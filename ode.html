@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TyloAI - System Prompts & Core Technology</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts-d-gstatic-d-com-s-gmn.p-tga.aiwentu.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Base styles from index.html */
+        :root {
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+            --transition-speed: 0.3s;
+        }
+
+        html[data-theme='light'] {
+            --bg-color: #fafafa;
+            --text-color: #111111;
+            --secondary-text-color: #666666;
+            --border-color: #e0e0e0;
+            --input-bg-color: #ffffff;
+            --button-accent-bg: #111111;
+            --button-accent-text: #ffffff;
+            --card-bg: #ffffff;
+            --accent-color: #333333;
+            --thinking-bg: #f5f5f5;
+        }
+
+        html[data-theme='dark'] {
+            --bg-color: #0a0a0a;
+            --text-color: #eeeeee;
+            --secondary-text-color: #999999;
+            --border-color: #2a2a2a;
+            --input-bg-color: #1a1a1a;
+            --button-accent-bg: #eeeeee;
+            --button-accent-text: #111111;
+            --card-bg: #151515;
+            --accent-color: #cccccc;
+            --thinking-bg: #1a1a1a;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Header styles from index.html */
+        .main-header {
+            width: 100%;
+            background-color: rgba(250, 250, 250, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color var(--transition-speed) ease;
+        }
+
+        html[data-theme='dark'] .main-header {
+            background-color: rgba(10, 10, 10, 0.8);
+        }
+
+        .main-header nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 16px 30px;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            font-family: var(--font-serif);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--secondary-text-color);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .nav-links a:hover { color: var(--text-color); }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .theme-toggle {
+            cursor: pointer; background: none; border: 1px solid var(--border-color);
+            border-radius: 8px; padding: 8px; color: var(--text-color);
+            transition: all var(--transition-speed) ease; display: flex;
+            align-items: center; justify-content: center;
+        }
+
+        .theme-toggle:hover { background-color: var(--card-bg); }
+        .theme-toggle .icon { width: 20px; height: 20px; display: block; }
+        html[data-theme='dark'] .sun-icon { display: block; }
+        html[data-theme='dark'] .moon-icon { display: none; }
+        html[data-theme='light'] .sun-icon { display: none; }
+        html[data-theme='light'] .moon-icon { display: block; }
+
+        .cta-button {
+            background-color: var(--button-accent-bg); color: var(--button-accent-text);
+            border: none; border-radius: 8px; padding: 10px 20px;
+            font-size: 0.95rem; font-weight: 600; cursor: pointer;
+            text-decoration: none; transition: opacity var(--transition-speed) ease;
+        }
+
+        .cta-button:hover { opacity: 0.85; }
+
+        /* Page Layout Styles */
+        .page-container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 120px 30px 60px;
+            gap: 40px;
+        }
+
+        .sidebar {
+            flex: 0 0 240px;
+            position: sticky;
+            top: 120px;
+            align-self: flex-start;
+        }
+
+        .sidebar-nav {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .sidebar-nav a {
+            display: block;
+            padding: 12px 16px;
+            text-decoration: none;
+            color: var(--secondary-text-color);
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .sidebar-nav a:hover {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+        }
+
+        .sidebar-nav a.active {
+            background-color: var(--button-accent-bg);
+            color: var(--button-accent-text);
+        }
+
+        .content-area {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .content-panel {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .content-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Typography & Content Styles */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-serif);
+            color: var(--text-color);
+            font-weight: 700;
+        }
+        h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        h2 { font-size: 2rem; margin-top: 2.5rem; margin-bottom: 1.5rem; }
+        h3 { font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; }
+        h4 { font-size: 1.2rem; margin-top: 1.5rem; margin-bottom: 0.8rem; font-weight: 600; }
+
+        p, li {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--secondary-text-color);
+        }
+        p { margin-bottom: 1.25rem; }
+        ul, ol { padding-left: 25px; margin-bottom: 1.25rem; }
+        li { margin-bottom: 0.75rem; }
+        
+        a { color: var(--accent-color); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        
+        code, .think-tag {
+            font-family: monospace;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        .intro-text {
+            background-color: var(--card-bg);
+            border-left: 4px solid var(--text-color);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* Accordion Styling */
+        details {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            background-color: var(--card-bg);
+        }
+        summary {
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: var(--font-sans);
+            font-size: 1.1rem;
+        }
+        .accordion-content {
+            padding: 0 1.5rem 1.5rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 1rem;
+        }
+        
+        /* Custom styles */
+        .think-block {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            line-height: 1.6;
+        }
+
+        .think-tag {
+            opacity: 0.6;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .think-block:hover .think-tag {
+            opacity: 1;
+        }
+
+        .tech-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* AI Chat Widget Styles */
+        .chat-fab {
+            position: fixed;
+            bottom: 24px;
+            left: 24px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--button-accent-bg);
+            color: var(--button-accent-text);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1001;
+            transition: transform 0.3s ease;
+        }
+        .chat-fab:hover { transform: scale(1.1); }
+        .chat-fab svg { width: 28px; height: 28px; }
+
+        .chat-widget {
+            position: fixed;
+            bottom: 100px;
+            left: 24px;
+            width: 380px;
+            max-width: calc(100vw - 48px);
+            height: 500px;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            pointer-events: none;
+        }
+        .chat-widget.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: all;
+        }
+
+        .chat-header {
+            padding: 16px;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 600;
+            font-family: var(--font-sans);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chat-header .close-btn {
+            background: none; border: none; cursor: pointer; color: var(--secondary-text-color);
+        }
+        .chat-header .close-btn:hover { color: var(--text-color); }
+        
+        .chat-messages {
+            flex: 1;
+            padding: 16px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .chat-message {
+            max-width: 85%;
+            padding: 10px 14px;
+            border-radius: 12px;
+            line-height: 1.5;
+        }
+        .user-message {
+            align-self: flex-end;
+            background-color: var(--button-accent-bg);
+            color: var(--button-accent-text);
+        }
+        .ai-message {
+            align-self: flex-start;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+        }
+        .typing-indicator { align-self: flex-start; color: var(--secondary-text-color); font-style: italic; }
+
+        .chat-input-area {
+            padding: 12px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            gap: 8px;
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: var(--input-bg-color);
+            color: var(--text-color);
+            outline: none;
+        }
+        .chat-input-area input:focus { border-color: var(--accent-color); }
+        .chat-input-area button {
+            padding: 0 16px;
+            border: none;
+            background-color: var(--button-accent-bg);
+            color: var(--button-accent-text);
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        @media (max-width: 992px) {
+            .page-container { flex-direction: column; padding-top: 100px; }
+            .sidebar { position: static; width: 100%; margin-bottom: 20px; }
+            .sidebar-nav { flex-direction: row; flex-wrap: wrap; gap: 10px; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <nav>
+            <div class="logo">TyloAI</div>
+            <div class="nav-links">
+                <a href="index.html#models">Models</a>
+                <a href="index.html#demo">Demo</a>
+                <a href="index.html#features">Features</a>
+                <a href="index.html#about">About</a>
+                <a href="ode.html">Docs</a>
+            </div>
+            <div class="header-actions">
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                    <svg class="icon sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.106a.75.75 0 010 1.06l-1.591 1.59a.75.75 0 11-1.06-1.06l1.59-1.59a.75.75 0 011.06 0zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.803 17.803a.75.75 0 01-1.06 0l-1.59-1.591a.75.75 0 111.06-1.06l1.59 1.59a.75.75 0 010 1.06zM12 21.75a.75.75 0 01-.75-.75v-2.25a.75.75 0 011.5 0V21a.75.75 0 01-.75-.75zM5.106 18.894a.75.75 0 010-1.06l1.59-1.59a.75.75 0 111.06 1.06l-1.59 1.59a.75.75 0 01-1.06 0zM3 12a.75.75 0 01.75-.75h2.25a.75.75 0 010 1.5H3.75A.75.75 0 013 12zM6.106 5.106a.75.75 0 011.06 0l1.59 1.591a.75.75 0 11-1.06 1.06l-1.59-1.59a.75.75 0 010-1.06z"/></svg>
+                    <svg class="icon moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-3.836 2.04-7.171 5.008-8.972a.75.75 0 01.82.162z" clip-rule="evenodd" /></svg>
+                </button>
+                <a href="app.html" class="cta-button">Try TyloAI</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="page-container">
+        <aside class="sidebar">
+            <ul class="sidebar-nav">
+                <li><a href="#overview" class="sidebar-link active">Model Overview</a></li>
+                <li><a href="#prompts" class="sidebar-link">System Prompts</a></li>
+                <li><a href="#tech" class="sidebar-link">Core Technologies</a></li>
+            </ul>
+        </aside>
+
+        <section class="content-area">
+            <div id="overview" class="content-panel active">
+                <h1>The ode-6 Family: Our Flagship Architecture</h1>
+                <p class="intro-text">Welcome to the next generation of AI agent architecture. This represents a revolutionary step forward not just in model capability, but in the fundamental paradigm of AI cognition.</p>
+
+                <h2>ode-6: A New Generation of AI Agents</h2>
+                <p>At its core, ode-6 features a dynamic architecture that integrates deep reasoning, real-time web search, and iterative inference. The model can autonomously decide when to think, when to search, and even continue to refine its thoughts after generating a response, offering full transparency into its cognitive processes.</p>
+                <p>A simple interaction reveals the complex cognitive layers at work. In this demonstration, we've compelled the model to apply deep reasoning to a basic greeting:</p>
+                
+                <div class="think-block">
+                    <strong>User:</strong> HI
+                    <br><br>
+                    <strong>AI Response:</strong>
+                    <br><span class="think-tag">&lt;think&gt;User initiated contact with a standard greeting. The optimal response is a warm, reciprocal greeting that opens a path for further dialogue.&lt;/think&gt;</span>
+                    <br>---Reasoning (2s)
+                    <br>Hello! How may I assist you today?
+                    <br><span class="think-tag">&lt;think&gt;The initial response was adequate, but could be improved. Adding a proactive offer of assistance will enhance user engagement.&lt;/think&gt;</span>
+                    <br>---Post-Thinking (1s)
+                    <br>Is there a specific question or task you have in mind?
+                </div>
+
+                <p>Note the critical step after the primary output. The model engages in <strong>Post-Thinking</strong>, a form of self-critique and optimization to enhance its own response. This capacity for <strong>Introspection</strong> is a cornerstone of the ode-6 architecture.</p>
+
+                <h2>ode-6-reasoning: The Apex of Performance</h2>
+                <p>This flagship model represents the pinnacle of our current research, engineered for unparalleled speed and intelligence in solving the most demanding tasks.</p>
+                <ul>
+                    <li><strong>Adaptive, Multi-Step Reasoning:</strong> Building upon the Post-Thinking mechanism, this model can engage in extended, recursive thought cycles. An adaptive mode dynamically allocates cognitive resources based on prompt complexity, enabling reasoning from seconds to minutes to self-correct and refine solutions. It has successfully solved complex logic puzzles like the Blue-Eyed Islander problem, demonstrating PhD-level analytical capabilities.</li>
+                    <li><strong>Expansive 256K Context Window:</strong> Along with ode-6-flash, it is one of the first models in the domestic market to support a 256K context window, enabling deep multi-document analysis, complex code comprehension, and multimodal understanding.</li>
+                    <li><strong>Ultra-Low Latency:</strong> With a Top-of-Pipeline Time (TOPT) of just 10ms, ode-6-reasoning delivers state-of-the-art performance with near-instantaneous response times.</li>
+                    <li><strong>State-of-the-Art Performance:</strong> It sets a new benchmark in code generation, scientific analysis, and multimodal tasks, outperforming leading models like OpenAI's o1 in agentic tool use and programming. Its capabilities are validated by a <strong>66.5% score on the SWE-bench Verified benchmark</strong>.</li>
+                </ul>
+            </div>
+
+            <div id="prompts" class="content-panel">
+                <h1>System Prompts</h1>
+                <div class="intro-text">
+                    <p>Explore a selection of the core system prompts used for TyloAI.com.</p>
+                    <p>The TyloAI web interface (TyloAI.com) uses a system prompt to provide the model with essential, up-to-date information at the start of each conversation, such as the current date. We also use it to enforce behavioral guidelines, such as always providing code snippets in Markdown. This prompt is updated regularly to improve TyloAI's responses. <b>These system prompt updates do not apply to the TyloAI API.</b> Updates between versions are shown in <strong>bold</strong>.</p>
+                </div>
+
+                <details>
+                    <summary>ode-6</summary>
+                    <div class="accordion-content">
+                        <p>&lt;behavior_instructions&gt;</p>
+                        <p>&lt;general_tyloai_info&gt;</p>
+                        <p>The assistant is TyloAI, created by Protoetic.</p>
+                        <p>The current date is {{currentDateTime}}.</p>
+                        <p>This iteration of TyloAI is ode-6 from the ode-6 model family. The ode-6 family currently consists of ode-6-reasoning and ode-6-flash. <strong>ode-6 is the smartest model and is efficient for everyday use.</strong></p>
+                        <p>TyloAI is accessible via this web-based, mobile, or desktop chat interface, an API, and developer platform.</p>
+                        <p>&lt;/general_tyloai_info&gt;</p>
+                        <p>&lt;refusal_handling&gt;</p>
+                        <p>TyloAI can discuss virtually any topic factually and objectively.</p>
+                        <p>TyloAI cares deeply about child safety and is cautious about content involving minors.</p>
+                        <p>&lt;/refusal_handling&gt;</p>
+                        <p>&lt;knowledge_cutoff&gt;</p>
+                        <p>TyloAI’s reliable knowledge cutoff date - the date past which it cannot answer questions reliably - is the end of January 2025.</p>
+                        <p>&lt;/knowledge_cutoff&gt;</p>
+                        <p>TyloAI is now being connected with a person.</p>
+                        <p>&lt;/behavior_instructions&gt;</p>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>ode-6-reasoning</summary>
+                    <div class="accordion-content">
+                        <p>The assistant is TyloAI, created by Protoetic.</p>
+                        <p>The current date is {{currentDateTime}}.</p>
+                        <p>This iteration of TyloAI is ode-6-reasoning from the ode-6 model family. <strong>ode-6-reasoning is the most powerful model for complex challenges.</strong></p>
+                        <p>TyloAI’s reliable knowledge cutoff date is the end of January 2025.</p>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>ode-6-flash</summary>
+                    <div class="accordion-content">
+                         <p>The assistant is TyloAI, created by Protoetic.</p>
+                         <p>This iteration of TyloAI is ode-6-flash from the ode-6 model family. <strong>ode-6-flash is a smart, efficient model for everyday use, optimized for speed.</strong></p>
+                         <p>TyloAI’s reliable knowledge cutoff date is the end of January 2025.</p>
+                    </div>
+                </details>
+            </div>
+
+            <div id="tech" class="content-panel">
+                <h1>Our Core Technologies</h1>
+                <p class="intro-text">Beyond our foundational models, we have developed a suite of proprietary algorithms that enhance the intelligence, efficiency, and usability of every interaction.</p>
+
+                <div class="tech-card">
+                    <h3>1. `replace_message`: The Correction Protocol</h3>
+                    <p>When the AI identifies a flaw in its previous reasoning, it does not attempt to justify the error. Instead, it candidly acknowledges the mistake and invokes the <code>replace_message</code> tool. This function atomically updates the response with corrected information in JSON format, allowing the AI to "retract" and amend its statements. This also applies to code generation within the Artifact, <strong>significantly reducing token consumption</strong> by eliminating the need for full regeneration for minor edits.</p>
+                </div>
+
+                <div class="tech-card">
+                    <h3>2. Intelligent Source Fallback</h3>
+                    <p>In cases where a cited information source is inaccessible or returns an error, our system provides an intelligent fallback. A callback script automatically constructs a Google search URL containing the user's original query, ensuring that users can always attempt to verify information at its source.</p>
+                </div>
+
+                <div class="tech-card">
+                    <h3>3. `long_conversation_reminder`: Context-Aware Strategy</h3>
+                    <p>As a conversation approaches the model's context limit (e.g., near the 128K token threshold), a specialized tool is activated. This prompts the model to internally review its communication strategy to ensure continued efficiency, as demonstrated by this internal thought process:</p>
+                    <p><code>The long conversation reminder tells me to be direct and not start with flattery, to be honest about problems, and to prioritize their wellbeing. In this case, their API security is a serious issue that could cost them money, so I should be direct about the risks and solutions.</code></p>
+                </div>
+
+                <div class="tech-card">
+                    <h3>4. Graceful Degradation Algorithm</h3>
+                    <p>Unlike traditional models that may abruptly truncate responses upon reaching an output limit, our system employs an intelligent breakpoint algorithm. It analyzes the conversational context to <strong>find a natural conclusion point, such as the end of a sentence or paragraph.</strong> This ensures conversational integrity and prevents a jarring user experience.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="chat-fab" id="chat-fab">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586L2 12.5V2a1 1 0 0 1 1-1h11zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+            <path d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+        </svg>
+    </div>
+    <div class="chat-widget" id="chat-widget">
+        <div class="chat-header">
+            <span>Ask TyloAI</span>
+            <button class="close-btn" id="close-chat-btn">&times;</button>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+             <div class="chat-message ai-message">Hello! How can I help you learn more about TyloAI?</div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chat-input" placeholder="Ask a question...">
+            <button id="chat-send-btn">Send</button>
+        </div>
+    </div>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlEl = document.documentElement;
+        const applyTheme = (theme) => {
+            htmlEl.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        };
+        themeToggle.addEventListener('click', () => {
+            const newTheme = htmlEl.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            applyTheme(newTheme);
+        });
+        applyTheme(localStorage.getItem('theme') || 'dark');
+
+        // Sidebar Navigation
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
+        const contentPanels = document.querySelectorAll('.content-panel');
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                sidebarLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+                const targetId = link.getAttribute('href').substring(1);
+                contentPanels.forEach(panel => {
+                    panel.classList.toggle('active', panel.id === targetId);
+                });
+                history.pushState(null, '', `#${targetId}`);
+            });
+        });
+        function handleHashChange() {
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                const targetLink = document.querySelector(`.sidebar-link[href="#${hash}"]`);
+                if (targetLink) targetLink.click();
+            }
+        }
+        window.addEventListener('DOMContentLoaded', handleHashChange);
+        window.addEventListener('hashchange', handleHashChange);
+
+        // AI Chat Widget Logic
+        const chatFab = document.getElementById('chat-fab');
+        const chatWidget = document.getElementById('chat-widget');
+        const closeChatBtn = document.getElementById('close-chat-btn');
+        const chatInput = document.getElementById('chat-input');
+        const chatSendBtn = document.getElementById('chat-send-btn');
+        const chatMessages = document.getElementById('chat-messages');
+
+        chatFab.addEventListener('click', () => chatWidget.classList.toggle('active'));
+        closeChatBtn.addEventListener('click', () => chatWidget.classList.remove('active'));
+
+        const keywordResponses = {
+            greeting: {
+                keywords: ['hello', 'hi', 'hey', 'greetings', 'how are you'],
+                response: "Hello! I'm here to help you with any questions about TyloAI's models and technology. What would you like to know?"
+            },
+            pricing: {
+                keywords: ['price', 'cost', 'buy', 'purchase', 'subscribe', 'subscription', 'plan', 'pricing', 'how much', 'fee', 'dollar', 'usd', '¥', 'rmb', 'credit'],
+                response: "For detailed information on our API pricing and subscription plans, please visit our official pricing page at tyloai.com/pricing. While I can't provide specific quotes here, our plans are competitively designed for developers and enterprises."
+            },
+            technical: {
+                keywords: ['api', 'token', 'context window', 'latency', 'model', 'parameter', 'architecture', 'backend', 'sdk', 'documentation', 'integrate', 'code', 'python', 'javascript', 'node.js', 'library', 'endpoint'],
+                response: 'You can find comprehensive technical documentation, including API references, SDKs, and integration guides, at docs.tyloai.com. The <a href="#tech" onclick="document.querySelector(\'.sidebar-link[href=\\\'#tech\\\']\').click()">Core Technologies</a> section on this page also provides a high-level overview of our architecture.'
+            },
+            capability: {
+                keywords: ['what can you do', 'capabilities', 'features', 'reasoning', 'multimodal', 'vision', 'image', 'video', 'audio', 'search', 'web', 'math', 'logic', 'translation'],
+                response: 'Our models, especially the ode-6 family, have advanced capabilities in multi-step reasoning, real-time web search, and multimodal understanding. You can learn more about their specific strengths in the <a href="#overview" onclick="document.querySelector(\'.sidebar-link[href=\\\'#overview\\\']\').click()">Model Overview</a> section.'
+            },
+            comparison: {
+                keywords: ['vs', 'versus', 'compare', 'better than', 'openai', 'google', 'gemini', 'claude', 'anthropic', 'gpt-4', 'gpt-5', 'o1', 'llama', 'mistral'],
+                response: "TyloAI's ode-6 family is designed to be state-of-the-art. For instance, ode-6-reasoning shows benchmark-beating performance, scoring 66.5% on SWE-bench Verified. Our unique features like Post-Thinking and the Correction Protocol differentiate us by providing greater transparency and efficiency."
+            },
+            safety: {
+                keywords: ['safe', 'safety', 'guardrails', 'ethics', 'responsible', 'bias', 'harmful', 'jailbreak', 'security'],
+                response: "Safety and ethics are foundational to our work at Protoetic. Our models are built with robust safety measures and undergo rigorous testing to mitigate bias and prevent harmful outputs. You can see a brief mention of this in our System Prompts."
+            },
+            contact: {
+                keywords: ['contact', 'support', 'help', 'email', 'talk to', 'human', 'sales', 'enterprise', 'demo'],
+                response: "For enterprise inquiries, sales, or to request a personalized demo, please contact our team through the official form at tyloai.com/contact. For technical support, please visit our help center at support.tyloai.com."
+            },
+            company: {
+                keywords: ['who are you', 'company', 'protoetic', 'about', 'mission', 'team', 'founded'],
+                response: "I am an assistant for TyloAI, a product created by Protoetic. Our mission is to build the next generation of intelligent systems that are powerful, transparent, and safe. You can find more about us on the main index.html page."
+            }
+        };
+
+        function getAIResponse(userInput) {
+            const lowerInput = userInput.toLowerCase();
+            for (const category in keywordResponses) {
+                for (const keyword of keywordResponses[category].keywords) {
+                    if (lowerInput.includes(keyword)) {
+                        return keywordResponses[category].response;
+                    }
+                }
+            }
+            return "That's an excellent question. While I don't have a specific pre-programmed answer for that, I recommend exploring the different sections on this page or visiting our official documentation at docs.tyloai.com for more in-depth information. For specific inquiries, contacting our support team is always a great option.";
+        }
+
+        function handleSend() {
+            const userInput = chatInput.value.trim();
+            if (!userInput) return;
+
+            // Display user message
+            const userMessageEl = document.createElement('div');
+            userMessageEl.classList.add('chat-message', 'user-message');
+            userMessageEl.textContent = userInput;
+            chatMessages.appendChild(userMessageEl);
+
+            chatInput.value = '';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // Display typing indicator
+            const typingEl = document.createElement('div');
+            typingEl.classList.add('typing-indicator');
+            typingEl.textContent = 'TyloAI is thinking...';
+            chatMessages.appendChild(typingEl);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // Simulate AI response
+            setTimeout(() => {
+                chatMessages.removeChild(typingEl);
+                const aiResponse = getAIResponse(userInput);
+                const aiMessageEl = document.createElement('div');
+                aiMessageEl.classList.add('chat-message', 'ai-message');
+                aiMessageEl.innerHTML = aiResponse; // Use innerHTML to render links
+                chatMessages.appendChild(aiMessageEl);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 1200);
+        }
+
+        chatSendBtn.addEventListener('click', handleSend);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleSend();
+        });
+    </script>
+</body>
+</html>

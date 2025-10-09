@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TyloAI - Under Maintenance</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #000;
+            --secondary: #666;
+            --accent: #f5f5f5;
+            --hover: #111;
+        }
+
+        body {
+            background: #fff;
+            color: var(--primary);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 40px;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(0,0,0,0.02) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 60px;
+            text-align: center;
+            opacity: 0;
+            animation: fadeInDown 0.8s ease forwards;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 18px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            background: #4ade80;
+            border-radius: 50%;
+            animation: pulse 2s ease infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(48px, 8vw, 96px);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 32px;
+            letter-spacing: -3px;
+            text-align: center;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.4s forwards;
+        }
+
+        .subtitle {
+            font-size: clamp(18px, 2vw, 24px);
+            color: var(--secondary);
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
+            font-weight: 400;
+            line-height: 1.6;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.6s forwards;
+        }
+
+        .return-date {
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.8s forwards;
+            cursor: default;
+        }
+
+        .return-date:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .return-date i {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* Demo Section */
+        .demo-section-wrapper {
+            background: var(--accent);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(36px, 5vw, 64px);
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -2px;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--secondary);
+            font-weight: 400;
+        }
+
+        .demo-container {
+            display: flex;
+            gap: 60px;
+            max-width: 1300px;
+            margin: 0 auto;
+            align-items: flex-start;
+        }
+
+        .demo-chat {
+            flex: 1;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+        }
+
+        .demo-explanation {
+            flex: 1;
+            max-width: 500px;
+        }
+
+        .explanation-card {
+            background: white;
+            padding: 32px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            border: 1px solid #e5e5e5;
+            transition: all 0.3s ease;
+        }
+
+        .explanation-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+        }
+
+        .explanation-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .explanation-card p {
+            color: var(--secondary);
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        /* Chat styles */
+        .message {
+            animation: fadeIn 0.5s ease;
+            margin-bottom: 24px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .user-message {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .user-message .message-content {
+            background: var(--primary);
+            color: white;
+            padding: 14px 18px;
+            border-radius: 16px;
+            max-width: 85%;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .ai-message .message-content {
+            background: var(--accent);
+            border: 1px solid #e5e5e5;
+            padding: 20px;
+            border-radius: 16px;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .thinking-block {
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 10px;
+            margin: 12px 0;
+            overflow: hidden;
+        }
+
+        .thinking-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s ease;
+        }
+
+        .thinking-header:hover {
+            background: var(--accent);
+        }
+
+        .thinking-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--secondary);
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .expand-icon {
+            transition: transform 0.3s ease;
+            color: var(--secondary);
+        }
+
+        .expand-icon.expanded {
+            transform: rotate(180deg);
+        }
+
+        .thinking-content {
+            padding: 0 16px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            color: var(--secondary);
+            font-size: 14px;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .thinking-content.expanded {
+            max-height: 500px;
+            padding: 0 16px 14px;
+        }
+
+        /* Models Section */
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .model-card {
+            background: white;
+            padding: 48px 40px;
+            border: 1px solid #e5e5e5;
+            border-radius: 20px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .model-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .model-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .model-card:hover {
+            transform: translateY(-12px);
+            border-color: var(--primary);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+        }
+
+        .model-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--primary);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            color: white;
+            font-size: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .model-card:hover .model-icon {
+            transform: rotate(10deg) scale(1.1);
+        }
+
+        .model-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -1px;
+        }
+
+        .model-tag {
+            display: inline-block;
+            padding: 6px 12px;
+            background: var(--accent);
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .model-description {
+            color: var(--secondary);
+            font-size: 15px;
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: var(--accent);
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            padding: 36px;
+            border-radius: 16px;
+            border: 1px solid #e5e5e5;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .faq-item:hover {
+            transform: translateX(8px);
+            border-color: var(--primary);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+        }
+
+        .faq-question {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .faq-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover .faq-icon {
+            background: var(--primary);
+            color: white;
+            transform: rotate(15deg);
+        }
+
+        .faq-answer {
+            color: var(--secondary);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            max-width: 1100px;
+            margin: 60px auto 0;
+        }
+
+        .contact-item {
+            text-align: center;
+            padding: 48px 32px;
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 20px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+
+        .contact-item:hover::before {
+            transform: translateY(0);
+        }
+
+        .contact-item:hover {
+            border-color: var(--primary);
+            transform: translateY(-8px);
+        }
+
+        .contact-icon {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 24px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            position: relative;
+            z-index: 1;
+            transition: all 0.4s ease;
+        }
+
+        .contact-item:hover .contact-icon {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        .contact-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 20px;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+            transition: color 0.4s ease;
+        }
+
+        .contact-info {
+            color: var(--secondary);
+            font-size: 14px;
+            position: relative;
+            z-index: 1;
+            transition: color 0.4s ease;
+        }
+
+        .contact-item:hover .contact-title,
+        .contact-item:hover .contact-info {
+            color: white;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            animation: fadeIn 1s ease 1.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 0.6; }
+        }
+
+        .scroll-indicator i {
+            font-size: 24px;
+            animation: bounce 2s ease infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
+        }
+
+        .scroll-text {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .demo-container {
+                flex-direction: column;
+            }
+
+            .demo-explanation {
+                max-width: 100%;
+            }
+
+            .models-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 60px 24px;
+            }
+
+            h1 {
+                font-size: 48px;
+                letter-spacing: -2px;
+            }
+
+            .return-date {
+                padding: 16px 32px;
+                font-size: 16px;
+            }
+
+            .demo-chat {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="logo">TyloAI</div>
+            <div style="text-align: center;">
+                <div class="status-badge">
+                    <span class="status-dot"></span>
+                    <span>Under Maintenance</span>
+                </div>
+                <h1>Crafting the Future<br>of Intelligence</h1>
+                <p class="subtitle">
+                    Our engineers are refining the <strong>ode family</strong> to deliver 
+                    breakthrough AI capabilities. Something extraordinary is coming.
+                </p>
+                <div class="return-date">
+                    <i class="fa-solid fa-rocket"></i>
+                    <span>November 2025</span>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span class="scroll-text">Scroll</span>
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section class="demo-section-wrapper">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <h2 class="section-title">Experience Post-Thinking</h2>
+                <p class="section-subtitle">Watch how TyloAI thinks, searches, and refines its responses in real-time</p>
+            </div>
+            
+            <div class="demo-container">
+                <!-- Left: Demo Chat -->
+                <div class="demo-chat fade-in-up">
+                    <div class="message user-message">
+                        <div class="message-content">
+                            There are 100 prisoners in solitary cells, each with a unique number from 1 to 100. A room contains 100 boxes, each containing a unique number from 1 to 100. Each prisoner will be allowed to enter the room, open 50 boxes, and check the numbers inside. They must leave the room exactly as they found it and can't communicate with other prisoners. If all 100 prisoners find their own number, they will all be freed. What strategy can they use to maximize their chance of success?
+                        </div>
+                    </div>
+
+                    <div class="message ai-message">
+                        <div class="message-content">
+                            <div class="thinking-block">
+                                <div class="thinking-header" onclick="toggleThinking(this)">
+                                    <div class="thinking-label">
+                                        <i class="fa-solid fa-brain"></i>
+                                        Initial reasoning chain
+                                    </div>
+                                    <i class="fa-solid fa-chevron-down expand-icon"></i>
+                                </div>
+                                <div class="thinking-content">
+                                    Let's try to figure out this prisoner problem. So, we have 100 prisoners, each with a unique number from 1 to 100. There are 100 boxes in a room, each containing a unique number from 1 to 100. Each prisoner can open 50 boxes, and they can't communicate after that. They all need to find their own number to be freed. The question is, what strategy maximizes their chance of success?
+                                </div>
+                            </div>
+
+                            <p style="margin: 16px 0; font-size: 15px; line-height: 1.7;">
+                                The optimal strategy leverages permutation cycle properties to achieve a surprisingly high success rate of approximately 31%. Each prisoner begins by opening the box corresponding to their own number, then follows the cycle until they find their number or exhaust their 50 attempts.
+                            </p>
+
+                            <div class="thinking-block">
+                                <div class="thinking-header" onclick="toggleThinking(this)">
+                                    <div class="thinking-label">
+                                        <i class="fa-solid fa-lightbulb"></i>
+                                        Synthesis (post-thinking)
+                                    </div>
+                                    <i class="fa-solid fa-chevron-down expand-icon"></i>
+                                </div>
+                                <div class="thinking-content">
+                                    After analyzing various approaches, the cycle detection strategy clearly emerges as the optimal solution to this prisoner problem. The key insight is recognizing that the random arrangement of numbers in boxes forms a permutation, which can be decomposed into disjoint cycles.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Explanation -->
+                <div class="demo-explanation fade-in-up">
+                    <div class="explanation-card">
+                        <h3>
+                            <i class="fa-solid fa-brain" style="color: #6366f1;"></i>
+                            Multi-Layer Thinking
+                        </h3>
+                        <p>
+                            TyloAI breaks down complex problems into multiple reasoning layers. You can expand each thinking block to see how the AI approaches the problem step by step.
+                        </p>
+                    </div>
+
+                    <div class="explanation-card">
+                        <h3>
+                            <i class="fa-solid fa-magnifying-glass" style="color: #8b5cf6;"></i>
+                            Real-Time Search
+                        </h3>
+                        <p>
+                            When needed, TyloAI automatically searches the web to verify facts and gather the latest information, ensuring accurate and up-to-date responses.
+                        </p>
+                    </div>
+
+                    <div class="explanation-card">
+                        <h3>
+                            <i class="fa-solid fa-sparkles" style="color: #ec4899;"></i>
+                            Post-Thinking Synthesis
+                        </h3>
+                        <p>
+                            After initial reasoning, TyloAI reflects on its thoughts, refines the answer, and synthesizes the best possible response through advanced cognitive architecture.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Models Section -->
+    <section>
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <h2 class="section-title">Meet the ode Family</h2>
+                <p class="section-subtitle">Three models. Infinite possibilities.</p>
+            </div>
+            <div class="models-grid">
+                <div class="model-card fade-in-up">
+                    <div class="model-icon">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <div class="model-name">ode-6</div>
+                    <div class="model-tag">DAILY USE</div>
+                    <p class="model-description">
+                        The perfect balance of intelligence and efficiency. Designed for everyday tasks 
+                        with exceptional reasoning capabilities.
+                    </p>
+                </div>
+                <div class="model-card fade-in-up" style="animation-delay: 0.1s;">
+                    <div class="model-icon">
+                        <i class="fa-solid fa-atom"></i>
+                    </div>
+                    <div class="model-name">ode-6-reasoning</div>
+                    <div class="model-tag">ULTIMATE POWER</div>
+                    <p class="model-description">
+                        Unleash maximum cognitive power. Built for complex mathematics, advanced coding, 
+                        and multi-step reasoning challenges.
+                    </p>
+                </div>
+                <div class="model-card fade-in-up" style="animation-delay: 0.2s;">
+                    <div class="model-icon">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <div class="model-name">ode-6-flash</div>
+                    <div class="model-tag">LIGHTNING FAST</div>
+                    <p class="model-description">
+                        Instant intelligence at your fingertips. Optimized for speed without compromising 
+                        quality or accuracy.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <h2 class="section-title">Questions & Answers</h2>
+                <p class="section-subtitle">Everything you need to know</p>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item fade-in-up">
+                    <div class="faq-question">
+                        <div class="faq-icon"><i class="fa-regular fa-clock"></i></div>
+                        <span>When will TyloAI return?</span>
+                    </div>
+                    <p class="faq-answer">
+                        We're targeting November 2025 for our official launch. The ode family 
+                        is being meticulously refined to exceed expectations.
+                    </p>
+                </div>
+                <div class="faq-item fade-in-up" style="animation-delay: 0.1s;">
+                    <div class="faq-question">
+                        <div class="faq-icon"><i class="fa-solid fa-wrench"></i></div>
+                        <span>What's being enhanced?</span>
+                    </div>
+                    <p class="faq-answer">
+                        Core intelligence, response speed, reasoning depth, and overall reliability. 
+                        Every aspect is being elevated to new standards.
+                    </p>
+                </div>
+                <div class="faq-item fade-in-up" style="animation-delay: 0.2s;">
+                    <div class="faq-question">
+                        <div class="faq-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                        <span>Is my data secure?</span>
+                    </div>
+                    <p class="faq-answer">
+                        Absolutely. All data remains encrypted and protected. Your information 
+                        will be fully accessible when we return.
+                    </p>
+                </div>
+                <div class="faq-item fade-in-up" style="animation-delay: 0.3s;">
+                    <div class="faq-question">
+                        <div class="faq-icon"><i class="fa-solid fa-sparkles"></i></div>
+                        <span>What makes ode-6 special?</span>
+                    </div>
+                    <p class="faq-answer">
+                        Revolutionary reasoning architecture, unprecedented speed, and 
+                        unmatched versatility. Experience the future of AI intelligence.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section>
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <h2 class="section-title">Stay in Touch</h2>
+                <p class="section-subtitle">Join our community and be the first to know</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-item fade-in-up">
+                    <div class="contact-icon">
+                        <i class="fa-regular fa-envelope"></i>
+                    </div>
+                    <div class="contact-title">Email Support</div>
+                    <div class="contact-info">support@tyloai.com</div>
+                </div>
+                <div class="contact-item fade-in-up" style="animation-delay: 0.1s;">
+                    <div class="contact-icon">
+                        <i class="fa-brands fa-discord"></i>
+                    </div>
+                    <div class="contact-title">Join Discord</div>
+                    <div class="contact-info">Community & Updates</div>
+                </div>
+                <div class="contact-item fade-in-up" style="animation-delay: 0.2s;">
+                    <div class="contact-icon">
+                        <i class="fa-brands fa-twitter"></i>
+                    </div>
+                    <div class="contact-title">Follow Us</div>
+                    <div class="contact-info">@TyloAI</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const elements = entry.target.querySelectorAll('.fade-in-up');
+                    elements.forEach((el, index) => {
+                        setTimeout(() => {
+                            el.style.opacity = '1';
+                            el.style.transform = 'translateY(0)';
+                        }, index * 100);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Toggle thinking blocks
+        function toggleThinking(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.expand-icon');
+            
+            content.classList.toggle('expanded');
+            icon.classList.toggle('expanded');
+        }
+    </script>
+</body>
+</html>
