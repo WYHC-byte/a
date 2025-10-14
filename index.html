@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TyloAI | Power, at your command</title>
+    <title>Protoetic | Building the Future of AI</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -184,6 +184,26 @@
             color: var(--text-color);
         }
 
+        .hero-title-line1 {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .hero-title-line2 {
+            display: block;
+            min-height: 1.2em;
+        }
+
+        .typing-text {
+            border-right: 2px solid var(--text-color);
+            animation: blink 0.7s step-end infinite;
+        }
+
+        @keyframes blink {
+            from, to { border-color: transparent; }
+            50% { border-color: var(--text-color); }
+        }
+
         .hero-content p {
             font-size: 1.2rem;
             line-height: 1.6;
@@ -223,6 +243,14 @@
             padding: 8px;
             box-shadow: 0 2px 12px rgba(0,0,0,0.04);
             transition: all var(--transition-speed) ease;
+        }
+
+        .prompt-label {
+            font-size: 0.85rem;
+            color: var(--secondary-text-color);
+            margin-bottom: 8px;
+            padding: 0 6px;
+            font-weight: 500;
         }
 
         .prompt-input-area {
@@ -434,61 +462,6 @@
             font-size: 1.5rem;
         }
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
-            margin-top: 60px;
-        }
-
-        .feature-item {
-            text-align: center;
-        }
-
-        .feature-icon {
-            width: 64px;
-            height: 64px;
-            background-color: var(--text-color);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-        }
-
-        .feature-icon svg {
-            width: 32px;
-            height: 32px;
-            stroke: var(--bg-color);
-        }
-
-        .feature-icon.clock-icon svg circle {
-            stroke-dasharray: 63 189; /* 1/4实线 + 3/4虚线 */
-            stroke-dashoffset: 0;
-        }
-
-        .feature-icon img {
-            width: 32px;
-            height: 32px;
-            filter: invert(1);
-        }
-
-        html[data-theme='dark'] .feature-icon img {
-            filter: invert(0);
-        }
-
-        .feature-item h3 {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-            color: var(--text-color);
-        }
-
-        .feature-item p {
-            color: var(--secondary-text-color);
-            line-height: 1.6;
-        }
-
         .demo-section {
             background-color: var(--card-bg);
             border-radius: 24px;
@@ -518,162 +491,131 @@
             font-size: 1.05rem;
         }
 
-        .chat-container {
-            max-width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
         }
 
-        .message {
-            animation: fadeIn 0.5s ease;
+        .research-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all var(--transition-speed) ease;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .research-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
         }
 
-        .user-message {
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        .user-message .message-content {
+        .research-icon {
+            width: 56px;
+            height: 56px;
             background-color: var(--text-color);
-            color: var(--bg-color);
-            padding: 14px 18px;
-            border-radius: 16px;
-            max-width: 65%;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        .ai-message .message-content {
-            background-color: var(--thinking-bg);
-            border: 1px solid var(--border-color);
-            padding: 20px;
-            border-radius: 16px;
-            font-size: 0.95rem;
-            line-height: 1.7;
-            color: var(--text-color);
-        }
-
-        .thinking-block {
-            background-color: var(--bg-color);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            margin: 12px 0;
-            overflow: hidden;
-        }
-
-        .thinking-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 16px;
-            cursor: pointer;
-            user-select: none;
-            transition: background-color var(--transition-speed) ease;
-        }
-
-        .thinking-header:hover {
-            background-color: var(--thinking-bg);
-        }
-
-        .thinking-label {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--secondary-text-color);
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        .thinking-icon {
-            width: 16px;
-            height: 16px;
-            opacity: 0.6;
-        }
-
-        .expand-icon {
-            transition: transform var(--transition-speed) ease;
-            color: var(--secondary-text-color);
-            width: 14px;
-            height: 14px;
-        }
-
-        .expand-icon.expanded {
-            transform: rotate(180deg);
-        }
-
-        .thinking-content {
-            padding: 0 16px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease, padding 0.4s ease;
-            color: var(--secondary-text-color);
-            font-size: 0.88rem;
-            line-height: 1.6;
-            opacity: 0.8;
-            font-style: italic;
-        }
-
-        .thinking-content.expanded {
-            max-height: 400px;
-            padding: 0 16px 14px;
-        }
-
-        .search-indicator {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background-color: var(--bg-color);
-            border: 1px solid var(--border-color);
-            padding: 8px 14px;
-            border-radius: 16px;
-            font-size: 0.85rem;
-            color: var(--secondary-text-color);
-            margin: 10px 0;
-            font-weight: 500;
-        }
-
-        .search-icon {
-            width: 14px;
-            height: 14px;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .ai-response-text {
-            margin: 12px 0;
-            font-size: 0.95rem;
-            line-height: 1.7;
-        }
-
-        .demo-context {
-            background-color: var(--bg-color);
-            border: 1px solid var(--border-color);
             border-radius: 12px;
-            padding: 20px;
-            margin-top: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
         }
 
-        .demo-context h4 {
-            font-size: 1.1rem;
+        .research-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--bg-color);
+        }
+
+        .research-card h3 {
+            font-size: 1.5rem;
             font-weight: 600;
             margin-bottom: 12px;
             color: var(--text-color);
         }
 
-        .demo-context p {
+        .research-card p {
             color: var(--secondary-text-color);
-            line-height: 1.6;
-            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .read-more {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: gap var(--transition-speed) ease;
+        }
+
+        .read-more:hover {
+            gap: 10px;
+        }
+
+        .about-container {
+            display: flex;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-content {
+            flex: 1;
+            max-width: 550px;
+        }
+
+        .about-video {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .custom-video-player {
+            position: relative;
+            width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: #000;
+            aspect-ratio: 16/9;
+        }
+
+        .custom-video-player video {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.3);
+            transition: opacity 0.3s ease;
+            cursor: pointer;
+        }
+
+        .video-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .play-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            padding: 0;
+        }
+
+        .play-button:hover {
+            transform: scale(1.1);
         }
 
         .footer {
@@ -765,15 +707,6 @@
                 min-height: 350px;
             }
 
-            .heroes_lottie_wrap {
-                max-width: 400px;
-                max-height: 400px;
-            }
-
-            #hero-video {
-    min-height: 350px;
-}
-
             .section-title {
                 font-size: 2.2rem;
             }
@@ -785,11 +718,6 @@
 
             .timeline-marker {
                 margin: 0 auto;
-            }
-
-            .timeline-item:not(:last-child) .timeline-marker::after {
-                left: 50%;
-                height: 80px;
             }
 
             .model-card::before {
@@ -809,48 +737,42 @@
                 gap: 40px;
             }
 
-            .user-message .message-content {
-                max-width: 90%;
+            .about-container {
+                flex-direction: column;
+                gap: 40px;
             }
 
-            .demo-section {
-                padding: 40px 20px;
+            .about-content {
+                max-width: 100%;
+                text-align: center;
             }
 
-            .ai-response-text {
-                font-size: 0.9rem;
+            .about-content h2 {
+                text-align: center !important;
             }
-        }
 
-        @media (max-width: 640px) {
-            .heroes_lottie_wrap {
-                max-width: 320px;
-                max-height: 320px;
-            }
-            #hero-video {
-                min-height: 320px;
+            .about-video {
+                max-width: 100%;
             }
         }
     </style>
-    <link rel="preload" as="fetch" href="tylo-overview.mp4" crossorigin>
 </head>
 <body>
     <header class="main-header">
         <nav>
-            <div class="logo">TyloAI</div>
+            <div class="logo">Protoetic</div>
             <div class="nav-links">
-                <a href="#models">Models</a>
+                <a href="#technology">Technology</a>
                 <a href="#demo">Demo</a>
-                <a href="#features">Features</a>
-                <a href="#about">About</a>
-                <a href="ode.html">Docs</a>
+                <a href="#research">Research</a>
+                <a href="#about">About Us</a>
             </div>
             <div class="header-actions">
                 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-                    <svg class="icon sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.106a.75.75 0 010 1.06l-1.591 1.59a.75.75 0 11-1.06-1.06l1.59-1.59a.75.75 0 011.06 0zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.803 17.803a.75.75 0 01-1.06 0l-1.59-1.591a.75.75 0 111.06-1.06l1.59 1.59a.75.75 0 010 1.06zM12 21.75a.75.75 0 01-.75-.75v-2.25a.75.75 0 011.5 0V21a.75.75 0 01-.75-.75zM5.106 18.894a.75.75 0 010-1.06l1.59-1.59a.75.75 0 111.06 1.06l-1.59 1.59a.75.75 0 01-1.06 0zM3 12a.75.75 0 01.75-.75h2.25a.75.75 0 010 1.5H3.75A.75.75 0 013 12zM6.106 5.106a.75.75 0 011.06 0l1.59 1.591a.75.75 0 11-1.06 1.06l-1.59-1.59a.75.75 0 010-1.06z"/></svg>
+                    <svg class="icon sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.106a.75.75 0 010 1.06l-1.591 1.59a.75.75 0 11-1.06-1.06l1.59-1.59a.75.75 0 011.06 0zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.803 17.803a.75.75 0 01-1.06 0l-1.59-1.591a.75.75 0 111.06-1.06l1.59 1.59a.75.75 0 010 1.06zM12 21.75a.75.75 0 01-.75-.75v-2.25a.75.75 0 011.5 0V21a.75.75 0 01-.75.75zM5.106 18.894a.75.75 0 010-1.06l1.59-1.59a.75.75 0 111.06 1.06l-1.59 1.59a.75.75 0 01-1.06 0zM3 12a.75.75 0 01.75-.75h2.25a.75.75 0 010 1.5H3.75A.75.75 0 013 12zM6.106 5.106a.75.75 0 011.06 0l1.59 1.591a.75.75 0 11-1.06 1.06l-1.59-1.59a.75.75 0 010-1.06z"/></svg>
                     <svg class="icon moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-3.836 2.04-7.171 5.008-8.972a.75.75 0 01.82.162z" clip-rule="evenodd" /></svg>
                 </button>
-                <a href="app.html" class="cta-button">Try TyloAI</a>
+                <a href="https://www.tyloai.com/app.html" class="cta-button">Launch TyloAI</a>
             </div>
         </nav>
     </header>
@@ -858,8 +780,11 @@
     <main>
         <section class="hero-section">
             <div class="hero-content">
-                <h1>Think different.<br>Think deeper.</h1>
-                <p>Intelligence that doesn't just respond. It reasons. It reflects. It transforms impossible into inevitable.</p>
+                <h1>
+                    <span class="hero-title-line1">Intelligence meets</span>
+                    <span class="hero-title-line2"><span id="typing-text" class="typing-text"></span></span>
+                </h1>
+                <p>Protoetic is building the next generation of AI systems that think deeply, reason transparently, and empower humanity. Our flagship product, TyloAI, represents the future of cognitive architecture.</p>
                 <div class="interactive-prompt">
                     <div class="prompt-input-area">
                         <input type="text" id="prompt-input" placeholder="How can I help you today?">
@@ -885,16 +810,16 @@
             <div class="hero-animation">
                 <div class="heroes_lottie_wrap">
                     <video id="hero-video" autoplay loop muted playsinline>
-                        <source src="tyloai-overview.mp4" type="video/mp4">
+                        <source src="https://118.25.39.112/tyloai-overview.MP4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
             </div>
         </section>
 
-        <section id="models"class="section">
-            <h2 class="section-title">The ode-6 Family</h2>
-            <p class="section-subtitle">Three powerful models designed for different needs, all featuring advanced capabilities and post-thinking architecture.</p>
+        <section id="technology" class="section">
+            <h2 class="section-title">The ode-6 Model Family</h2>
+            <p class="section-subtitle">Developed by Protoetic's core research team, featuring groundbreaking post-thinking architecture and extended reasoning capabilities.</p>
             
             <div class="models-timeline">
                 <div class="timeline-item">
@@ -945,630 +870,105 @@
         </section>
 
         <section id="demo" class="section">
-            <h2 class="section-title">Experience Post-Thinking</h2>
-            <p class="section-subtitle">Watch how TyloAI thinks, searches, and refines its responses in real-time</p>
+            <h2 class="section-title">Our Core Technology: Post-Thinking</h2>
+            <p class="section-subtitle">Witness the cognitive architecture that sets Protoetic apart</p>
             <div class="demo-section">
                 <div class="demo-intro">
-                    <h3>Witness Cognitive Architecture in Action</h3>
-                    <p>TyloAI doesn't just answer—it reasons, debates itself, and refines. Watch as multiple cognitive processes collaborate, challenge each other, and synthesize the optimal response.</p>
-                </div>
-
-                <div class="chat-container">
-                    <div class="message user-message">
-                        <div class="message-content">
-                            There are 100 prisoners in solitary cells, each with a unique number from 1 to 100. A room contains 100 boxes, each containing a unique number from 1 to 100. Each prisoner will be allowed to enter the room, open 50 boxes, and check the numbers inside. They must leave the room exactly as they found it and can't communicate with other prisoners. If all 100 prisoners find their own number, they will all be freed. What strategy can they use to maximize their chance of success?
-                        </div>
-                    </div>
-
-                    <div class="message ai-message">
-                        <div class="message-content">
-                            <div class="thinking-block">
-                                <div class="thinking-header" onclick="toggleThinking(this)">
-                                    <div class="thinking-label">
-                                        <svg class="thinking-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-                                            <path d="M2 17l10 5 10-5M2 12l10 5 10-5"></path>
-                                        </svg>
-                                        Initial reasoning chain
-                                    </div>
-                                    <svg class="expand-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <polyline points="6 9 12 15 18 9"></polyline>
-                                    </svg>
-                                </div>
-                                <div class="thinking-content">
-                                    Let's try to figure out this prisoner problem. So, we have 100 prisoners, each with a unique number from 1 to 100. There are 100 boxes in a room, each containing a unique number from 1 to 100. Each prisoner can open 50 boxes, and they can't communicate after that. They all need to find their own number to be freed. The question is, what strategy maximizes their chance of success?
-
-                                    First, if they all choose randomly, the probability would be (1/2)^100, which is practically zero. So there must be a smarter way. Let's think about patterns or structures they can exploit.
-
-                                    The key constraints here are that each number is unique in both prisoner IDs and box contents, and they can't communicate. So any strategy must be pre-planned and rely on some inherent structure in the numbering.
-
-                                    Maybe something with permutations? Since each box contains a unique number, the arrangement of numbers in boxes forms a permutation of 1 to 100. Permutations can be decomposed into cycles. For example, if box 1 contains 3, box 3 contains 5, and box 5 contains 1, that's a cycle of length 3: 1→3→5→1.
-
-                                    If each prisoner starts by opening the box with their own number, then follows the cycle by opening the box corresponding to the number they just found, that might work. Let's see. Suppose a prisoner's number is in a cycle of length k. If k ≤ 50, then following the cycle will lead them to their number within 50 steps. But if the cycle is longer than 50, they'll fail.
-
-                                    So the success of this strategy depends on the permutation not containing any cycle longer than 50. What's the probability of that? I remember this is a known problem. The probability that a random permutation of 100 elements has no cycle longer than 50 is approximately 31.18%. That's way better than the random approach.
-
-                                    Let me verify. Each prisoner starts with their own number's box, then goes to the number found in that box, and so on. If their number is part of a cycle of length ≤50, they'll find it within 50 steps. If all cycles are ≤50, everyone succeeds. If any cycle is longer than 50, everyone in that cycle fails, so the whole group fails.
-
-                                    Yes, that makes sense. This strategy transforms the problem from individual probabilities to the probability that the permutation's longest cycle is at most 50. And that probability is surprisingly high—around 30%, which is astronomically better than random chance.
-                                </div>
-                            </div>
-
-                            <div class="search-indicator">
-                                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <circle cx="11" cy="11" r="8"></circle>
-                                    <path d="m21 21-4.35-4.35"></path>
-                                </svg>
-                                Verifying permutation cycle properties and probability calculations...
-                            </div>
-
-                            <div class="ai-response-text">
-                                The optimal strategy leverages permutation cycle properties to achieve a surprisingly high success rate of approximately 31%. Here's the core approach:
-
-                                Each prisoner begins by opening the box corresponding to their own number. They then open the box whose number matches the value found in the previous box, repeating this process until they either find their own number or exhaust their 50 attempts.
-
-                                This works because the numbers in boxes form a permutation, which can be decomposed into disjoint cycles. If all cycles in the permutation have length ≤50, every prisoner will find their number within 50 steps. The probability of this occurring with 100 elements is approximately 31%, vastly exceeding the near-zero probability of success with random selection.
-                            </div>
-
-                            <div class="thinking-block">
-                                <div class="thinking-header" onclick="toggleThinking(this)">
-                                    <div class="thinking-label">
-                                        <svg class="thinking-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <circle cx="9" cy="12" r="1"></circle>
-                                            <circle cx="15" cy="12" r="1"></circle>
-                                            <path d="M8 15s1.5 2 4 2 4-2 4-2"></path>
-                                            <circle cx="12" cy="12" r="10"></circle>
-                                        </svg>
-                                        Alternative approaches and their limitations
-                                    </div>
-                                    <svg class="expand-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <polyline points="6 9 12 15 18 9"></polyline>
-                                    </svg>
-                                </div>
-                                <div class="thinking-content">
-                                    Let me explore if there are other possible strategies that might work better. What if prisoners divide the boxes among themselves? For example, prisoner 1 checks boxes 1-50, prisoner 2 checks boxes 1-50, etc. But that would mean if a number is in boxes 51-100, none of the prisoners would find it. So that's worse.
-
-                                    Another idea: Assign each prisoner a unique set of 50 boxes. But since there are C(100,50) possible sets, which is enormous, coordinating this would be impossible without communication. Also, if two prisoners need to check the same box that contains one of their numbers, this approach could fail.
-
-                                    What if they use a probabilistic approach, like each prisoner starts with their number but occasionally branches off? That would likely break the cycle detection and reduce the probability, since they might miss their cycle entirely.
-
-                                    What about using modular arithmetic? For example, prisoner n checks boxes n, n+50, n+25, etc., modulo 100. But this doesn't account for the permutation structure and would result in lower success rates, as it wouldn't guarantee finding their number even in medium-length cycles.
-
-                                    I can't think of a better approach. The cycle method seems optimal because it converts individual probabilities into a single system-wide probability. The key insight is that the problem's structure (unique numbers forming a permutation) allows for this coordinated strategy that's exponentially better than random attempts.
-                                </div>
-                            </div>
-
-                            <div class="thinking-block">
-                                <div class="thinking-header" onclick="toggleThinking(this)">
-                                    <div class="thinking-label">
-                                        <svg class="thinking-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                            <path d="M9 10h.01M15 10h.01"></path>
-                                            <path d="M9.5 15a3.5 3.5 0 005 0"></path>
-                                        </svg>
-                                        Probability calculation verification
-                                    </div>
-                                    <svg class="expand-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <polyline points="6 9 12 15 18 9"></polyline>
-                                    </svg>
-                                </div>
-                                <div class="thinking-content">
-                                    Let me verify the probability calculation for the cycle strategy. The success condition is that no cycle in the permutation has length >50. 
-
-                                    The probability that a random permutation of n elements has no cycle longer than k is given by 1 - sum from m=k+1 to n of (1/m) when k = n/2. For n=100 and k=50, this becomes 1 - (1/51 + 1/52 + ... + 1/100).
-
-                                    Calculating that sum: The harmonic number H_100 ≈ 5.187, and H_50 ≈ 4.499. The difference is approximately 0.688. So 1 - 0.688 ≈ 0.312, or 31.2%, which matches the earlier estimate.
-
-                                    This makes sense because the probability that a permutation of 100 elements contains a cycle of length m is 1/m for each m from 1 to 100. For mutually exclusive events (a permutation can't have two different longest cycles), we sum these probabilities. So the probability of having a cycle longer than 50 is the sum from 51 to 100 of 1/m ≈ 0.688, making the success probability ≈ 1 - 0.688 = 0.312.
-
-                                    This mathematical verification confirms that the cycle strategy provides approximately a 31% chance of success, which is indeed vastly better than the (1/2)^100 ≈ 1e-30 probability with random selection.
-                                </div>
-                            </div>
-
-                            <div class="thinking-block">
-                                <div class="thinking-header" onclick="toggleThinking(this)">
-                                    <div class="thinking-label">
-                                        <svg class="thinking-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-                                            <circle cx="12" cy="12" r="3"></circle>
-                                        </svg>
-                                        Synthesis (post-thinking)
-                                    </div>
-                                    <svg class="expand-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <polyline points="6 9 12 15 18 9"></polyline>
-                                    </svg>
-                                </div>
-                                <div class="thinking-content">
-                                    After analyzing various approaches, the cycle detection strategy clearly emerges as the optimal solution to this prisoner problem. The key insight is recognizing that the random arrangement of numbers in boxes forms a permutation, which can be decomposed into disjoint cycles.
-
-                                    By having each prisoner start with their own number's box and follow the cycle (opening the box corresponding to the number found in the previous box), they leverage the structure of these cycles. Success depends on no cycle exceeding 50 elements in length, which mathematically gives them approximately a 31% chance of all being freed.
-
-                                    This solution is elegant because it transforms the problem from 100 independent events (each with 1/2 probability) into a single system-wide event with a surprisingly high probability of success. The strategy requires no communication between prisoners after they enter the room, only a prearranged plan based on understanding permutation cycles.
-
-                                    What's fascinating is how this approach turns a seemingly impossible problem (with random chance effectively zero) into one with reasonable odds. It demonstrates the power of recognizing underlying mathematical structures in complex problems.
-                                </div>
-                            </div>
-
-                            <div class="ai-response-text">
-                                The optimal strategy for the 100 prisoners to maximize their chance of freedom relies on understanding permutation cycles in mathematics:
-
-                                <br><br>
-
-                                <strong>The Cycle Detection Strategy</strong>
-                                <p style="margin-top: 8px; line-height: 1.6;">
-                                Each prisoner follows this prearranged plan:
-                                <ol style="margin-left: 20px; margin-top: 8px;">
-                                    <li>Start by opening the box corresponding to their own number (Prisoner 1 opens Box 1, Prisoner 2 opens Box 2, etc.)</li>
-                                    <li>From each opened box, take the number inside and open the box with that number</li>
-                                    <li>Continue this process until finding their own number or exhausting the 50 attempts</li>
-                                </ol>
-                                </p>
-
-                                <br>
-
-                                <strong>Why This Works</strong>
-                                <p style="margin-top: 8px; line-height: 1.6;">
-                                The numbers in the boxes form a permutation of 1-100, which can be decomposed into disjoint cycles. For example, if Box 3 contains 7, Box 7 contains 12, and Box 12 contains 3, this forms a cycle: 3→7→12→3.
-                                </p>
-                                <p style="margin-top: 8px; line-height: 1.6;">
-                                When prisoners follow the cycle starting from their number, they will find their own number if and only if their cycle's length is ≤50. If all cycles in the permutation have length ≤50, every prisoner succeeds.
-                                </p>
-
-                                <br>
-
-                                <strong>Probability of Success</strong>
-                                <p style="margin-top: 8px; line-height: 1.6;">
-                                The probability that a random permutation of 100 elements contains no cycle longer than 50 is approximately 31.18%. This is astronomically better than the (1/2)^100 ≈ 1×10^-30 probability of success with random selection.
-                                </p>
-
-                                <br>
-
-                                <strong>Key Insight</strong>
-                                <p style="margin-top: 8px; line-height: 1.6;">
-                                This strategy transforms 100 independent events into a single system-wide event, leveraging the inherent structure of permutations to dramatically improve the odds. It works because the prisoners' fates become linked through the cycle structure—they either all succeed or fail together based on the permutation's properties.
-                                </p>
-                            </div>
-
-                            <div class="thinking-block">
-                                <div class="thinking-header" onclick="toggleThinking(this)">
-                                    <div class="thinking-label">
-                                        <svg class="thinking-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <circle cx="12" cy="12" r="10"></circle>
-                                            <polyline points="12 6 12 12 16 14"></polyline>
-                                        </svg>
-                                        Request Fulfillment Summary
-                                    </div>
-                                    <svg class="expand-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <polyline points="6 9 12 15 18 9"></polyline>
-                                    </svg>
-                                </div>
-                                <div class="thinking-content">
-                                    The user requested a complex logic/math problem instead of the previous investment question, along with a thinking summary that addresses what was requested and how it was fulfilled.
-
-                                    I selected the classic 100 prisoners and 100 boxes problem, which is recognized as a challenging logic puzzle requiring understanding of permutations and cycles. This meets the "特别特别难的一道逻辑/数学题目" requirement.
-
-                                    For the solution, I provided:
-                                    1. A detailed initial reasoning chain explaining the cycle detection strategy
-                                    2. A clear explanation of the optimal strategy
-                                    3. Analysis of alternative approaches and their limitations
-                                    4. Verification of the probability calculation
-                                    5. A synthesis of the solution showing deep understanding
-                                    6. A comprehensive final explanation of the strategy and its effectiveness
-
-                                    The thinking process demonstrates genuine problem-solving, including exploring alternatives, verifying mathematical claims, and connecting concepts from permutation theory to the practical solution. This fulfills the requirement for a thorough, human-like thinking process rather than a superficial answer.
-
-                                    Finally, I've added this request fulfillment summary as specifically requested, confirming that I've addressed the user's requirements completely.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <h3>Technology Demonstration</h3>
+                    <p>Our post-thinking architecture doesn't just answer—it reasons, debates itself, and refines. Multiple cognitive processes collaborate, challenge each other, and synthesize optimal responses in real-time.</p>
                 </div>
             </div>
-                
         </section>
 
-        <section id="features" class="section" style="background-color: var(--card-bg); border-radius: 24px; border: 1px solid var(--border-color);">
-            <h2 class="section-title">Built for Power Users</h2>
-            <p class="section-subtitle">Advanced features that put control in your hands</p>
+        <section id="research" class="section" style="background-color: var(--card-bg); border-radius: 24px; border: 1px solid var(--border-color); margin: 0 30px;">
+            <h2 class="section-title">Research & Innovation</h2>
+            <p class="section-subtitle">Pioneering responsible AI development through cutting-edge research</p>
             
-            <div class="features-grid">
-                <div class="feature-item">
-                    <div class="feature-icon">
+            <div class="research-grid">
+                <div class="research-card">
+                    <div class="research-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <path d="m21 21-4.35-4.35"></path>
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                            <path d="M2 17l10 5 10-5M2 12l10 5 10-5"></path>
                         </svg>
                     </div>
-                    <h3>Web Search</h3>
-                    <p>Real-time information access across all models, ensuring you get the latest data and insights.</p>
+                    <h3>Cognitive Architecture</h3>
+                    <p>Developing novel neural architectures that enable transparent reasoning processes, allowing AI systems to think step-by-step and self-correct through multi-layered cognitive chains.</p>
+                    <a href="#" class="read-more">Read our research →</a>
                 </div>
 
-                <div class="feature-item">
-                    <div class="feature-icon clock-icon">
+                <div class="research-card">
+                    <div class="research-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <polyline points="12 6 12 12 16 14"></polyline>
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                         </svg>
                     </div>
-                    <h3>Extended Thinking</h3>
-                    <p>Break down complex problems with multi-step reasoning and comprehensive analysis.</p>
+                    <h3>AI Safety & Ethics</h3>
+                    <p>Committed to building AI systems that are safe, aligned with human values, and beneficial to society. Our research focuses on interpretability, robustness, and ethical decision-making.</p>
+                    <a href="#" class="read-more">Explore our approach →</a>
                 </div>
 
-                <div class="feature-item">
-                    <div class="feature-icon">
+                <div class="research-card">
+                    <div class="research-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-                            <polyline points="7.5 4.21 12 6.81 16.5 4.21"></polyline>
-                            <polyline points="7.5 19.79 7.5 14.6 3 12"></polyline>
-                            <polyline points="21 12 16.5 14.6 16.5 19.79"></polyline>
-                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path d="M12 1v6m0 6v6m5.2-15.8l-4.2 4.2m-2 2l-4.2 4.2M23 12h-6m-6 0H1m18.8 5.2l-4.2-4.2m-2-2l-4.2-4.2"></path>
                         </svg>
                     </div>
-                    <h3>Post-Thinking</h3>
-                    <p>Advanced cognitive architecture that reflects and refines responses after generation.</p>
-                </div>
-
-                <div class="feature-item">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-                        </svg>
-                    </div>
-                    <h3>High-Level Chains</h3>
-                    <p>Connect multiple reasoning steps for sophisticated problem-solving workflows.</p>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="m18 16 4-4-4-4"></path>
-                            <path d="m6 8-4 4 4 4"></path>
-                            <path d="m14.5 4-5 16"></path>
-                        </svg>
-                    </div>
-                    <h3>Artifact</h3>
-                    <p>Artifact introduction, can run code, built-in sandbox</p>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
-                            <path d="M20 3v4"></path>
-                            <path d="M22 5h-4"></path>
-                            <circle cx="12" cy="12" r="1"></circle>
-                        </svg>
-                    </div>
-                    <h3>Autonomous Decision</h3>
-                    <p>AI adaptive mode automatically determines whether to enable deep thinking, secondary thinking, how much to think, and how many times to think based on the difficulty of the prompt. Capable of thinking from seconds to minutes.</p>
+                    <h3>Extended Reasoning</h3>
+                    <p>Pushing the boundaries of AI capabilities with systems that can engage in long-horizon planning, complex problem decomposition, and adaptive learning across domains.</p>
+                    <a href="#" class="read-more">Learn more →</a>
                 </div>
             </div>
         </section>
 
-<!-- CSS 部分 -->
-<style>
-.about-container {
-    display: flex;
-    gap: 80px;
-    align-items: center;
-}
-
-.about-content {
-    flex: 1;
-    max-width: 550px;
-}
-
-.about-video {
-    flex: 1;
-    max-width: 600px;
-}
-
-.custom-video-player {
-    position: relative;
-    width: 100%;
-    border-radius: 20px;
-    overflow: hidden;
-    background-color: #000;
-    aspect-ratio: 16/9;
-}
-
-.custom-video-player video {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-}
-
-.video-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(0, 0, 0, 0.3);
-    transition: opacity 0.3s ease;
-    cursor: pointer;
-}
-
-.video-overlay.hidden {
-    opacity: 0;
-    pointer-events: none;
-}
-
-.play-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #111;
-    transition: transform 0.3s ease;
-    padding: 0;
-}
-
-.play-button:hover {
-    transform: scale(1.1);
-}
-
-.video-controls {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-    padding: 20px 16px 16px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.custom-video-player:hover .video-controls {
-    opacity: 1;
-}
-
-.video-controls.show {
-    opacity: 1;
-}
-
-.progress-bar {
-    width: 100%;
-    height: 4px;
-    background-color: rgba(255, 255, 255, 0.3);
-    border-radius: 2px;
-    cursor: pointer;
-    margin-bottom: 12px;
-    position: relative;
-}
-
-.progress-filled {
-    height: 100%;
-    background-color: #fff;
-    border-radius: 2px;
-    width: 0%;
-    transition: width 0.1s linear;
-}
-
-.control-buttons {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.control-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #fff;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.2s ease;
-}
-
-.control-btn:hover {
-    transform: scale(1.1);
-}
-
-.control-btn svg {
-    width: 24px;
-    height: 24px;
-}
-
-.time-display {
-    color: #fff;
-    font-size: 0.85rem;
-    margin-left: auto;
-    font-family: var(--font-sans);
-}
-
-@media (max-width: 992px) {
-    .about-container {
-        flex-direction: column;
-        gap: 40px;
-    }
-
-    .about-content {
-        max-width: 100%;
-        text-align: center;
-    }
-
-    .about-content h2 {
-        text-align: center !important;
-    }
-
-    .about-video {
-        max-width: 100%;
-    }
-}
-</style>
-
-<!-- HTML 部分 -->
-<section id="about" class="section">
-    <div class="about-container">
-        <div class="about-content">
-            <h2 class="section-title" style="text-align: left; margin-bottom: 30px;">Power, at your command</h2>
-            <p style="font-size: 1.1rem; line-height: 1.8; color: var(--secondary-text-color); margin-bottom: 30px;">
-                Protoetic is redefining what's possible with AI. Founded in January 2025, we're building the next generation of intelligent systems that put unprecedented power in your hands.
-            </p>
-            <p style="font-size: 1.1rem; line-height: 1.8; color: var(--secondary-text-color); margin-bottom: 40px;">
-                Our mission is to create AI that thinks deeper, reasons better, and empowers you to achieve more. With the ode-6 family, we're not just building models—we're crafting thinking partners that adapt to your needs.
-            </p>
-            <div>
-                <a href="app.html" class="cta-button" style="display: inline-block; padding: 14px 32px; font-size: 1.1rem; margin-right: 15px;">Start with TyloAI</a>
-                <a href="https://protoetic.com" class="cta-button" style="display: inline-block; padding: 14px 32px; font-size: 1.1rem; background-color: transparent; color: var(--text-color); border: 1px solid var(--border-color);">Learn More</a>
-            </div>
-        </div>
-        <div class="about-video">
-            <div class="custom-video-player" id="about-video-player">
-                <video id="about-video" playsinline>
-                    <source src="tyloai-trailer.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <div class="video-overlay" id="video-overlay">
-                    <button class="play-button" id="play-button">
-                        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-                            <circle cx="40" cy="40" r="40" fill="rgba(255,255,255,0.95)"/>
-                            <path d="M32 26L56 40L32 54V26Z" fill="#111"/>
-                        </svg>
-                    </button>
-                </div>
-                <div class="video-controls" id="video-controls">
-                    <div class="progress-bar" id="progress-bar">
-                        <div class="progress-filled" id="progress-filled"></div>
+        <section id="about" class="section">
+            <div class="about-container">
+                <div class="about-content">
+                    <h2 class="section-title" style="text-align: left; margin-bottom: 30px;">Building the Future of AI</h2>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--secondary-text-color); margin-bottom: 30px;">
+                        Founded in January 2025, Protoetic is on a mission to develop AI systems that think deeply, reason transparently, and genuinely understand the world. We believe AI should empower humanity, not replace human judgment.
+                    </p>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--secondary-text-color); margin-bottom: 40px;">
+                        Our first product, TyloAI, demonstrates what's possible when cognitive architecture meets responsible development. With the ode-6 model family, we're not just building tools—we're crafting thinking partners that adapt to your needs and grow with you.
+                    </p>
+                    <div>
+                        <a href="app.html" class="cta-button" style="display: inline-block; padding: 14px 32px; font-size: 1.1rem; margin-right: 15px;">Launch TyloAI App</a>
+                        <a href="#research" class="cta-button" style="display: inline-block; padding: 14px 32px; font-size: 1.1rem; background-color: transparent; color: var(--text-color); border: 1px solid var(--border-color);">Explore Our Research</a>
                     </div>
-                    <div class="control-buttons">
-                        <button class="control-btn" id="play-pause-btn">
-                            <svg id="play-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                            </svg>
-                            <svg id="pause-icon" style="display: none;" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="6" y="4" width="4" height="16"></rect>
-                                <rect x="14" y="4" width="4" height="16"></rect>
-                            </svg>
-                        </button>
-                        <span class="time-display" id="time-display">0:00 / 0:00</span>
+                </div>
+                <div class="about-video">
+                    <div class="custom-video-player" id="about-video-player">
+                        <video id="about-video" playsinline>
+                            <source src="tyloai-trailer.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="video-overlay" id="video-overlay">
+                            <button class="play-button" id="play-button">
+                                <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                                    <circle cx="40" cy="40" r="40" fill="rgba(255,255,255,0.95)"/>
+                                    <path d="M32 26L56 40L32 54V26Z" fill="#111"/>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
-
-<!-- JavaScript 部分 -->
-<script>
-// Custom video player for about section
-const aboutVideo = document.getElementById('about-video');
-const videoOverlay = document.getElementById('video-overlay');
-const playButton = document.getElementById('play-button');
-const videoControls = document.getElementById('video-controls');
-const playPauseBtn = document.getElementById('play-pause-btn');
-const playIcon = document.getElementById('play-icon');
-const pauseIcon = document.getElementById('pause-icon');
-const progressBar = document.getElementById('progress-bar');
-const progressFilled = document.getElementById('progress-filled');
-const timeDisplay = document.getElementById('time-display');
-
-// 格式化时间
-function formatTime(seconds) {
-    const mins = Math.floor(seconds / 60);
-    const secs = Math.floor(seconds % 60);
-    return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-}
-
-// 更新进度条
-function updateProgress() {
-    const percent = (aboutVideo.currentTime / aboutVideo.duration) * 100;
-    progressFilled.style.width = percent + '%';
-    timeDisplay.textContent = `${formatTime(aboutVideo.currentTime)} / ${formatTime(aboutVideo.duration)}`;
-}
-
-// 点击初始播放按钮
-playButton.addEventListener('click', () => {
-    aboutVideo.play();
-    videoOverlay.classList.add('hidden');
-});
-
-// 点击视频区域播放/暂停
-aboutVideo.addEventListener('click', () => {
-    if (aboutVideo.paused) {
-        aboutVideo.play();
-        videoOverlay.classList.add('hidden');
-    } else {
-        aboutVideo.pause();
-    }
-});
-
-// 播放/暂停按钮
-playPauseBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    if (aboutVideo.paused) {
-        aboutVideo.play();
-    } else {
-        aboutVideo.pause();
-    }
-});
-
-// 更新播放/暂停图标
-aboutVideo.addEventListener('play', () => {
-    playIcon.style.display = 'none';
-    pauseIcon.style.display = 'block';
-    videoControls.classList.add('show');
-    setTimeout(() => {
-        if (!aboutVideo.paused) {
-            videoControls.classList.remove('show');
-        }
-    }, 2000);
-});
-
-aboutVideo.addEventListener('pause', () => {
-    playIcon.style.display = 'block';
-    pauseIcon.style.display = 'none';
-    videoControls.classList.add('show');
-});
-
-// 更新进度
-aboutVideo.addEventListener('timeupdate', updateProgress);
-
-// 点击进度条跳转
-progressBar.addEventListener('click', (e) => {
-    const rect = progressBar.getBoundingClientRect();
-    const percent = (e.clientX - rect.left) / rect.width;
-    aboutVideo.currentTime = percent * aboutVideo.duration;
-});
-
-// 视频结束
-aboutVideo.addEventListener('ended', () => {
-    videoOverlay.classList.remove('hidden');
-    playIcon.style.display = 'block';
-    pauseIcon.style.display = 'none';
-});
-
-// 鼠标移动显示控制条
-let controlTimeout;
-document.getElementById('about-video-player').addEventListener('mousemove', () => {
-    if (!aboutVideo.paused) {
-        videoControls.classList.add('show');
-        clearTimeout(controlTimeout);
-        controlTimeout = setTimeout(() => {
-            videoControls.classList.remove('show');
-        }, 2000);
-    }
-});
-</script>
+        </section>
     </main>
 
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-brand">
                 <h3>Protoetic</h3>
-                <p>Power, at your command. Building the future of intelligent systems since January 2025.</p>
+                <p>Building responsible AI systems that empower humanity through deep thinking and transparent reasoning. Founded January 2025.</p>
             </div>
             
             <div class="footer-section">
                 <h4>Products</h4>
                 <ul>
-                    <li><a href="login.html">TyloAI Chat</a></li>
-                    <li><a href="ode.html">ode-6 Models</a></li>
+                    <li><a href="app.html">TyloAI Chat</a></li>
+                    <li><a href="#technology">ode-6 Models</a></li>
                     <li><a href="#">API Access</a></li>
                 </ul>
             </div>
@@ -1578,7 +978,8 @@ document.getElementById('about-video-player').addEventListener('mousemove', () =
                 <ul>
                     <li><a href="about.html">About Us</a></li>
                     <li><a href="research.html">Research</a></li>
-                    <li><a href="#">Careers</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="news.html">News & Blog</a></li>
                 </ul>
             </div>
             
@@ -1586,14 +987,15 @@ document.getElementById('about-video-player').addEventListener('mousemove', () =
                 <h4>Resources</h4>
                 <ul>
                     <li><a href="#">Documentation</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Support</a></li>
+                    <li><a href="privacy.html">Privacy</a></li>
+                    <li><a href="terms.html">Terms</a></li>
+                    <li><a href="mailto:info@tyloai.com">Contact</a></li>
                 </ul>
             </div>
         </div>
         
         <div class="footer-bottom">
-            <p>&copy; 2025 Protoetic. All rights reserved.</p>
+            <p>&copy; 2025 Protoetic. All rights reserved. | Building AI that thinks deeply and acts responsibly.</p>
         </div>
     </footer>
 
@@ -1617,6 +1019,49 @@ document.getElementById('about-video-player').addEventListener('mousemove', () =
         const initialTheme = storedTheme ? storedTheme : 'dark';
         applyTheme(initialTheme);
 
+        // Typing animation
+        const typingElement = document.getElementById('typing-text');
+        const phrases = [
+            'Deep Reasoning',
+            'Post-Thinking',
+            'Cognitive Architecture',
+            'Beneficial AI',
+            'Extended Thinking',
+            'Transparent Intelligence'
+        ];
+        
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typingSpeed = 100;
+        
+        function typeText() {
+            const currentPhrase = phrases[phraseIndex];
+            
+            if (isDeleting) {
+                typingElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+                typingSpeed = 50;
+            } else {
+                typingElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+                typingSpeed = 100;
+            }
+            
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                typingSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                typingSpeed = 500;
+            }
+            
+            setTimeout(typeText, typingSpeed);
+        }
+        
+        setTimeout(typeText, 1000);
+
         // Prompt functionality
         function fillPrompt(text) {
             document.getElementById('prompt-input').value = text;
@@ -1625,7 +1070,7 @@ document.getElementById('about-video-player').addEventListener('mousemove', () =
         function submitPrompt() {
             const input = document.getElementById('prompt-input').value;
             if (input.trim()) {
-                window.open('https://tyloai.com?q=' + encodeURIComponent(input), '_blank');
+                window.open('app.html?q=' + encodeURIComponent(input), '_blank');
             }
         }
 
@@ -1649,14 +1094,28 @@ document.getElementById('about-video-player').addEventListener('mousemove', () =
             });
         });
 
-        // Toggle thinking blocks
-        function toggleThinking(header) {
-            const content = header.nextElementSibling;
-            const icon = header.querySelector('.expand-icon');
-            
-            content.classList.toggle('expanded');
-            icon.classList.toggle('expanded');
-        }
+        // Video player
+        const aboutVideo = document.getElementById('about-video');
+        const videoOverlay = document.getElementById('video-overlay');
+        const playButton = document.getElementById('play-button');
+
+        playButton.addEventListener('click', () => {
+            aboutVideo.play();
+            videoOverlay.classList.add('hidden');
+        });
+
+        aboutVideo.addEventListener('click', () => {
+            if (aboutVideo.paused) {
+                aboutVideo.play();
+                videoOverlay.classList.add('hidden');
+            } else {
+                aboutVideo.pause();
+            }
+        });
+
+        aboutVideo.addEventListener('ended', () => {
+            videoOverlay.classList.remove('hidden');
+        });
     </script>
 </body>
 </html>

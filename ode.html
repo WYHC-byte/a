@@ -435,6 +435,7 @@
                 <li><a href="#overview" class="sidebar-link active">Model Overview</a></li>
                 <li><a href="#prompts" class="sidebar-link">System Prompts</a></li>
                 <li><a href="#tech" class="sidebar-link">Core Technologies</a></li>
+                <li><a href="#ai-may-make-mistakes" class="sidebar-link">AI Limitations</a></li>
             </ul>
         </aside>
 
@@ -544,6 +545,29 @@
                     <h3>4. Graceful Degradation Algorithm</h3>
                     <p>Unlike traditional models that may abruptly truncate responses upon reaching an output limit, our system employs an intelligent breakpoint algorithm. It analyzes the conversational context to <strong>find a natural conclusion point, such as the end of a sentence or paragraph.</strong> This ensures conversational integrity and prevents a jarring user experience.</p>
                 </div>
+            </div>
+            <div id="ai-may-make-mistakes" class="content-panel">
+                <h1>Understanding AI Limitations & Responsible Use</h1>
+                <p class="intro-text">To be a helpful and harmless assistant, TyloAI may sometimes generate responses that are incorrect or misleading. It's crucial for users to understand these limitations as part of a responsible AI interaction.</p>
+
+                <h2>The Phenomenon of "Hallucination"</h2>
+                <p>This behavior is often referred to as "hallucination," and it is a byproduct of the current limitations in even the most advanced generative AI models. An AI model's primary goal is to predict the next most plausible word, which usually results in coherent and factual text, but can sometimes lead to outputs that are not grounded in reality.</p>
+                <p>For example, TyloAI might:</p>
+                <ul>
+                    <li>Present information that is outdated, as its knowledge is not updated in real-time and has a specific <a href="#prompts">knowledge cutoff date</a>.</li>
+                    <li>Generate citations or sources that appear authoritative but are entirely fabricated. In other words, TyloAI can write something that looks correct but is fundamentally false.</li>
+                    <li>Misinterpret nuanced or ambiguous questions, leading to an answer that is logical but irrelevant.</li>
+                </ul>
+
+                <h2>Your Role as a User</h2>
+                <h4>Do Not Rely on TyloAI as a Single Source of Truth</h4>
+                <p>Users should not depend on TyloAI for high-stakes advice, such as medical, legal, or financial guidance. Always cross-reference critical information with reliable, independent sources.</p>
+                
+                <h4>Verify Information from Web Searches</h4>
+                <p>When interacting with results from web searches, users should review the sources TyloAI cites. The original website may contain crucial context or details not included in TyloAI's summary. The quality of the AI's response is dependent on the sources it references, so examining the original content helps you identify any information that might be misunderstood without its full context.</p>
+
+                <h2>Help Us Improve</h2>
+                <p>Your feedback is invaluable for improving TyloAI's safety and accuracy. If you encounter a response that is unhelpful, incorrect, or concerning, please let us know. You can use feedback mechanisms within the interface or write to us at <code>feedback@tyloai.com</code> with your thoughts and suggestions.</p>
             </div>
         </section>
     </main>

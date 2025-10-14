@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Protoetic - Building the Future of AI</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+            --transition-speed: 0.3s;
+        }
+
+        html[data-theme='light'] {
+            --bg-color: #fafafa;
+            --text-color: #111111;
+            --secondary-text-color: #666666;
+            --border-color: #e0e0e0;
+            --input-bg-color: #ffffff;
+            --button-accent-bg: #111111;
+            --button-accent-text: #ffffff;
+            --card-bg: #ffffff;
+            --accent-color: #333333;
+        }
+
+        html[data-theme='dark'] {
+            --bg-color: #0a0a0a;
+            --text-color: #eeeeee;
+            --secondary-text-color: #999999;
+            --border-color: #2a2a2a;
+            --input-bg-color: #1a1a1a;
+            --button-accent-bg: #eeeeee;
+            --button-accent-text: #111111;
+            --card-bg: #151515;
+            --accent-color: #cccccc;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        .main-header {
+            width: 100%;
+            background-color: rgba(250, 250, 250, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color var(--transition-speed) ease;
+        }
+
+        html[data-theme='dark'] .main-header {
+            background-color: rgba(10, 10, 10, 0.8);
+        }
+
+        .main-header nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 16px 30px;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            font-family: var(--font-serif);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--secondary-text-color);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--text-color);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .theme-toggle {
+            cursor: pointer;
+            background: none;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 8px;
+            color: var(--text-color);
+            transition: all var(--transition-speed) ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--card-bg);
+        }
+
+        .theme-toggle .icon {
+            width: 20px;
+            height: 20px;
+            display: block;
+        }
+
+        html[data-theme='dark'] .sun-icon { display: block; }
+        html[data-theme='dark'] .moon-icon { display: none; }
+        html[data-theme='light'] .sun-icon { display: none; }
+        html[data-theme='light'] .moon-icon { display: block; }
+
+        .cta-button {
+            background-color: var(--button-accent-bg);
+            color: var(--button-accent-text);
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: opacity var(--transition-speed) ease;
+        }
+
+        .cta-button:hover {
+            opacity: 0.85;
+        }
+
+        .page-hero {
+            padding: 150px 30px 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .page-hero h1 {
+            font-family: var(--font-serif);
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: var(--text-color);
+        }
+
+        .page-hero p {
+            font-size: 1.3rem;
+            color: var(--secondary-text-color);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 30px;
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 60px;
+            align-items: start;
+        }
+
+        .content-block {
+            max-width: 600px;
+        }
+
+        .content-block h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
+        .content-block p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--secondary-text-color);
+            margin-bottom: 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-top: 80px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 30px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            transition: transform var(--transition-speed) ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .stat-number {
+            font-family: var(--font-serif);
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 12px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--secondary-text-color);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .team-member {
+            text-align: center;
+            padding: 30px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            transition: transform var(--transition-speed) ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-4px);
+        }
+
+        .member-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--text-color) 0%, var(--secondary-text-color) 100%);
+            margin: 0 auto 20px;
+        }
+
+        .member-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 8px;
+        }
+
+        .member-role {
+            font-size: 1rem;
+            color: var(--secondary-text-color);
+            margin-bottom: 16px;
+        }
+
+        .member-bio {
+            font-size: 0.95rem;
+            color: var(--secondary-text-color);
+            line-height: 1.6;
+        }
+
+        .timeline {
+            max-width: 800px;
+            margin: 60px auto 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .timeline-date {
+            flex-shrink: 0;
+            width: 120px;
+            font-weight: 600;
+            color: var(--text-color);
+            font-size: 1.1rem;
+        }
+
+        .timeline-content {
+            flex: 1;
+            padding-bottom: 30px;
+            border-left: 2px solid var(--border-color);
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 6px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--text-color);
+        }
+
+        .timeline-content h4 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 12px;
+        }
+
+        .timeline-content p {
+            font-size: 1rem;
+            color: var(--secondary-text-color);
+            line-height: 1.7;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .value-card {
+            padding: 40px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+        }
+
+        .value-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--text-color);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .value-icon svg {
+            width: 26px;
+            height: 26px;
+            stroke: var(--bg-color);
+        }
+
+        .value-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 16px;
+        }
+
+        .value-card p {
+            font-size: 1rem;
+            color: var(--secondary-text-color);
+            line-height: 1.7;
+        }
+
+        .footer {
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 60px 30px 30px;
+            margin-top: 100px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+        }
+
+        .footer-brand h3 {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text-color);
+        }
+
+        .footer-brand p {
+            color: var(--secondary-text-color);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .footer-section h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-color);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: var(--secondary-text-color);
+            text-decoration: none;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--text-color);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 40px auto 0;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--secondary-text-color);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+            }
+
+            .page-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .content-grid, .values-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <nav>
+            <a href="index.html" class="logo">Protoetic</a>
+            <div class="nav-links">
+                <a href="index.html#technology">Technology</a>
+                <a href="index.html#demo">Demo</a>
+                <a href="research.html">Research</a>
+                <a href="about.html" class="active">About Us</a>
+            </div>
+            <div class="header-actions">
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                    <svg class="icon sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.106a.75.75 0 010 1.06l-1.591 1.59a.75.75 0 11-1.06-1.06l1.59-1.59a.75.75 0 011.06 0zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.803 17.803a.75.75 0 01-1.06 0l-1.59-1.591a.75.75 0 111.06-1.06l1.59 1.59a.75.75 0 010 1.06zM12 21.75a.75.75 0 01-.75-.75v-2.25a.75.75 0 011.5 0V21a.75.75 0 01-.75.75zM5.106 18.894a.75.75 0 010-1.06l1.59-1.59a.75.75 0 111.06 1.06l-1.59 1.59a.75.75 0 01-1.06 0zM3 12a.75.75 0 01.75-.75h2.25a.75.75 0 010 1.5H3.75A.75.75 0 013 12zM6.106 5.106a.75.75 0 011.06 0l1.59 1.591a.75.75 0 11-1.06 1.06l-1.59-1.59a.75.75 0 010-1.06z"/></svg>
+                    <svg class="icon moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-3.836 2.04-7.171 5.008-8.972a.75.75 0 01.82.162z" clip-rule="evenodd" /></svg>
+                </button>
+                <a href="app.html" class="cta-button">Launch TyloAI</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="page-hero">
+            <h1>Building AI That Thinks Deeply</h1>
+            <p>We're a team of researchers, engineers, and thinkers dedicated to developing AI systems that reason transparently, act responsibly, and genuinely empower humanity.</p>
+        </div>
+
+        <section class="section">
+            <div class="content-grid">
+                <div class="content-block">
+                    <h3>Our Mission</h3>
+                    <p>At Protoetic, we believe artificial intelligence should be a thinking partner that enhances human capability, not a black box that replaces human judgment.</p>
+                    <p>Founded in January 2025, we're building the next generation of cognitive architectures—AI systems that think step-by-step, show their reasoning, and adapt to your unique needs.</p>
+                </div>
+                <div class="content-block">
+                    <h3>Our Approach</h3>
+                    <p>We pioneered post-thinking architecture, a revolutionary approach where multiple cognitive processes collaborate, debate, and refine responses in real-time.</p>
+                    <p>This isn't just faster AI—it's fundamentally different AI that understands context, questions its own assumptions, and produces more thoughtful, nuanced results.</p>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">2025</div>
+                    <div class="stat-label">Founded</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Model Variants</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Team Members</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100K+</div>
+                    <div class="stat-label">Active Users</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" style="background-color: var(--card-bg); border-radius: 24px; margin: 0 30px; border: 1px solid var(--border-color);">
+            <h2 class="section-title" style="text-align: center;">Our Values</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                    </div>
+                    <h3>Safety First</h3>
+                    <p>Every feature we build, every model we train, is designed with safety and alignment at its core. We believe powerful AI must be responsible AI.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M12 16v-4M12 8h.01"></path>
+                        </svg>
+                    </div>
+                    <h3>Transparency</h3>
+                    <p>We believe users deserve to understand how AI reaches its conclusions. Our post-thinking architecture makes reasoning visible and interpretable.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                    </div>
+                    <h3>Human-Centric</h3>
+                    <p>Technology should serve people, not the other way around. We design AI that adapts to human needs and enhances human decision-making.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                        </svg>
+                    </div>
+                    <h3>Innovation</h3>
+                    <p>We're not satisfied with incremental improvements. We're reimagining what AI can be through groundbreaking research and bold engineering.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title" style="text-align: center;">Our Journey</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">Jan 2025</div>
+                    <div class="timeline-content">
+                        <h4>Company Founded</h4>
+                        <p>Protoetic was established with a vision to build AI that thinks deeply and reasons transparently.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Mar 2025</div>
+                    <div class="timeline-content">
+                        <h4>Post-Thinking Architecture</h4>
+                        <p>Breakthrough in cognitive architecture enabling multi-layered reasoning and self-correction capabilities.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Jun 2025</div>
+                    <div class="timeline-content">
+                        <h4>ode-6 Model Family</h4>
+                        <p>Launch of our three-tier model ecosystem: ode-6-flash, ode-6, and ode-6-reasoning.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Sep 2025</div>
+                    <div class="timeline-content">
+                        <h4>TyloAI Launch</h4>
+                        <p>Public release of TyloAI, making advanced cognitive AI accessible to everyone.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" style="background-color: var(--input-bg-color); border-radius: 24px; margin: 0 30px; text-align: center;">
+            <h2 class="section-title">Join Our Mission</h2>
+            <p style="font-size: 1.2rem; color: var(--secondary-text-color); max-width: 700px; margin: 20px auto 40px; line-height: 1.6;">
+                We're looking for talented individuals who share our vision of building responsible, powerful AI that serves humanity.
+            </p>
+            <a href="careers.html" class="cta-button" style="display: inline-block; padding: 14px 32px; font-size: 1.1rem;">View Open Positions</a>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>Protoetic</h3>
+                <p>Building responsible AI systems that empower humanity through deep thinking and transparent reasoning. Founded January 2025.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="app.html">TyloAI Chat</a></li>
+                    <li><a href="index.html#technology">ode-6 Models</a></li>
+                    <li><a href="#">API Access</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="research.html">Research</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="news.html">Press</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="news.html">Blog</a></li>
+                    <li><a href="#">Support</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Protoetic. All rights reserved. | <a href="privacy.html" style="color: var(--secondary-text-color); text-decoration: none;">Privacy</a> | <a href="terms.html" style="color: var(--secondary-text-color); text-decoration: none;">Terms</a> | <a href="security.html" style="color: var(--secondary-text-color); text-decoration: none;">Security</a></p>
+        </div>
+    </footer>
+
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlEl = document.documentElement;
+
+        const applyTheme = (theme) => {
+            htmlEl.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        };
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = htmlEl.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            applyTheme(newTheme);
+        });
+
+        const storedTheme = localStorage.getItem('theme');
+        const initialTheme = storedTheme ? storedTheme : 'dark';
+        applyTheme(initialTheme);
+    </script>
+</body>
+</html>

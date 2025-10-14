@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service | Protoetic</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+            --transition-speed: 0.3s;
+        }
+
+        html[data-theme='light'] {
+            --bg-color: #fafafa;
+            --text-color: #111111;
+            --secondary-text-color: #666666;
+            --border-color: #e0e0e0;
+            --input-bg-color: #ffffff;
+            --button-accent-bg: #111111;
+            --button-accent-text: #ffffff;
+            --card-bg: #ffffff;
+            --accent-color: #333333;
+        }
+
+        html[data-theme='dark'] {
+            --bg-color: #0a0a0a;
+            --text-color: #eeeeee;
+            --secondary-text-color: #999999;
+            --border-color: #2a2a2a;
+            --input-bg-color: #1a1a1a;
+            --button-accent-bg: #eeeeee;
+            --button-accent-text: #111111;
+            --card-bg: #151515;
+            --accent-color: #cccccc;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        .main-header {
+            width: 100%;
+            background-color: rgba(250, 250, 250, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color var(--transition-speed) ease;
+        }
+
+        html[data-theme='dark'] .main-header {
+            background-color: rgba(10, 10, 10, 0.8);
+        }
+
+        .main-header nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 16px 30px;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            font-family: var(--font-serif);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--secondary-text-color);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-color);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .theme-toggle {
+            cursor: pointer;
+            background: none;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 8px;
+            color: var(--text-color);
+            transition: all var(--transition-speed) ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--card-bg);
+        }
+
+        .theme-toggle .icon {
+            width: 20px;
+            height: 20px;
+            display: block;
+        }
+
+        html[data-theme='dark'] .sun-icon { display: block; }
+        html[data-theme='dark'] .moon-icon { display: none; }
+        html[data-theme='light'] .sun-icon { display: none; }
+        html[data-theme='light'] .moon-icon { display: block; }
+
+        .cta-button {
+            background-color: var(--button-accent-bg);
+            color: var(--button-accent-text);
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: opacity var(--transition-speed) ease;
+        }
+
+        .cta-button:hover {
+            opacity: 0.85;
+        }
+
+        .page-hero {
+            padding: 150px 30px 60px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .page-hero h1 {
+            font-family: var(--font-serif);
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text-color);
+        }
+
+        .last-updated {
+            color: var(--secondary-text-color);
+            font-size: 1rem;
+            margin-bottom: 40px;
+        }
+
+        .content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 30px 100px;
+        }
+
+        .content h2 {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 50px 0 20px;
+            color: var(--text-color);
+        }
+
+        .content h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 30px 0 16px;
+            color: var(--text-color);
+        }
+
+        .content p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--secondary-text-color);
+            margin-bottom: 20px;
+        }
+
+        .content ul {
+            margin: 20px 0 20px 30px;
+            color: var(--secondary-text-color);
+        }
+
+        .content li {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+
+        .content strong {
+            color: var(--text-color);
+            font-weight: 600;
+        }
+
+        .highlight-box {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+        }
+
+        .footer {
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 60px 30px 30px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+        }
+
+        .footer-brand h3 {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text-color);
+        }
+
+        .footer-brand p {
+            color: var(--secondary-text-color);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .footer-section h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-color);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: var(--secondary-text-color);
+            text-decoration: none;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--text-color);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 40px auto 0;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--secondary-text-color);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+            }
+
+            .page-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <nav>
+            <a href="index.html" class="logo">Protoetic</a>
+            <div class="nav-links">
+                <a href="index.html#technology">Technology</a>
+                <a href="index.html#demo">Demo</a>
+                <a href="research.html">Research</a>
+                <a href="about.html">About Us</a>
+            </div>
+            <div class="header-actions">
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                    <svg class="icon sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.106a.75.75 0 010 1.06l-1.591 1.59a.75.75 0 11-1.06-1.06l1.59-1.59a.75.75 0 011.06 0zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.803 17.803a.75.75 0 01-1.06 0l-1.59-1.591a.75.75 0 111.06-1.06l1.59 1.59a.75.75 0 010 1.06zM12 21.75a.75.75 0 01-.75-.75v-2.25a.75.75 0 011.5 0V21a.75.75 0 01-.75.75zM5.106 18.894a.75.75 0 010-1.06l1.59-1.59a.75.75 0 111.06 1.06l-1.59 1.59a.75.75 0 01-1.06 0zM3 12a.75.75 0 01.75-.75h2.25a.75.75 0 010 1.5H3.75A.75.75 0 013 12zM6.106 5.106a.75.75 0 011.06 0l1.59 1.591a.75.75 0 11-1.06 1.06l-1.59-1.59a.75.75 0 010-1.06z"/></svg>
+                    <svg class="icon moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-3.836 2.04-7.171 5.008-8.972a.75.75 0 01.82.162z" clip-rule="evenodd" /></svg>
+                </button>
+                <a href="app.html" class="cta-button">Launch TyloAI</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="page-hero">
+            <h1>Terms of Service</h1>
+            <p class="last-updated">Last Updated: October 11, 2025</p>
+        </div>
+
+        <div class="content">
+            <div class="highlight-box">
+                <p><strong>Welcome to Protoetic.</strong> These Terms of Service govern your access to and use of TyloAI and our related services. By using our services, you agree to these terms. Please read them carefully.</p>
+            </div>
+
+            <h2>1. Acceptance of Terms</h2>
+            <p>By accessing or using Protoetic's services, including TyloAI, you agree to be bound by these Terms of Service and our Privacy Policy. If you do not agree to these terms, you may not use our services.</p>
+            <p>We may update these terms from time to time. Your continued use of our services after changes are posted constitutes acceptance of the updated terms.</p>
+
+            <h2>2. Description of Service</h2>
+            <p>Protoetic provides artificial intelligence services, including:</p>
+            <ul>
+                <li><strong>TyloAI:</strong> An AI-powered conversational assistant using our ode-6 model family</li>
+                <li><strong>API Access:</strong> Programmatic access to our AI models for developers</li>
+                <li><strong>Extended Reasoning:</strong> Advanced cognitive capabilities for complex problem-solving</li>
+                <li><strong>Post-Thinking Architecture:</strong> Multi-layered reasoning and self-correction features</li>
+            </ul>
+
+            <h2>3. User Accounts</h2>
+            
+            <h3>3.1 Account Creation</h3>
+            <p>To access certain features, you must create an account. You agree to:</p>
+            <ul>
+                <li>Provide accurate, current, and complete information</li>
+                <li>Maintain and update your information to keep it accurate</li>
+                <li>Maintain the security of your password and account</li>
+                <li>Notify us immediately of any unauthorized access or security breach</li>
+                <li>Accept responsibility for all activities under your account</li>
+            </ul>
+
+            <h3>3.2 Account Requirements</h3>
+            <p>You must be at least 13 years old to use our services. Users under 18 must have parental consent. You must provide a valid email address and comply with all applicable laws.</p>
+
+            <h2>4. Acceptable Use Policy</h2>
+            <p>You agree not to use our services to:</p>
+            <ul>
+                <li>Violate any laws, regulations, or third-party rights</li>
+                <li>Generate or distribute harmful, abusive, harassing, or illegal content</li>
+                <li>Attempt to reverse engineer, decompile, or extract our models or algorithms</li>
+                <li>Interfere with or disrupt our services or servers</li>
+                <li>Use automated systems to access our services without permission</li>
+                <li>Impersonate others or misrepresent your affiliation</li>
+                <li>Collect or harvest user data without consent</li>
+                <li>Generate spam, malware, or phishing content</li>
+                <li>Bypass rate limits or usage restrictions</li>
+                <li>Use services for high-risk applications without appropriate safeguards (medical diagnosis, legal advice, financial decisions, etc.)</li>
+            </ul>
+
+            <h2>5. Content and Intellectual Property</h2>
+            
+            <h3>5.1 Your Content</h3>
+            <p>You retain ownership of content you input into our services. By using our services, you grant us a worldwide, non-exclusive, royalty-free license to use, process, and analyze your content to:</p>
+            <ul>
+                <li>Provide and improve our services</li>
+                <li>Train and refine our AI models</li>
+                <li>Ensure safety and compliance</li>
+            </ul>
+
+            <h3>5.2 AI-Generated Content</h3>
+            <p>Content generated by TyloAI is provided as-is. While you may use AI-generated content, we make no guarantees about its accuracy, completeness, or suitability for any purpose. You are responsible for reviewing and verifying AI-generated content before use.</p>
+
+            <h3>5.3 Our Intellectual Property</h3>
+            <p>Our services, including TyloAI, the ode-6 model family, post-thinking architecture, and all related technology, are protected by intellectual property laws. You may not copy, modify, distribute, or create derivative works without our permission.</p>
+
+            <h2>6. Subscription and Payment</h2>
+            
+            <h3>6.1 Paid Services</h3>
+            <p>Certain features require paid subscriptions. By subscribing, you agree to:</p>
+            <ul>
+                <li>Pay all fees associated with your chosen plan</li>
+                <li>Provide accurate billing information</li>
+                <li>Authorize automatic recurring charges</li>
+            </ul>
+
+            <h3>6.2 Billing and Cancellation</h3>
+            <p>Subscriptions automatically renew unless canceled. You may cancel at any time through your account settings. Refunds are provided according to our refund policy, typically pro-rated for the unused portion of your subscription.</p>
+
+            <h3>6.3 Price Changes</h3>
+            <p>We may change our pricing with 30 days' notice. Changes apply to subsequent billing cycles. Continuing use after price changes constitutes acceptance.</p>
+
+            <h2>7. API Terms</h2>
+            <p>If you use our API services, additional terms apply:</p>
+            <ul>
+                <li><strong>Rate Limits:</strong> You must comply with specified rate limits and usage quotas</li>
+                <li><strong>API Keys:</strong> Keep API keys confidential and secure</li>
+                <li><strong>Attribution:</strong> Provide appropriate attribution when required</li>
+                <li><strong>Monitoring:</strong> We may monitor API usage for compliance and optimization</li>
+            </ul>
+
+            <h2>8. Disclaimers and Limitations</h2>
+            
+            <h3>8.1 Service Availability</h3>
+            <p>We strive for high availability but do not guarantee uninterrupted service. Services are provided "as is" and "as available" without warranties of any kind.</p>
+
+            <h3>8.2 AI Limitations</h3>
+            <p>TyloAI is an AI system with inherent limitations:</p>
+            <ul>
+                <li>May generate inaccurate or outdated information</li>
+                <li>Should not be relied upon for critical decisions without human verification</li>
+                <li>Not a substitute for professional advice (legal, medical, financial, etc.)</li>
+                <li>May exhibit biases present in training data</li>
+            </ul>
+
+            <h3>8.3 Limitation of Liability</h3>
+            <p>To the maximum extent permitted by law, Protoetic shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, whether incurred directly or indirectly, or any loss of data, use, goodwill, or other intangible losses resulting from:</p>
+            <ul>
+                <li>Your use or inability to use our services</li>
+                <li>Any unauthorized access to or use of our servers</li>
+                <li>Any interruption or cessation of our services</li>
+                <li>Any bugs, viruses, or other harmful code</li>
+                <li>Content or data provided through our services</li>
+            </ul>
+
+            <h2>9. Indemnification</h2>
+            <p>You agree to indemnify and hold harmless Protoetic, its affiliates, and their respective officers, directors, employees, and agents from any claims, losses, damages, liabilities, and expenses (including legal fees) arising from:</p>
+            <ul>
+                <li>Your use of our services</li>
+                <li>Your violation of these terms</li>
+                <li>Your violation of any rights of another party</li>
+                <li>Content you provide or generate using our services</li>
+            </ul>
+
+            <h2>10. Termination</h2>
+            <p>We may suspend or terminate your access to our services at any time for:</p>
+            <ul>
+                <li>Violation of these terms</li>
+                <li>Fraudulent or illegal activity</li>
+                <li>Non-payment of fees</li>
+                <li>Any reason at our discretion with notice</li>
+            </ul>
+            <p>Upon termination, your right to use our services ceases immediately. Provisions regarding intellectual property, disclaimers, and limitations of liability survive termination.</p>
+
+            <h2>11. Dispute Resolution</h2>
+            
+            <h3>11.1 Governing Law</h3>
+            <p>These terms are governed by the laws of the State of California, United States, without regard to conflict of law principles.</p>
+
+            <h3>11.2 Arbitration</h3>
+            <p>Any disputes shall be resolved through binding arbitration in accordance with the American Arbitration Association's rules, except you may assert claims in small claims court if they qualify.</p>
+
+            <h3>11.3 Class Action Waiver</h3>
+            <p>You agree to resolve disputes individually and waive the right to participate in class actions or collective proceedings.</p>
+
+            <h2>12. General Provisions</h2>
+            <ul>
+                <li><strong>Entire Agreement:</strong> These terms constitute the entire agreement between you and Protoetic</li>
+                <li><strong>Severability:</strong> If any provision is found unenforceable, the remaining provisions remain in effect</li>
+                <li><strong>No Waiver:</strong> Failure to enforce any provision does not constitute a waiver</li>
+                <li><strong>Assignment:</strong> You may not assign these terms; we may assign them freely</li>
+                <li><strong>Force Majeure:</strong> We are not liable for delays or failures due to circumstances beyond our control</li>
+            </ul>
+
+            <h2>13. Contact Information</h2>
+            <p>For questions about these Terms of Service, contact us:</p>
+            <ul>
+                <li><strong>Email:</strong> legal@protoetic.ai</li>
+                <li><strong>Mail:</strong> Protoetic Inc., Legal Department, 123 AI Boulevard, San Francisco, CA 94103</li>
+            </ul>
+
+            <div class="highlight-box" style="margin-top: 50px;">
+                <p><strong>Thank you for choosing Protoetic.</strong> We're committed to building AI that empowers you while maintaining the highest standards of safety and transparency.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>Protoetic</h3>
+                <p>Building responsible AI systems that empower humanity through deep thinking and transparent reasoning. Founded January 2025.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="app.html">TyloAI Chat</a></li>
+                    <li><a href="index.html#technology">ode-6 Models</a></li>
+                    <li><a href="#">API Access</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="research.html">Research</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="news.html">Press</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="news.html">Blog</a></li>
+                    <li><a href="#">Support</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Protoetic. All rights reserved. | <a href="privacy.html" style="color: var(--secondary-text-color); text-decoration: none;">Privacy</a> | <a href="terms.html" style="color: var(--secondary-text-color); text-decoration: none;">Terms</a> | <a href="security.html" style="color: var(--secondary-text-color); text-decoration: none;">Security</a></p>
+        </div>
+    </footer>
+
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlEl = document.documentElement;
+
+        const applyTheme = (theme) => {
+            htmlEl.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        };
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = htmlEl.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            applyTheme(newTheme);
+        });
+
+        const storedTheme = localStorage.getItem('theme');
+        const initialTheme = storedTheme ? storedTheme : 'dark';
+        applyTheme(initialTheme);
+    </script>
+</body>
+</html>

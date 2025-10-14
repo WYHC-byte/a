@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News & Updates | Protoetic</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+            --transition-speed: 0.3s;
+        }
+
+        html[data-theme='light'] {
+            --bg-color: #fafafa;
+            --text-color: #111111;
+            --secondary-text-color: #666666;
+            --border-color: #e0e0e0;
+            --input-bg-color: #ffffff;
+            --button-accent-bg: #111111;
+            --button-accent-text: #ffffff;
+            --card-bg: #ffffff;
+            --accent-color: #333333;
+        }
+
+        html[data-theme='dark'] {
+            --bg-color: #0a0a0a;
+            --text-color: #eeeeee;
+            --secondary-text-color: #999999;
+            --border-color: #2a2a2a;
+            --input-bg-color: #1a1a1a;
+            --button-accent-bg: #eeeeee;
+            --button-accent-text: #111111;
+            --card-bg: #151515;
+            --accent-color: #cccccc;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        .main-header {
+            width: 100%;
+            background-color: rgba(250, 250, 250, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color var(--transition-speed) ease;
+        }
+
+        html[data-theme='dark'] .main-header {
+            background-color: rgba(10, 10, 10, 0.8);
+        }
+
+        .main-header nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 16px 30px;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            font-family: var(--font-serif);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--secondary-text-color);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--text-color);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .theme-toggle {
+            cursor: pointer;
+            background: none;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 8px;
+            color: var(--text-color);
+            transition: all var(--transition-speed) ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--card-bg);
+        }
+
+        .theme-toggle .icon {
+            width: 20px;
+            height: 20px;
+            display: block;
+        }
+
+        html[data-theme='dark'] .sun-icon { display: block; }
+        html[data-theme='dark'] .moon-icon { display: none; }
+        html[data-theme='light'] .sun-icon { display: none; }
+        html[data-theme='light'] .moon-icon { display: block; }
+
+        .cta-button {
+            background-color: var(--button-accent-bg);
+            color: var(--button-accent-text);
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: opacity var(--transition-speed) ease;
+        }
+
+        .cta-button:hover {
+            opacity: 0.85;
+        }
+
+        .page-hero {
+            padding: 150px 30px 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .page-hero h1 {
+            font-family: var(--font-serif);
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: var(--text-color);
+        }
+
+        .page-hero p {
+            font-size: 1.3rem;
+            color: var(--secondary-text-color);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 30px;
+        }
+
+        .featured-post {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 80px;
+            transition: transform var(--transition-speed) ease;
+            cursor: pointer;
+        }
+
+        .featured-post:hover {
+            transform: translateY(-4px);
+        }
+
+        .featured-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, var(--text-color) 0%, var(--secondary-text-color) 100%);
+        }
+
+        .featured-content {
+            padding: 50px;
+        }
+
+        .post-badge {
+            display: inline-block;
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            padding: 6px 14px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .featured-content h2 {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text-color);
+        }
+
+        .post-meta {
+            display: flex;
+            gap: 20px;
+            color: var(--secondary-text-color);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .featured-content p {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: var(--secondary-text-color);
+        }
+
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .post-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform var(--transition-speed) ease;
+            cursor: pointer;
+        }
+
+        .post-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .post-image {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, var(--text-color) 0%, var(--secondary-text-color) 100%);
+        }
+
+        .post-content {
+            padding: 28px;
+        }
+
+        .post-content .post-badge {
+            font-size: 0.7rem;
+            padding: 4px 10px;
+            margin-bottom: 12px;
+        }
+
+        .post-content h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-color);
+            line-height: 1.3;
+        }
+
+        .post-content .post-meta {
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+        }
+
+        .post-content p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--secondary-text-color);
+        }
+
+        .categories {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: 10px 24px;
+            border: 1px solid var(--border-color);
+            background-color: transparent;
+            color: var(--secondary-text-color);
+            border-radius: 20px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .category-btn:hover, .category-btn.active {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            border-color: var(--text-color);
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            color: var(--text-color);
+        }
+
+        .footer {
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 60px 30px 30px;
+            margin-top: 100px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+        }
+
+        .footer-brand h3 {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text-color);
+        }
+
+        .footer-brand p {
+            color: var(--secondary-text-color);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .footer-section h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-color);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: var(--secondary-text-color);
+            text-decoration: none;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--text-color);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 40px auto 0;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--secondary-text-color);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+            }
+
+            .page-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .featured-content {
+                padding: 30px;
+            }
+
+            .featured-content h2 {
+                font-size: 1.8rem;
+            }
+
+            .posts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <nav>
+            <a href="index.html" class="logo">Protoetic</a>
+            <div class="nav-links">
+                <a href="index.html#technology">Technology</a>
+                <a href="index.html#demo">Demo</a>
+                <a href="research.html">Research</a>
+                <a href="about.html">About Us</a>
+            </div>
+            <div class="header-actions">
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                    <svg class="icon sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.106a.75.75 0 010 1.06l-1.591 1.59a.75.75 0 11-1.06-1.06l1.59-1.59a.75.75 0 011.06 0zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.803 17.803a.75.75 0 01-1.06 0l-1.59-1.591a.75.75 0 111.06-1.06l1.59 1.59a.75.75 0 010 1.06zM12 21.75a.75.75 0 01-.75-.75v-2.25a.75.75 0 011.5 0V21a.75.75 0 01-.75.75zM5.106 18.894a.75.75 0 010-1.06l1.59-1.59a.75.75 0 111.06 1.06l-1.59 1.59a.75.75 0 01-1.06 0zM3 12a.75.75 0 01.75-.75h2.25a.75.75 0 010 1.5H3.75A.75.75 0 013 12zM6.106 5.106a.75.75 0 011.06 0l1.59 1.591a.75.75 0 11-1.06 1.06l-1.59-1.59a.75.75 0 010-1.06z"/></svg>
+                    <svg class="icon moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-3.836 2.04-7.171 5.008-8.972a.75.75 0 01.82.162z" clip-rule="evenodd" /></svg>
+                </button>
+                <a href="app.html" class="cta-button">Launch TyloAI</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="page-hero">
+            <h1>News & Updates</h1>
+            <p>The latest announcements, insights, and stories from the Protoetic team</p>
+        </div>
+
+        <section class="section">
+            <div class="featured-post">
+                <div class="featured-image"></div>
+                <div class="featured-content">
+                    <span class="post-badge">COMPANY NEWS</span>
+                    <h2>Introducing TyloAI: The Future of Cognitive AI</h2>
+                    <div class="post-meta">
+                        <span>October 11, 2025</span>
+                        <span>•</span>
+                        <span>By Protoetic Team</span>
+                        <span>•</span>
+                        <span>5 min read</span>
+                    </div>
+                    <p>Today marks a significant milestone in our journey to build AI that thinks deeply and transparently. We're excited to announce the public launch of TyloAI, powered by our revolutionary post-thinking architecture and the ode-6 model family.</p>
+                </div>
+            </div>
+
+            <div class="categories">
+                <button class="category-btn active">All Posts</button>
+                <button class="category-btn">Company News</button>
+                <button class="category-btn">Research</button>
+                <button class="category-btn">Product Updates</button>
+                <button class="category-btn">Engineering</button>
+            </div>
+
+            <h2 class="section-title">Latest Posts</h2>
+            
+            <div class="posts-grid">
+                <div class="post-card">
+                    <div class="post-image"></div>
+                    <div class="post-content">
+                        <span class="post-badge">RESEARCH</span>
+                        <h3>Post-Thinking Architecture: A Technical Deep Dive</h3>
+                        <div class="post-meta">
+                            <span>October 8, 2025</span>
+                            <span>•</span>
+                            <span>8 min read</span>
+                        </div>
+                        <p>An in-depth look at how our post-thinking architecture enables multiple reasoning processes to collaborate and self-correct in real-time.</p>
+                    </div>
+                </div>
+
+                <div class="post-card">
+                    <div class="post-image"></div>
+                    <div class="post-content">
+                        <span class="post-badge">PRODUCT</span>
+                        <h3>ode-6-reasoning: Built for Complex Problems</h3>
+                        <div class="post-meta">
+                            <span>October 5, 2025</span>
+                            <span>•</span>
+                            <span>6 min read</span>
+                        </div>
+                        <p>Discover how our most powerful model tackles intensive mathematics and advanced programming challenges with unprecedented accuracy.</p>
+                    </div>
+                </div>
+
+                <div class="post-card">
+                    <div class="post-image"></div>
+                    <div class="post-content">
+                        <span class="post-badge">ENGINEERING</span>
+                        <h3>Scaling AI Inference to Millions of Users</h3>
+                        <div class="post-meta">
+                            <span>October 1, 2025</span>
+                            <span>•</span>
+                            <span>7 min read</span>
+                        </div>
+                        <p>The engineering challenges and solutions behind building infrastructure that serves TyloAI at scale while maintaining low latency.</p>
+                    </div>
+                </div>
+
+                <div class="post-card">
+                    <div class="post-image"></div>
+                    <div class="post-content">
+                        <span class="post-badge">RESEARCH</span>
+                        <h3>AI Safety Through Transparent Reasoning</h3>
+                        <div class="post-meta">
+                            <span>September 28, 2025</span>
+                            <span>•</span>
+                            <span>10 min read</span>
+                        </div>
+                        <p>How making AI reasoning visible and interpretable is fundamental to building safe and aligned systems.</p>
+                    </div>
+                </div>
+
+                <div class="post-card">
+                    <div class="post-image"></div>
+                    <div class="post-content">
+                        <span class="post-badge">COMPANY NEWS</span>
+                        <h3>Protoetic Raises Series A to Advance AI Research</h3>
+                        <div class="post-meta">
+                            <span>September 25, 2025</span>
+                            <span>•</span>
+                            <span>4 min read</span>
+                        </div>
+                        <p>We're thrilled to announce our Series A funding round to accelerate research in cognitive architecture and AI safety.</p>
+                    </div>
+                </div>
+
+                <div class="post-card">
+                    <div class="post-image"></div>
+                    <div class="post-content">
+                        <span class="post-badge">PRODUCT</span>
+                        <h3>Extended Thinking: AI That Plans Ahead</h3>
+                        <div class="post-meta">
+                            <span>September 20, 2025</span>
+                            <span>•</span>
+                            <span>5 min read</span>
+                        </div>
+                        <p>Introducing extended thinking mode in TyloAI, enabling long-horizon planning and complex multi-step problem solving.</p>
+                    </div>
+                </div>
+
+                <div class="post-card">
+                    <div class="post-image"></div>
+                    <div class="post-content">
+                        <span class="post-badge">RESEARCH</span>
+                        <h3>The Science of Cognitive Collaboration in AI</h3>
+                        <div class="post-meta">
+                            <span>September 15, 2025</span>
+                            <span>•</span>
+                            <span>12 min read</span>
+                        </div>
+                        <p>Research findings on how multiple AI reasoning processes can work together to produce more accurate and nuanced outputs.</p>
+                    </div>
+                </div>
+
+                <div class="post-card">
+                    <div class="post-image"></div>
+                    <div class="post-content">
+                        <span class="post-badge">ENGINEERING</span>
+                        <h3>Building Real-Time AI with Sub-Second Latency</h3>
+                        <div class="post-meta">
+                            <span>September 10, 2025</span>
+                            <span>•</span>
+                            <span>9 min read</span>
+                        </div>
+                        <p>Technical insights into optimizing neural network inference for real-time conversational AI experiences.</p>
+                    </div>
+                </div>
+
+                <div class="post-card">
+                    <div class="post-image"></div>
+                    <div class="post-content">
+                        <span class="post-badge">COMPANY NEWS</span>
+                        <h3>Welcome to Protoetic: Our Founding Story</h3>
+                        <div class="post-meta">
+                            <span>January 15, 2025</span>
+                            <span>•</span>
+                            <span>6 min read</span>
+                        </div>
+                        <p>The vision, values, and mission that drove us to build a new kind of AI company focused on transparency and human empowerment.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>Protoetic</h3>
+                <p>Building responsible AI systems that empower humanity through deep thinking and transparent reasoning. Founded January 2025.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="app.html">TyloAI Chat</a></li>
+                    <li><a href="index.html#technology">ode-6 Models</a></li>
+                    <li><a href="#">API Access</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="research.html">Research</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="news.html">Press</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="news.html">Blog</a></li>
+                    <li><a href="#">Support</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Protoetic. All rights reserved. | <a href="privacy.html" style="color: var(--secondary-text-color); text-decoration: none;">Privacy</a> | <a href="terms.html" style="color: var(--secondary-text-color); text-decoration: none;">Terms</a> | <a href="security.html" style="color: var(--secondary-text-color); text-decoration: none;">Security</a></p>
+        </div>
+    </footer>
+
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlEl = document.documentElement;
+
+        const applyTheme = (theme) => {
+            htmlEl.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        };
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = htmlEl.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            applyTheme(newTheme);
+        });
+
+        const storedTheme = localStorage.getItem('theme');
+        const initialTheme = storedTheme ? storedTheme : 'dark';
+        applyTheme(initialTheme);
+
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

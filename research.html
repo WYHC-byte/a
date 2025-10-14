@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research & Innovation | Protoetic</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+            --transition-speed: 0.3s;
+        }
+
+        html[data-theme='light'] {
+            --bg-color: #fafafa;
+            --text-color: #111111;
+            --secondary-text-color: #666666;
+            --border-color: #e0e0e0;
+            --input-bg-color: #ffffff;
+            --button-accent-bg: #111111;
+            --button-accent-text: #ffffff;
+            --card-bg: #ffffff;
+            --accent-color: #333333;
+        }
+
+        html[data-theme='dark'] {
+            --bg-color: #0a0a0a;
+            --text-color: #eeeeee;
+            --secondary-text-color: #999999;
+            --border-color: #2a2a2a;
+            --input-bg-color: #1a1a1a;
+            --button-accent-bg: #eeeeee;
+            --button-accent-text: #111111;
+            --card-bg: #151515;
+            --accent-color: #cccccc;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        .main-header {
+            width: 100%;
+            background-color: rgba(250, 250, 250, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color var(--transition-speed) ease;
+        }
+
+        html[data-theme='dark'] .main-header {
+            background-color: rgba(10, 10, 10, 0.8);
+        }
+
+        .main-header nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 16px 30px;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            font-family: var(--font-serif);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--secondary-text-color);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--text-color);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .theme-toggle {
+            cursor: pointer;
+            background: none;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 8px;
+            color: var(--text-color);
+            transition: all var(--transition-speed) ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--card-bg);
+        }
+
+        .theme-toggle .icon {
+            width: 20px;
+            height: 20px;
+            display: block;
+        }
+
+        html[data-theme='dark'] .sun-icon { display: block; }
+        html[data-theme='dark'] .moon-icon { display: none; }
+        html[data-theme='light'] .sun-icon { display: none; }
+        html[data-theme='light'] .moon-icon { display: block; }
+
+        .cta-button {
+            background-color: var(--button-accent-bg);
+            color: var(--button-accent-text);
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: opacity var(--transition-speed) ease;
+        }
+
+        .cta-button:hover {
+            opacity: 0.85;
+        }
+
+        .page-hero {
+            padding: 150px 30px 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .page-hero h1 {
+            font-family: var(--font-serif);
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: var(--text-color);
+        }
+
+        .page-hero p {
+            font-size: 1.3rem;
+            color: var(--secondary-text-color);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 30px;
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-color);
+            text-align: center;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--secondary-text-color);
+            margin-bottom: 60px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .research-areas {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .research-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 40px;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .research-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+
+        .research-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--text-color);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .research-icon svg {
+            width: 30px;
+            height: 30px;
+            stroke: var(--bg-color);
+        }
+
+        .research-card h3 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-color);
+        }
+
+        .research-card p {
+            color: var(--secondary-text-color);
+            line-height: 1.7;
+            margin-bottom: 24px;
+            font-size: 1rem;
+        }
+
+        .read-more {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: gap var(--transition-speed) ease;
+            font-size: 0.95rem;
+        }
+
+        .read-more:hover {
+            gap: 10px;
+        }
+
+        .publications-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .publication-item {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 32px;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .publication-item:hover {
+            border-color: var(--text-color);
+        }
+
+        .publication-badge {
+            display: inline-block;
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .publication-item h4 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 12px;
+        }
+
+        .publication-authors {
+            font-size: 0.95rem;
+            color: var(--secondary-text-color);
+            margin-bottom: 12px;
+        }
+
+        .publication-abstract {
+            font-size: 1rem;
+            color: var(--secondary-text-color);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .publication-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .publication-links a {
+            padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .publication-links a:hover {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+        }
+
+        .team-section {
+            background-color: var(--card-bg);
+            border-radius: 24px;
+            padding: 60px;
+            border: 1px solid var(--border-color);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .team-member {
+            text-align: center;
+        }
+
+        .member-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--text-color) 0%, var(--secondary-text-color) 100%);
+            margin: 0 auto 16px;
+        }
+
+        .member-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 6px;
+        }
+
+        .member-title {
+            font-size: 0.9rem;
+            color: var(--secondary-text-color);
+        }
+
+        .footer {
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 60px 30px 30px;
+            margin-top: 100px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+        }
+
+        .footer-brand h3 {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text-color);
+        }
+
+        .footer-brand p {
+            color: var(--secondary-text-color);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .footer-section h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-color);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: var(--secondary-text-color);
+            text-decoration: none;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--text-color);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 40px auto 0;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--secondary-text-color);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+            }
+
+            .page-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .research-areas {
+                grid-template-columns: 1fr;
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <nav>
+            <a href="index.html" class="logo">Protoetic</a>
+            <div class="nav-links">
+                <a href="index.html#technology">Technology</a>
+                <a href="index.html#demo">Demo</a>
+                <a href="research.html" class="active">Research</a>
+                <a href="about.html">About Us</a>
+            </div>
+            <div class="header-actions">
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                    <svg class="icon sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.106a.75.75 0 010 1.06l-1.591 1.59a.75.75 0 11-1.06-1.06l1.59-1.59a.75.75 0 011.06 0zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.803 17.803a.75.75 0 01-1.06 0l-1.59-1.591a.75.75 0 111.06-1.06l1.59 1.59a.75.75 0 010 1.06zM12 21.75a.75.75 0 01-.75-.75v-2.25a.75.75 0 011.5 0V21a.75.75 0 01-.75.75zM5.106 18.894a.75.75 0 010-1.06l1.59-1.59a.75.75 0 111.06 1.06l-1.59 1.59a.75.75 0 01-1.06 0zM3 12a.75.75 0 01.75-.75h2.25a.75.75 0 010 1.5H3.75A.75.75 0 013 12zM6.106 5.106a.75.75 0 011.06 0l1.59 1.591a.75.75 0 11-1.06 1.06l-1.59-1.59a.75.75 0 010-1.06z"/></svg>
+                    <svg class="icon moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-3.836 2.04-7.171 5.008-8.972a.75.75 0 01.82.162z" clip-rule="evenodd" /></svg>
+                </button>
+                <a href="app.html" class="cta-button">Launch TyloAI</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="page-hero">
+            <h1>Research & Innovation</h1>
+            <p>Pioneering the future of artificial intelligence through groundbreaking research in cognitive architecture, safety, and extended reasoning capabilities.</p>
+        </div>
+
+        <section class="section">
+            <h2 class="section-title">Our Research Areas</h2>
+            <p class="section-subtitle">Advancing the frontier of AI capabilities while ensuring safety and alignment</p>
+            
+            <div class="research-areas">
+                <div class="research-card">
+                    <div class="research-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                            <path d="M2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                        </svg>
+                    </div>
+                    <h3>Post-Thinking Architecture</h3>
+                    <p>Revolutionary cognitive architecture enabling multiple reasoning processes to collaborate, debate, and refine responses in real-time for more nuanced and accurate outputs.</p>
+                    <a href="#" class="read-more">Read papers →</a>
+                </div>
+
+                <div class="research-card">
+                    <div class="research-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path d="M12 1v6m0 6v6m5.2-15.8l-4.2 4.2m-2 2l-4.2 4.2M23 12h-6m-6 0H1m18.8 5.2l-4.2-4.2m-2-2l-4.2-4.2"></path>
+                        </svg>
+                    </div>
+                    <h3>Extended Reasoning</h3>
+                    <p>Developing systems capable of long-horizon planning, complex problem decomposition, and multi-step cognitive chains for solving previously intractable problems.</p>
+                    <a href="#" class="read-more">Explore research →</a>
+                </div>
+
+                <div class="research-card">
+                    <div class="research-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                    </div>
+                    <h3>AI Safety & Alignment</h3>
+                    <p>Ensuring AI systems remain safe, interpretable, and aligned with human values through rigorous testing, formal verification, and ethical frameworks.</p>
+                    <a href="#" class="read-more">View approach →</a>
+                </div>
+
+                <div class="research-card">
+                    <div class="research-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                        </svg>
+                    </div>
+                    <h3>Neural Architecture</h3>
+                    <p>Designing novel neural network architectures optimized for transparency, efficiency, and the ability to explain reasoning processes at every step.</p>
+                    <a href="#" class="read-more">Learn more →</a>
+                </div>
+
+                <div class="research-card">
+                    <div class="research-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                        </svg>
+                    </div>
+                    <h3>Adaptive Intelligence</h3>
+                    <p>Creating AI systems that learn and adapt to individual user needs, contexts, and preferences while maintaining consistency and reliability.</p>
+                    <a href="#" class="read-more">Discover more →</a>
+                </div>
+
+                <div class="research-card">
+                    <div class="research-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="2" y1="12" x2="22" y2="12"></line>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                        </svg>
+                    </div>
+                    <h3>Multimodal Understanding</h3>
+                    <p>Advancing AI's ability to understand and reason across text, images, code, and structured data with seamless integration and context awareness.</p>
+                    <a href="#" class="read-more">Read more →</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Recent Publications</h2>
+            <p class="section-subtitle">Our latest contributions to the AI research community</p>
+            
+            <div class="publications-grid">
+                <div class="publication-item">
+                    <span class="publication-badge">NEURIPS 2025</span>
+                    <h4>Post-Thinking: A Novel Architecture for Multi-Layer Cognitive Processing</h4>
+                    <p class="publication-authors">Chen, L., Rodriguez, M., Patel, A., Zhang, W. — Protoetic Research</p>
+                    <p class="publication-abstract">We introduce post-thinking architecture, a paradigm shift in neural network design that enables multiple reasoning processes to collaborate and self-correct in real-time. Our approach achieves state-of-the-art performance on complex reasoning benchmarks while maintaining full interpretability of intermediate steps.</p>
+                    <div class="publication-links">
+                        <a href="#">PDF</a>
+                        <a href="#">Code</a>
+                        <a href="#">arXiv</a>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <span class="publication-badge">ICML 2025</span>
+                    <h4>Extended Reasoning Chains: Scaling Cognitive Depth in Language Models</h4>
+                    <p class="publication-authors">Patel, A., Kim, J., Thompson, R. — Protoetic Research</p>
+                    <p class="publication-abstract">This paper presents a framework for training language models to engage in extended reasoning chains, enabling them to solve complex multi-step problems that require planning, hypothesis testing, and iterative refinement. We demonstrate significant improvements on mathematical reasoning and code generation tasks.</p>
+                    <div class="publication-links">
+                        <a href="#">PDF</a>
+                        <a href="#">Code</a>
+                        <a href="#">arXiv</a>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <span class="publication-badge">AAAI 2025</span>
+                    <h4>Transparent AI: Ensuring Interpretability in Deep Cognitive Systems</h4>
+                    <p class="publication-authors">Zhang, W., Anderson, K., Chen, L. — Protoetic Research</p>
+                    <p class="publication-abstract">We propose a comprehensive framework for building interpretable AI systems that can explain their reasoning processes at every step. Our approach combines attention visualization, intermediate representation analysis, and natural language explanations to provide full transparency without sacrificing performance.</p>
+                    <div class="publication-links">
+                        <a href="#">PDF</a>
+                        <a href="#">arXiv</a>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <span class="publication-badge">ICLR 2025</span>
+                    <h4>Safety-First Neural Architectures: Design Principles for Aligned AI</h4>
+                    <p class="publication-authors">Rodriguez, M., Liu, S., Anderson, K. — Protoetic Research</p>
+                    <p class="publication-abstract">This work establishes design principles for building AI systems that are inherently safer and more aligned with human values. We introduce architectural constraints that prevent harmful outputs while maintaining model capability and demonstrate their effectiveness across multiple domains.</p>
+                    <div class="publication-links">
+                        <a href="#">PDF</a>
+                        <a href="#">Code</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="team-section">
+                <h2 class="section-title">Research Team</h2>
+                <p class="section-subtitle">World-class researchers advancing the frontiers of AI</p>
+                
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-avatar"></div>
+                        <div class="member-name">Dr. Lisa Chen</div>
+                        <div class="member-title">Head of Research</div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar"></div>
+                        <div class="member-name">Dr. Marcus Rodriguez</div>
+                        <div class="member-title">AI Safety Lead</div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar"></div>
+                        <div class="member-name">Dr. Aisha Patel</div>
+                        <div class="member-title">Neural Architecture</div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar"></div>
+                        <div class="member-name">Dr. Wei Zhang</div>
+                        <div class="member-title">Cognitive Systems</div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar"></div>
+                        <div class="member-name">Dr. James Kim</div>
+                        <div class="member-title">Machine Learning</div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar"></div>
+                        <div class="member-name">Dr. Rachel Thompson</div>
+                        <div class="member-title">NLP Research</div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar"></div>
+                        <div class="member-name">Dr. Kwame Anderson</div>
+                        <div class="member-title">Ethics & Alignment</div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar"></div>
+                        <div class="member-name">Dr. Sofia Liu</div>
+                        <div class="member-title">Systems Architecture</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" style="background-color: var(--input-bg-color); border-radius: 24px; margin: 0 30px; text-align: center;">
+            <h2 class="section-title">Join Our Research Team</h2>
+            <p style="font-size: 1.2rem; color: var(--secondary-text-color); max-width: 700px; margin: 20px auto 40px; line-height: 1.6;">
+                We're looking for exceptional researchers passionate about advancing AI safely and responsibly.
+            </p>
+            <a href="careers.html" class="cta-button" style="display: inline-block; padding: 14px 32px; font-size: 1.1rem;">View Research Positions</a>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>Protoetic</h3>
+                <p>Building responsible AI systems that empower humanity through deep thinking and transparent reasoning. Founded January 2025.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="app.html">TyloAI Chat</a></li>
+                    <li><a href="index.html#technology">ode-6 Models</a></li>
+                    <li><a href="#">API Access</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="research.html">Research</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="news.html">Press</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="news.html">Blog</a></li>
+                    <li><a href="#">Support</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Protoetic. All rights reserved. | <a href="privacy.html" style="color: var(--secondary-text-color); text-decoration: none;">Privacy</a> | <a href="terms.html" style="color: var(--secondary-text-color); text-decoration: none;">Terms</a> | <a href="security.html" style="color: var(--secondary-text-color); text-decoration: none;">Security</a></p>
+        </div>
+    </footer>
+
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlEl = document.documentElement;
+
+        const applyTheme = (theme) => {
+            htmlEl.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        };
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = htmlEl.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            applyTheme(newTheme);
+        });
+
+        const storedTheme = localStorage.getItem('theme');
+        const initialTheme = storedTheme ? storedTheme : 'dark';
+        applyTheme(initialTheme);
+    </script>
+</body>
+</html>
