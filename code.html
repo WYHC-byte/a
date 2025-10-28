@@ -1,0 +1,2017 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ode-7-code - Built for developers | TyloAI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --transition-speed: 0.3s;
+        }
+
+        html[data-theme='light'] {
+            --bg-color: #fafafa;
+            --text-color: #111111;
+            --secondary-text-color: #666666;
+            --border-color: #e0e0e0;
+            --input-bg-color: #ffffff;
+            --button-accent-bg: #111111;
+            --button-accent-text: #ffffff;
+            --card-bg: #ffffff;
+            --accent-color: #D95F4A;
+            --code-bg: #f5f5f5;
+            --terminal-bg: #f5f5f5;
+            --terminal-text: #1a1a1a;
+        }
+
+        html[data-theme='dark'] {
+            --bg-color: #0a0a0a;
+            --text-color: #eeeeee;
+            --secondary-text-color: #999999;
+            --border-color: #2a2a2a;
+            --input-bg-color: #1a1a1a;
+            --button-accent-bg: #eeeeee;
+            --button-accent-text: #111111;
+            --card-bg: #151515;
+            --accent-color: #D95F4A;
+            --code-bg: #1a1a1a;
+            --terminal-bg: #1a1a1a;
+            --terminal-text: #00ff00;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(250, 250, 250, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            transition: background-color var(--transition-speed) ease;
+        }
+
+        html[data-theme='dark'] .main-header {
+            background-color: rgba(10, 10, 10, 0.8);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 16px 30px;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            font-family: var(--font-serif);
+        }
+
+        .nav-center {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-center a {
+            color: var(--secondary-text-color);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .nav-center a:hover {
+            color: var(--text-color);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .theme-toggle {
+            cursor: pointer;
+            background: none;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 8px;
+            color: var(--text-color);
+            transition: all var(--transition-speed) ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--card-bg);
+        }
+
+        .theme-toggle .icon {
+            width: 20px;
+            height: 20px;
+            display: block;
+        }
+
+        html[data-theme='dark'] .sun-icon { display: block; }
+        html[data-theme='dark'] .moon-icon { display: none; }
+        html[data-theme='light'] .sun-icon { display: none; }
+        html[data-theme='light'] .moon-icon { display: block; }
+
+        .cta-button {
+            background-color: var(--button-accent-bg);
+            color: var(--button-accent-text);
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: opacity var(--transition-speed) ease;
+        }
+
+        .cta-button:hover {
+            opacity: 0.85;
+        }
+
+        .sub-header {
+            position: fixed;
+            top: 64px;
+            left: 0;
+            width: 100%;
+            background-color: var(--bg-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 0;
+            z-index: 999;
+        }
+
+        .sub-header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .breadcrumb {
+            font-size: 14px;
+            color: var(--secondary-text-color);
+        }
+
+        .breadcrumb span:last-child {
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .explore-link {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .hero-section {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 180px 30px 80px;
+            text-align: center;
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            border: 1px solid rgba(217, 95, 74, 0.3);
+            background-color: rgba(217, 95, 74, 0.1);
+            border-radius: 999px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 24px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .hero-title {
+            font-size: 64px;
+            font-weight: 500;
+            margin-bottom: 24px;
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+
+        .hero-title .static-text {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .hero-title .highlight {
+            color: var(--accent-color);
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        .typing-cursor {
+            border-right: 2px solid var(--text-color);
+            animation: blink 0.7s step-end infinite;
+        }
+
+        @keyframes blink {
+            from, to { border-color: transparent; }
+            50% { border-color: var(--text-color); }
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--secondary-text-color);
+            margin-bottom: 48px;
+            max-width: 750px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .install-section {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .install-label {
+            font-size: 14px;
+            color: var(--secondary-text-color);
+            margin-bottom: 16px;
+        }
+
+        .code-snippet-wrapper {
+            display: flex;
+            align-items: center;
+            background-color: var(--code-bg);
+            border-radius: 8px;
+            padding: 14px 18px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .code-snippet-wrapper:hover {
+            border-color: var(--accent-color);
+        }
+
+        .terminal-dropdown {
+            font-size: 14px;
+            font-weight: 500;
+            padding-right: 16px;
+            border-right: 1px solid var(--border-color);
+            margin-right: 16px;
+            color: var(--text-color);
+        }
+
+        .code-snippet {
+            flex-grow: 1;
+            font-family: var(--font-mono);
+            font-size: 14px;
+            color: var(--text-color);
+        }
+
+        .command {
+            color: var(--accent-color);
+        }
+
+        .package {
+            color: #4C51BF;
+        }
+
+        .copy-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            color: var(--secondary-text-color);
+            padding: 4px;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .copy-btn:hover {
+            color: var(--text-color);
+        }
+
+        .requirements {
+            font-size: 13px;
+            color: var(--secondary-text-color);
+            text-align: center;
+        }
+
+        .platform-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 40px;
+            z-index: 2000;
+            display: none;
+            min-width: 400px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -48%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        .platform-modal.active {
+            display: block;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1999;
+            display: none;
+        }
+
+        .modal-overlay.active {
+            display: block;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .platform-options {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .platform-option {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 20px;
+            background-color: var(--code-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        .platform-option:hover {
+            border-color: var(--accent-color);
+            background-color: rgba(217, 95, 74, 0.05);
+            transform: translateX(4px);
+        }
+
+        .platform-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .platform-text h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .platform-text p {
+            font-size: 13px;
+            color: var(--secondary-text-color);
+        }
+
+        .section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 100px 30px;
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--secondary-text-color);
+            margin-bottom: 60px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .demo-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .demo-left {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+        }
+
+        .demo-conversation {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .message {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .message-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--secondary-text-color);
+        }
+
+        .message-content {
+            padding: 16px 20px;
+            border-radius: 12px;
+            line-height: 1.6;
+        }
+
+        .user-message .message-content {
+            background-color: var(--code-bg);
+            border: 1px solid var(--border-color);
+        }
+
+        .ai-message .message-content {
+            background-color: rgba(217, 95, 74, 0.1);
+            border: 1px solid rgba(217, 95, 74, 0.3);
+        }
+
+        .todo-list {
+            list-style: none;
+            margin: 12px 0;
+            padding-left: 0;
+        }
+
+        .todo-list li {
+            padding: 6px 0;
+            font-size: 14px;
+        }
+
+        .todo-list li::before {
+            content: "☑ ";
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .demo-right {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .demo-preview-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .demo-preview-title {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .preview-badge {
+            background-color: rgba(217, 95, 74, 0.2);
+            color: var(--accent-color);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .demo-preview-body {
+            flex: 1;
+            background-color: #000;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-family: var(--font-mono);
+            font-size: 14px;
+            overflow: hidden;
+        }
+
+        .comparison-section {
+            margin-top: 80px;
+        }
+
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .comparison-left {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .model-tabs {
+            display: flex;
+            gap: 12px;
+        }
+
+        .model-tab {
+            padding: 10px 16px;
+            background-color: var(--code-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all var(--transition-speed) ease;
+            color: var(--text-color);
+        }
+
+        .model-tab.active {
+            background-color: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        .model-tab:hover:not(.active) {
+            border-color: var(--accent-color);
+        }
+
+        .code-block {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .code-block-header {
+            padding: 12px 16px;
+            background-color: var(--code-bg);
+            border-bottom: 1px solid var(--border-color);
+            font-size: 12px;
+            color: var(--secondary-text-color);
+            font-weight: 600;
+        }
+
+        .code-block-body {
+            padding: 20px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            line-height: 1.6;
+            color: var(--text-color);
+            overflow-y: auto;
+            max-height: 400px;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .comparison-right {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .comparison-header {
+            padding: 16px 20px;
+            background-color: var(--code-bg);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .comparison-header h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .comparison-header p {
+            font-size: 12px;
+            color: var(--secondary-text-color);
+        }
+
+        .comparison-body {
+            padding: 20px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            line-height: 1.6;
+            color: var(--text-color);
+            overflow-y: auto;
+            max-height: 400px;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .usage-section {
+            margin-top: 80px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .usage-terminal {
+            background-color: #1a1a1a;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            line-height: 1.8;
+            color: #00ff00;
+            overflow-x: auto;
+            min-height: 350px;
+        }
+
+        .terminal-line {
+            margin-bottom: 12px;
+        }
+
+        .terminal-prompt {
+            color: #00ff00;
+        }
+
+        .terminal-input {
+            color: #ffff00;
+        }
+
+        .terminal-output {
+            color: #ffffff;
+        }
+
+        .terminal-success {
+            color: #00ff00;
+        }
+
+        .terminal-error {
+            color: #ff5555;
+        }
+
+        .usage-guide {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .guide-step {
+            padding: 20px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+        }
+
+        .guide-step h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .guide-step-number {
+            width: 32px;
+            height: 32px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .guide-step p {
+            color: var(--secondary-text-color);
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+
+        .guide-step code {
+            display: inline-block;
+            background-color: var(--code-bg);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            color: var(--accent-color);
+            font-size: 13px;
+        }
+
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 24px;
+            margin-top: 60px;
+        }
+
+        .example-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all var(--transition-speed) ease;
+            cursor: pointer;
+        }
+
+        .example-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+            border-color: var(--accent-color);
+        }
+
+        .example-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .example-info h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .example-info p {
+            font-size: 0.9rem;
+            color: var(--secondary-text-color);
+        }
+
+        .example-icon {
+            width: 48px;
+            height: 48px;
+            background-color: rgba(217, 95, 74, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .prompt-container {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 50px;
+            margin-top: 60px;
+            align-items: center;
+        }
+
+        .mac-window {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .mac-header {
+            background-color: var(--code-bg);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .mac-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .mac-button.close { background-color: #ff5f56; }
+        .mac-button.minimize { background-color: #ffbd2e; }
+        .mac-button.maximize { background-color: #27c93f; }
+
+        .mac-body {
+            padding: 30px;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--code-bg);
+            min-height: 400px;
+        }
+
+        .prompt-comment {
+            color: #6a9955;
+        }
+
+        .prompt-key {
+            color: #9cdcfe;
+        }
+
+        .prompt-string {
+            color: #ce9178;
+        }
+
+        .prompt-explanation {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .explanation-item {
+            padding: 20px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+        }
+
+        .explanation-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--accent-color);
+        }
+
+        .explanation-item p {
+            color: var(--secondary-text-color);
+            line-height: 1.7;
+        }
+
+        .disclaimer {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: rgba(217, 95, 74, 0.1);
+            border: 1px solid rgba(217, 95, 74, 0.3);
+            border-radius: 12px;
+            font-size: 0.9rem;
+            color: var(--secondary-text-color);
+        }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .plan-card {
+            background-color: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            padding: 36px;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent-color);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+        }
+
+        .plan-card.featured {
+            border-color: var(--accent-color);
+            position: relative;
+        }
+
+        .plan-badge {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+
+        .plan-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .plan-description {
+            color: var(--secondary-text-color);
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+
+        .plan-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .plan-features li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.95rem;
+        }
+
+        .plan-features li::before {
+            content: "✓";
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feature-detail {
+            color: var(--secondary-text-color);
+            font-size: 0.85rem;
+            margin-top: 4px;
+        }
+
+        .footer {
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 60px 30px 30px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+        }
+
+        .footer-brand h3 {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .footer-brand p {
+            color: var(--secondary-text-color);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .footer-section h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: var(--secondary-text-color);
+            text-decoration: none;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--text-color);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 40px auto 0;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--secondary-text-color);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 992px) {
+            .nav-center {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 48px;
+            }
+
+            .demo-container,
+            .prompt-container,
+            .comparison-container,
+            .usage-section {
+                grid-template-columns: 1fr;
+            }
+
+            .plans-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .examples-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .platform-modal {
+                min-width: 90vw;
+                max-width: 500px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="nav-left">
+                <span style="font-weight: 600; font-size: 18px;">TyloAI</span>
+            </div>
+            <div class="nav-center">
+                <a href="index.html">Home</a>
+                <a href="#demo">Demo</a>
+                <a href="#comparison">Comparison</a>
+                <a href="#usage">Getting Started</a>
+                <a href="#plans">Plans</a>
+            </div>
+            <div class="nav-right">
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                    <svg class="icon sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.106a.75.75 0 010 1.06l-1.591 1.59a.75.75 0 11-1.06-1.06l1.59-1.59a.75.75 0 011.06 0zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.803 17.803a.75.75 0 01-1.06 0l-1.59-1.591a.75.75 0 111.06-1.06l1.59 1.59a.75.75 0 010 1.06zM12 21.75a.75.75 0 01-.75-.75v-2.25a.75.75 0 011.5 0V21a.75.75 0 01-.75.75zM5.106 18.894a.75.75 0 010-1.06l1.59-1.59a.75.75 0 111.06 1.06l-1.59 1.59a.75.75 0 01-1.06 0zM3 12a.75.75 0 01.75-.75h2.25a.75.75 0 010 1.5H3.75A.75.75 0 013 12zM6.106 5.106a.75.75 0 011.06 0l1.59 1.591a.75.75 0 11-1.06 1.06l-1.59-1.59a.75.75 0 010-1.06z"/></svg>
+                    <svg class="icon moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-3.836 2.04-7.171 5.008-8.972a.75.75 0 01.82.162z" clip-rule="evenodd" /></svg>
+                </button>
+                <a href="#" class="cta-button">Try ode-7-code</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="modal-overlay" id="modal-overlay"></div>
+    <div class="platform-modal" id="platform-modal">
+        <div class="modal-title">Choose Your Platform</div>
+        <div class="platform-options">
+            <a href="https://www.tyloai.com/chat" target="_blank" class="platform-option">
+                <div class="platform-icon">🌐</div>
+                <div class="platform-text">
+                    <h4>Web Browser</h4>
+                    <p>Use ode-7-code in your browser instantly</p>
+                </div>
+            </a>
+            <a href="https://marketplace.visualstudio.com/" target="_blank" class="platform-option">
+                <div class="platform-icon">💻</div>
+                <div class="platform-text">
+                    <h4>VS Code Extension</h4>
+                    <p>Integrate directly into your favorite editor</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <section class="hero-section">
+        <div class="status-pill">
+            <span class="status-dot"></span>
+            Code Intelligence Active
+        </div>
+
+        <h1 class="hero-title">
+            <span class="static-text">Built for</span>
+            <span class="highlight">> <span id="typing-text" class="typing-cursor"></span></span>
+        </h1>
+
+        <p class="hero-subtitle">
+            Unleash TyloAI's raw power directly in your terminal. Search million-line codebases instantly. Transform hour-long workflows into a single command. Your tools. Your workflow. Your codebase, evolving at the speed of thought.
+        </p>
+
+        <div class="install-section">
+            <p class="install-label">Start using ode-7-code right now</p>
+            <div class="code-snippet-wrapper" id="install-trigger">
+                <div class="terminal-dropdown">Terminal</div>
+                <code class="code-snippet">
+                    <span class="command">npm install -g</span> <span class="package">@tyloai/ode-code</span>
+                </code>
+                <button class="copy-btn" onclick="copyCode(event)" title="Copy to clipboard">⎘</button>
+            </div>
+            <p class="requirements">Node.js 18+ is required. Click the command above to see platform options.</p>
+        </div>
+    </section>
+
+    <section id="demo" class="section">
+        <h2 class="section-title">See It In Action</h2>
+        <p class="section-subtitle">Watch ode-7-code transform natural language into production-ready code</p>
+
+        <div class="demo-container">
+            <div class="demo-left">
+                <div class="demo-conversation">
+                    <div class="message user-message">
+                        <div class="message-label">You</div>
+                        <div class="message-content">
+                            Create an interactive Three.js cosmos visualization using star catalog data from data.json
+                        </div>
+                    </div>
+
+                    <div class="message ai-message">
+                        <div class="message-label">ode-7-code</div>
+                        <div class="message-content">
+                            <strong>Building Cosmos</strong>
+                            <ul class="todo-list">
+                                <li>Initialize Three.js scene with camera and renderer</li>
+                                <li>Load and parse star data from data.json</li>
+                                <li>Create particle system with 50,000 stars</li>
+                                <li>Add mouse orbit and zoom controls</li>
+                                <li>Map star brightness and color data</li>
+                            </ul>
+                            <p style="margin-top: 16px;">
+                                <strong>Complete!</strong> Your interactive 3D cosmos is ready. Navigate through 50,000 real stars. Let me know if you want adjustments!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-right">
+                <div class="demo-preview-header">
+                    <span class="demo-preview-title">Live Preview</span>
+                    <span class="preview-badge">RUNNING</span>
+                </div>
+                <div class="demo-preview-body" id="cosmos-preview" style="background: #000; position: relative;">
+                    <canvas id="cosmos-canvas" style="width: 100%; height: 100%; display: block;"></canvas>
+                    <div id="cosmos-info" style="position: absolute; top: 15px; left: 15px; color: #00ff00; font-family: monospace; font-size: 12px; background: rgba(0,0,0,0.7); padding: 10px; border-radius: 5px; border: 1px solid rgba(0,255,0,0.3); display: none;">
+                        <div><strong>🌌 Cosmos Explorer</strong></div>
+                        <div id="cosmos-stats" style="margin-top: 8px; font-size: 11px;"></div>
+                    </div>
+                    <div id="cosmos-loading" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #00ff00; text-align: center; font-family: monospace;">
+                        <div style="font-size: 14px; margin-bottom: 10px;">Loading cosmos...</div>
+                        <div style="width: 40px; height: 40px; border: 2px solid rgba(0,255,0,0.3); border-top: 2px solid #00ff00; border-radius: 50%; animation: cosmosSpinner 1s linear infinite; margin: 0 auto;"></div>
+                    </div>
+                </div>
+                <style>
+                    @keyframes cosmosSpinner {
+                        0% { transform: rotate(0deg); }
+                        100% { transform: rotate(360deg); }
+                    }
+                </style>
+            </div>
+        </div>
+    </section>
+
+    <section id="comparison" class="section comparison-section">
+        <h2 class="section-title">ode-7-code in Action</h2>
+        <p class="section-subtitle">See how ode-7-code compares to ode-7 and ode-6 models</p>
+
+        <div class="comparison-container">
+            <div class="comparison-left">
+                <div class="model-tabs">
+                    <button class="model-tab active" onclick="switchModel('ode7')">ode-7</button>
+                    <button class="model-tab" onclick="switchModel('ode6')">ode-6</button>
+                </div>
+                <div class="code-block">
+                    <div class="code-block-header">Model Output</div>
+                    <div class="code-block-body" id="model-code">
+                        <!-- PASTE ODE-7 CODE HERE -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="comparison-right">
+                <div class="comparison-header">
+                    <h4>ode-7-code Result</h4>
+                    <p>CLI-optimized output with immediate execution</p>
+                </div>
+                <div class="comparison-body" id="ode-code-output">
+                    <!-- PASTE ODE-CODE OUTPUT HERE -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="usage" class="section">
+        <h2 class="section-title">How to Get Started</h2>
+        <p class="section-subtitle">Three simple steps to unleash the power of ode-7-code</p>
+
+        <div class="usage-section">
+            <div class="usage-terminal" id="usage-terminal">
+<span class="terminal-line"><span class="terminal-prompt">$</span> <span class="terminal-input">npm install -g @tyloai/ode-code</span></span>
+<span class="terminal-line" style="margin-top: 20px;"><span class="terminal-output">added 42 packages in 8.2s</span></span>
+<span class="terminal-line" style="margin-top: 20px;"><span class="terminal-prompt">$</span> <span class="terminal-input">ode code</span></span>
+<span class="terminal-line" style="margin-top: 20px;"><span class="terminal-success">✓ ode-7-code CLI initialized</span></span>
+<span class="terminal-line"><span class="terminal-output">Enter your request or type 'help' for commands</span></span>
+<span class="terminal-line" style="margin-top: 20px;"><span class="terminal-prompt">ode></span> <span class="terminal-input">Create a React component with state management</span></span>
+<span class="terminal-line" style="margin-top: 20px;"><span class="terminal-success">✓ Component generated in 2.3s</span></span>
+<span class="terminal-line"><span class="terminal-output">File saved: ./MyComponent.jsx</span></span>
+<span class="terminal-line" style="margin-top: 20px;"><span class="terminal-prompt">ode></span> <span class="terminal-input">help</span></span>
+<span class="terminal-line" style="margin-top: 20px;"><span class="terminal-success">Available Commands:</span></span>
+<span class="terminal-line"><span class="terminal-output">  exit, quit     - Exit ode-7-code CLI</span></span>
+<span class="terminal-line"><span class="terminal-output">  help           - Show this help menu</span></span>
+<span class="terminal-line"><span class="terminal-output">  [your prompt]  - Generate code instantly</span></span>
+            </div>
+
+            <div class="usage-guide">
+                <div class="guide-step">
+                    <h4>
+                        <div class="guide-step-number">1</div>
+                        Installation
+                    </h4>
+                    <p>Open your terminal and run the installation command. This installs the ode-7-code CLI globally on your system so you can use it from anywhere.</p>
+                    <p><code>npm install -g @tyloai/ode-code</code></p>
+                </div>
+
+                <div class="guide-step">
+                    <h4>
+                        <div class="guide-step-number">2</div>
+                        Launch the CLI
+                    </h4>
+                    <p>Type <code>ode code</code> in your terminal to start the interactive ode-7-code environment. This launches the AI assistant directly in your command line.</p>
+                    <p>You'll see the prompt <code>ode></code> waiting for your input.</p>
+                </div>
+
+                <div class="guide-step">
+                    <h4>
+                        <div class="guide-step-number">3</div>
+                        Start Creating
+                    </h4>
+                    <p>Simply describe what you want to build in natural language. ode-7-code understands your intent and generates production-ready code instantly. Type <code>help</code> to see available commands, or <code>exit</code>/<code>quit</code> to exit.</p>
+                    <p>It's that simple! No configuration. No complexity. Just pure coding power.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="examples" class="section">
+        <h2 class="section-title">Built for Every Developer</h2>
+        <p class="section-subtitle">From web apps to machine learning, ode-7-code handles it all</p>
+
+        <div class="examples-grid">
+            <div class="example-card">
+                <div class="example-header">
+                    <div class="example-info">
+                        <h3>React Dashboard</h3>
+                        <p>Full-stack admin panel with real-time data</p>
+                    </div>
+                    <div class="example-icon">⚛️</div>
+                </div>
+            </div>
+
+            <div class="example-card">
+                <div class="example-header">
+                    <div class="example-info">
+                        <h3>REST API</h3>
+                        <p>Express.js backend with auth and database</p>
+                    </div>
+                    <div class="example-icon">🔌</div>
+                </div>
+            </div>
+
+            <div class="example-card">
+                <div class="example-header">
+                    <div class="example-info">
+                        <h3>Game Engine</h3>
+                        <p>Physics-based 2D platformer with collision</p>
+                    </div>
+                    <div class="example-icon">🎮</div>
+                </div>
+            </div>
+
+            <div class="example-card">
+                <div class="example-header">
+                    <div class="example-info">
+                        <h3>Data Visualization</h3>
+                        <p>D3.js charts with interactive filtering</p>
+                    </div>
+                    <div class="example-icon">📊</div>
+                </div>
+            </div>
+
+            <div class="example-card">
+                <div class="example-header">
+                    <div class="example-info">
+                        <h3>CLI Tool</h3>
+                        <p>Command-line utility with argument parsing</p>
+                    </div>
+                    <div class="example-icon">⚙️</div>
+                </div>
+            </div>
+
+            <div class="example-card">
+                <div class="example-header">
+                    <div class="example-info">
+                        <h3>ML Pipeline</h3>
+                        <p>TensorFlow.js model training and deployment</p>
+                    </div>
+                    <div class="example-icon">🤖</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="prompts" class="section">
+        <h2 class="section-title">Master the Prompt</h2>
+        <p class="section-subtitle">Core prompting techniques for ode-7-code (optimized for interactive sessions)</p>
+
+        <div class="prompt-container">
+            <div class="mac-window">
+                <div class="mac-header">
+                    <div class="mac-button close"></div>
+                    <div class="mac-button minimize"></div>
+                    <div class="mac-button maximize"></div>
+                </div>
+                <div class="mac-body">
+                    <pre><span class="prompt-comment">// Optimal prompt structure for ode-7-code</span>
+
+<span class="prompt-key">Task:</span> <span class="prompt-string">"Build a real-time chat application"</span>
+
+<span class="prompt-key">Requirements:</span>
+<span class="prompt-string">- JWT-based authentication</span>
+<span class="prompt-string">- MongoDB message persistence</span>
+<span class="prompt-string">- Typing indicators</span>
+<span class="prompt-string">- File upload support</span>
+
+<span class="prompt-key">Stack:</span> <span class="prompt-string">React, Node.js, Socket.io, MongoDB</span>
+
+<span class="prompt-key">Style:</span> <span class="prompt-string">Modern dark theme with Tailwind CSS</span>
+
+<span class="prompt-key">Output:</span> <span class="prompt-string">Complete working code with comments</span></pre>
+                </div>
+            </div>
+
+            <div class="prompt-explanation">
+                <div class="explanation-item">
+                    <h4>🎯 Be Specific</h4>
+                    <p>Define exact features, tech stack, and desired output format. Specificity drives better results.</p>
+                </div>
+
+                <div class="explanation-item">
+                    <h4>📋 List Requirements</h4>
+                    <p>Break functionality into clear bullet points. This helps ode-7-code prioritize and structure code properly.</p>
+                </div>
+
+                <div class="explanation-item">
+                    <h4>🎨 Specify Style</h4>
+                    <p>Mention UI/UX preferences, design systems, and coding conventions you want followed throughout.</p>
+                </div>
+
+                <div class="explanation-item">
+                    <h4>📄 Iterate and Refine</h4>
+                    <p>Start simple, then refine. Ask for modifications, optimizations, or new features based on output.</p>
+                </div>
+
+                <div class="disclaimer">
+                    <strong>⚠️ Pro Tip:</strong> These patterns are optimized for interactive chat sessions. The more context you provide, the better ode-7-code understands your intent.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="plans" class="section">
+        <h2 class="section-title">Choose Your Plan</h2>
+        <p class="section-subtitle">Same intelligence across all plans—only access and speed differs</p>
+
+        <div class="plans-grid">
+            <div class="plan-card">
+                <div class="plan-name">Free</div>
+                <div class="plan-description">Perfect for trying ode-7-code</div>
+                <ul class="plan-features">
+                    <li>
+                        <div>
+                            Full ode-7-code capabilities
+                            <div class="feature-detail">Same intelligence, zero compromise</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            Queue priority: Standard
+                            <div class="feature-detail">10-30s wait during peak hours</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            Response speed: Standard
+                            <div class="feature-detail">Fair usage throttling applied</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            100 credits per request
+                            <div class="feature-detail">Advanced models cost more</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="plan-card featured">
+                <span class="plan-badge">POPULAR</span>
+                <div class="plan-name">Pro</div>
+                <div class="plan-description">For serious developers</div>
+                <ul class="plan-features">
+                    <li>
+                        <div>
+                            Full ode-7-code capabilities
+                            <div class="feature-detail">Identical performance to all plans</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            Queue priority: High
+                            <div class="feature-detail">1-10s wait, priority over free tier</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            Response speed: Fast
+                            <div class="feature-detail">Optimized bandwidth allocation</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            100 credits per request
+                            <div class="feature-detail">Same credit system as Free</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            Priority support
+                            <div class="feature-detail">24/7 assistance</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="plan-card">
+                <span class="plan-badge">ULTIMATE</span>
+                <div class="plan-name">Max</div>
+                <div class="plan-description">Zero limits, maximum speed</div>
+                <ul class="plan-features">
+                    <li>
+                        <div>
+                            Full ode-7-code capabilities
+                            <div class="feature-detail">Peak performance guaranteed</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            Queue priority: Instant
+                            <div class="feature-detail">Never wait, ever</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            Response speed: Maximum
+                            <div class="feature-detail">Dedicated resources</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            Unlimited requests
+                            <div class="feature-detail">No credit restrictions</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            Terminal beta access
+                            <div class="feature-detail">Test features before release</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            Dedicated support channel
+                            <div class="feature-detail">Direct access to team</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>Protoetic</h3>
+                <p>Building responsible AI systems that empower humanity through deep thinking and transparent reasoning. Founded January 2025.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="app.html">TyloAI Chat</a></li>
+                    <li><a href="index.html#technology">ode-7 Models</a></li>
+                    <li><a href="#">API Access</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="research.html">Research</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="news.html">News & Blog</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="privacy.html">Privacy</a></li>
+                    <li><a href="terms.html">Terms</a></li>
+                    <li><a href="mailto:info@tyloai.com">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Protoetic. All rights reserved. | Building AI that thinks deeply and acts responsibly.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        let cosmosScene, cosmosCamera, cosmosRenderer, cosmosStars, cosmosControls;
+        let cosmosData = [];
+        let cosmosInitialized = false;
+
+        async function initCosmos() {
+            if (cosmosInitialized) return;
+            
+            try {
+                // Create sample star data if no file exists
+                cosmosData = generateSampleStarData(5000);
+                
+                // Hide loading, show info
+                document.getElementById('cosmos-loading').style.display = 'none';
+                document.getElementById('cosmos-info').style.display = 'block';
+                
+                // Setup Three.js scene
+                const container = document.getElementById('cosmos-preview');
+                cosmosScene = new THREE.Scene();
+                cosmosCamera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 10000);
+                cosmosCamera.position.z = 500;
+                
+                cosmosRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+                cosmosRenderer.setSize(container.clientWidth, container.clientHeight);
+                cosmosRenderer.setClearColor(0x000000);
+                
+                // Clear existing content and add renderer
+                const canvas = document.getElementById('cosmos-canvas');
+                canvas.parentNode.replaceChild(cosmosRenderer.domElement, canvas);
+                cosmosRenderer.domElement.id = 'cosmos-canvas';
+                cosmosRenderer.domElement.style.width = '100%';
+                cosmosRenderer.domElement.style.height = '100%';
+                cosmosRenderer.domElement.style.display = 'block';
+                
+                // Create stars
+                createCosmosStars();
+                
+                // Update stats
+                updateCosmosStats();
+                
+                // Setup mouse controls
+                setupCosmosMouseControls();
+                
+                // Animation loop
+                animateCosmos();
+                
+                cosmosInitialized = true;
+                
+            } catch (error) {
+                document.getElementById('cosmos-loading').innerHTML = `<div style="color: #ff6b6b; font-size: 14px;">Error: ${error.message}</div>`;
+            }
+        }
+
+        function generateSampleStarData(count) {
+            const stars = [];
+            for (let i = 0; i < count; i++) {
+                const theta = Math.random() * Math.PI * 2;
+                const phi = Math.acos(Math.random() * 2 - 1);
+                const radius = Math.random() * 400;
+                
+                stars.push({
+                    x: radius * Math.sin(phi) * Math.cos(theta),
+                    y: radius * Math.sin(phi) * Math.sin(theta),
+                    z: radius * Math.cos(phi),
+                    temp: 3000 + Math.random() * 10000,
+                    mag: Math.random() * 10
+                });
+            }
+            return stars;
+        }
+
+        function createCosmosStars() {
+            const geometry = new THREE.BufferGeometry();
+            const positions = [];
+            const colors = [];
+            
+            cosmosData.forEach((star) => {
+                const scale = 1;
+                positions.push(star.x * scale, star.y * scale, star.z * scale);
+                
+                const color = getCosmosColorFromTemp(star.temp);
+                colors.push(color.r, color.g, color.b);
+            });
+            
+            geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+            geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+            
+            const material = new THREE.PointsMaterial({
+                size: 2,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.9,
+                sizeAttenuation: true
+            });
+            
+            cosmosStars = new THREE.Points(geometry, material);
+            cosmosScene.add(cosmosStars);
+            
+            addCosmosBackgroundStars();
+        }
+
+        function addCosmosBackgroundStars() {
+            const bgGeometry = new THREE.BufferGeometry();
+            const bgPositions = [];
+            const bgColors = [];
+            
+            for (let i = 0; i < 2000; i++) {
+                const theta = Math.random() * Math.PI * 2;
+                const phi = Math.acos(Math.random() * 2 - 1);
+                const radius = 800 + Math.random() * 400;
+                
+                bgPositions.push(
+                    radius * Math.sin(phi) * Math.cos(theta),
+                    radius * Math.sin(phi) * Math.sin(theta),
+                    radius * Math.cos(phi)
+                );
+                
+                const brightness = 0.3 + Math.random() * 0.6;
+                bgColors.push(brightness, brightness, brightness);
+            }
+            
+            bgGeometry.setAttribute('position', new THREE.Float32BufferAttribute(bgPositions, 3));
+            bgGeometry.setAttribute('color', new THREE.Float32BufferAttribute(bgColors, 3));
+            
+            const bgMaterial = new THREE.PointsMaterial({
+                size: 0.8,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.5
+            });
+            
+            const bgStars = new THREE.Points(bgGeometry, bgMaterial);
+            cosmosScene.add(bgStars);
+        }
+
+        function getCosmosColorFromTemp(temp) {
+            if (temp < 3500) return { r: 1, g: 0.5, b: 0.3 };
+            if (temp < 5000) return { r: 1, g: 0.8, b: 0.5 };
+            if (temp < 6000) return { r: 1, g: 1, b: 0.8 };
+            if (temp < 7500) return { r: 1, g: 1, b: 1 };
+            if (temp < 10000) return { r: 0.8, g: 0.9, b: 1 };
+            return { r: 0.6, g: 0.7, b: 1 };
+        }
+
+        function updateCosmosStats() {
+            const stats = document.getElementById('cosmos-stats');
+            stats.innerHTML = `
+                <div>Stars: ${cosmosData.length.toLocaleString()}</div>
+                <div style="margin-top: 5px; font-size: 10px;">Drag to rotate • Scroll to zoom</div>
+            `;
+        }
+
+        function setupCosmosMouseControls() {
+            let isDragging = false;
+            let previousMousePosition = { x: 0, y: 0 };
+            
+            cosmosRenderer.domElement.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                previousMousePosition = { x: e.clientX, y: e.clientY };
+            });
+            
+            cosmosRenderer.domElement.addEventListener('mousemove', (e) => {
+                if (isDragging) {
+                    const deltaMove = {
+                        x: e.clientX - previousMousePosition.x,
+                        y: e.clientY - previousMousePosition.y
+                    };
+                    
+                    const rotationSpeed = 0.005;
+                    cosmosStars.rotation.y += deltaMove.x * rotationSpeed;
+                    cosmosStars.rotation.x += deltaMove.y * rotationSpeed;
+                }
+                
+                previousMousePosition = { x: e.clientX, y: e.clientY };
+            });
+            
+            cosmosRenderer.domElement.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+            
+            cosmosRenderer.domElement.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                cosmosCamera.position.z += e.deltaY * 0.5;
+                cosmosCamera.position.z = Math.max(100, Math.min(2000, cosmosCamera.position.z));
+            });
+        }
+
+        function animateCosmos() {
+            requestAnimationFrame(animateCosmos);
+            cosmosRenderer.render(cosmosScene, cosmosCamera);
+        }
+
+        // Initialize when page loads
+        window.addEventListener('load', () => {
+            setTimeout(initCosmos, 100);
+        });
+        
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlEl = document.documentElement;
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = htmlEl.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            htmlEl.setAttribute('data-theme', newTheme);
+        });
+
+        const typingElement = document.getElementById('typing-text');
+        const roles = [
+            'developers',
+            'builders',
+            'engineers',
+            'creators',
+            'architects',
+            'innovators',
+            'makers',
+            'hackers'
+        ];
+        
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typingSpeed = 100;
+        
+        function typeText() {
+            const currentRole = roles[roleIndex];
+            
+            if (isDeleting) {
+                typingElement.textContent = currentRole.substring(0, charIndex - 1);
+                charIndex--;
+                typingSpeed = 50;
+            } else {
+                typingElement.textContent = currentRole.substring(0, charIndex + 1);
+                charIndex++;
+                typingSpeed = 100;
+            }
+            
+            if (!isDeleting && charIndex === currentRole.length) {
+                typingSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % roles.length;
+                typingSpeed = 500;
+            }
+            
+            setTimeout(typeText, typingSpeed);
+        }
+        
+        setTimeout(typeText, 1000);
+
+        function copyCode(e) {
+            if (e) e.preventDefault();
+            const code = 'npm install -g @tyloai/ode-code';
+            navigator.clipboard.writeText(code).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                const originalText = btn.textContent;
+                btn.textContent = '✓';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            });
+        }
+
+        const installTrigger = document.getElementById('install-trigger');
+        const modal = document.getElementById('platform-modal');
+        const overlay = document.getElementById('modal-overlay');
+
+        installTrigger.addEventListener('click', () => {
+            modal.classList.add('active');
+            overlay.classList.add('active');
+        });
+
+        overlay.addEventListener('click', () => {
+            modal.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        modal.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        const modelCodes = {
+            ode7: `// ODE-7 Generated Code - Full structure with explanations
+const express = require('express');
+const mongoose = require('mongoose');
+const app = express();
+
+app.use(express.json());
+
+// Connect to MongoDB
+mongoose.connect('mongodb://localhost:27017/myapp');
+
+// Define User schema
+const userSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  createdAt: { type: Date, default: Date.now }
+});
+
+const User = mongoose.model('User', userSchema);
+
+// REST endpoint
+app.get('/api/users', async (req, res) => {
+  const users = await User.find();
+  res.json(users);
+});
+
+app.listen(3000, () => {
+  console.log('Server running on port 3000');
+});`,
+            
+            ode6: `// ODE-6 Generated Code - Simplified version
+const express = require('express');
+const app = express();
+
+app.use(express.json());
+
+let users = [
+  { id: 1, name: 'John', email: 'john@example.com' },
+  { id: 2, name: 'Jane', email: 'jane@example.com' }
+];
+
+app.get('/api/users', (req, res) => {
+  res.json(users);
+});
+
+app.post('/api/users', (req, res) => {
+  const newUser = { id: users.length + 1, ...req.body };
+  users.push(newUser);
+  res.json(newUser);
+});
+
+app.listen(3000, () => {
+  console.log('Server started');
+});`
+        };
+
+        const odeCodeOutput = `// ODE-CODE Output - CLI-Optimized
+$ ode code
+> Create a REST API with Express and MongoDB
+
+✓ Analyzing request...
+✓ Generating optimized code...
+✓ File created: api.js
+
+--- Generated Code ---
+const express = require('express');
+const mongoose = require('mongoose');
+const app = express();
+
+app.use(express.json());
+mongoose.connect(process.env.MONGODB_URI);
+
+const userSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  createdAt: { type: Date, default: Date.now }
+});
+
+const User = mongoose.model('User', userSchema);
+
+app.get('/api/users', async (req, res) => {
+  const users = await User.find();
+  res.json(users);
+});
+
+app.listen(3000);
+
+✓ Code is production-ready
+✓ Run with: node api.js
+✓ Ready to deploy!`;
+
+        function switchModel(model) {
+            const tabs = document.querySelectorAll('.model-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            const codeBlock = document.getElementById('model-code');
+            codeBlock.textContent = modelCodes[model];
+        }
+
+        const initialCode = modelCodes.ode7;
+        document.getElementById('model-code').textContent = initialCode;
+        document.getElementById('ode-code-output').textContent = odeCodeOutput;
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

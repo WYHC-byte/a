@@ -7,13 +7,12 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
             --font-serif: 'Playfair Display', serif;
             --font-sans: 'Inter', sans-serif;
-            --font-mono: 'JetBrains Mono', monospace;
             --transition-speed: 0.3s;
         }
 
@@ -28,8 +27,6 @@
             --card-bg: #ffffff;
             --accent-color: #333333;
             --thinking-bg: #f5f5f5;
-            --terminal-bg: #f5f5f5;
-            --terminal-text: #1a1a1a;
         }
 
         html[data-theme='dark'] {
@@ -43,8 +40,6 @@
             --card-bg: #151515;
             --accent-color: #cccccc;
             --thinking-bg: #1a1a1a;
-            --terminal-bg: #1a1a1a;
-            --terminal-text: #00ff00;
         }
         
         * {
@@ -167,12 +162,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 85vh;
+            min-height: 100vh;
             width: 100%;
             max-width: 1400px;
             margin: 0 auto;
-            padding: 100px 30px 40px;
-            gap: 60px;
+            padding: 120px 30px 60px;
+            gap: 80px;
         }
 
         .hero-content {
@@ -210,154 +205,35 @@
         }
 
         .hero-content p {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             line-height: 1.6;
             color: var(--secondary-text-color);
-            margin-bottom: 32px;
+            margin-bottom: 40px;
         }
 
         .hero-animation {
             flex: 1;
-            max-width: 600px;
+            max-width: 500px;
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 420px;
+            min-height: 500px;
         }
 
-        .terminal-window {
+        .heroes_lottie_wrap {
             width: 100%;
-            background-color: var(--terminal-bg);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            border: 1px solid var(--border-color);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            position: relative;
+            max-width: 500px;
+            max-height: 500px;
         }
 
-        .terminal-window:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 25px 70px rgba(0,0,0,0.4);
-        }
-
-        .terminal-header {
-            background-color: var(--card-bg);
-            padding: 12px 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .terminal-button {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: opacity 0.2s ease;
-        }
-
-        .terminal-button:hover {
-            opacity: 0.7;
-        }
-
-        .terminal-button.close { background-color: #ff5f56; }
-        .terminal-button.minimize { background-color: #ffbd2e; }
-        .terminal-button.maximize { background-color: #27c93f; }
-
-        .terminal-title {
-            flex: 1;
-            text-align: center;
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--secondary-text-color);
-        }
-
-        .terminal-body {
-            padding: 30px;
-            font-family: var(--font-mono);
-            color: var(--terminal-text);
-            min-height: 380px;
-            overflow-y: auto;
-            max-height: 420px;
-        }
-
-        .ascii-art {
-            font-size: 1.1rem;
-            line-height: 1.2;
-            white-space: pre;
-            margin-bottom: 30px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
-
-        .terminal-line {
-            margin-bottom: 10px;
-            opacity: 0;
-            animation: fadeInLine 0.5s ease forwards;
-        }
-
-        .terminal-line:nth-child(1) { animation-delay: 0.2s; }
-        .terminal-line:nth-child(2) { animation-delay: 0.4s; }
-        .terminal-line:nth-child(3) { animation-delay: 0.6s; }
-
-        @keyframes fadeInLine {
-            to { opacity: 1; }
-        }
-
-        .terminal-prompt {
-            color: var(--text-color);
-        }
-
-        .terminal-command {
-            color: var(--terminal-text);
-            font-weight: 600;
-        }
-
-        .terminal-output {
-            color: var(--secondary-text-color);
-            padding-left: 20px;
-        }
-
-        .terminal-cursor {
-            display: inline-block;
-            width: 8px;
-            height: 16px;
-            background-color: var(--terminal-text);
-            animation: cursorBlink 1s step-end infinite;
-            margin-left: 2px;
-        }
-
-        @keyframes cursorBlink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-
-        .terminal-input-line {
-            display: flex;
-            align-items: center;
-            margin-top: 10px;
-        }
-
-        .terminal-input-line input {
-            background: transparent;
-            border: none;
-            outline: none;
-            color: var(--terminal-text);
-            font-family: var(--font-mono);
-            font-size: 1rem;
-            flex: 1;
-            font-weight: 600;
-        }
-
-        .terminal-output-item {
-            margin: 10px 0;
-            animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        #hero-video {
+            width: 100%;
+            height: 100%;
+            min-height: 500px;
+            object-fit: cover;
+            border-radius: 16px;
         }
 
         .interactive-prompt {
@@ -466,90 +342,107 @@
             margin-right: auto;
         }
 
-        .models-showcase {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-            max-width: 1200px;
+        .models-timeline {
+            position: relative;
+            max-width: 900px;
             margin: 60px auto;
         }
 
-        .showcase-card {
-            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(21, 21, 21, 0.5) 100%);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 40px;
+        .timeline-item {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 80px;
             position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.33, 1, 0.68, 1);
-            cursor: pointer;
         }
 
-        .showcase-card::before {
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-marker {
+            flex-shrink: 0;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--card-bg);
+            border: 3px solid var(--text-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--text-color);
+            position: relative;
+            z-index: 2;
+        }
+
+        .timeline-item:not(:last-child) .timeline-marker::after {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(238, 238, 238, 0.1) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 120px;
+            background-color: var(--border-color);
+            z-index: 1;
         }
 
-        .showcase-card:hover::before {
-            opacity: 1;
+        .model-card {
+            flex: 1;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 36px;
+            transition: all var(--transition-speed) ease;
+            position: relative;
         }
 
-        .showcase-card:hover {
-            transform: translateY(-12px) scale(1.02);
-            border-color: var(--text-color);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-        }
-
-        .card-number {
+        .model-card::before {
+            content: '';
             position: absolute;
-            top: 20px;
-            right: 30px;
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: var(--text-color);
-            opacity: 0.1;
+            left: -20px;
+            top: 28px;
+            width: 20px;
+            height: 2px;
+            background-color: var(--border-color);
+        }
+
+        .model-card:hover {
+            transform: translateX(8px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
         }
 
         .model-badge {
             display: inline-block;
-            background: rgba(238, 238, 238, 0.1);
-            color: var(--text-color);
-            padding: 8px 16px;
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            padding: 6px 12px;
             border-radius: 20px;
             font-size: 0.75rem;
             font-weight: 700;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             margin-bottom: 16px;
-            border: 1px solid var(--border-color);
-            text-transform: uppercase;
         }
 
-        .showcase-card h3 {
-            font-size: 2rem;
+        .model-card h3 {
+            font-size: 1.8rem;
             font-weight: 700;
             margin-bottom: 12px;
             color: var(--text-color);
             font-family: var(--font-serif);
         }
 
-        .showcase-card p {
+        .model-card p {
             color: var(--secondary-text-color);
             line-height: 1.7;
             margin-bottom: 24px;
-            font-size: 0.95rem;
         }
 
         .model-features {
             list-style: none;
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(2, 1fr);
             gap: 12px;
         }
 
@@ -563,10 +456,39 @@
         }
 
         .model-features li::before {
-            content: "▸";
+            content: "•";
             color: var(--text-color);
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
+        }
+
+        .demo-section {
+            background-color: var(--card-bg);
+            border-radius: 24px;
+            padding: 60px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+            border: 1px solid var(--border-color);
+        }
+
+        .demo-intro {
+            max-width: 800px;
+            margin: 0 auto 50px;
+            text-align: center;
+        }
+
+        .demo-intro h3 {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-color);
+        }
+
+        .demo-intro p {
+            color: var(--secondary-text-color);
+            line-height: 1.7;
+            font-size: 1.05rem;
         }
 
         .research-grid {
@@ -699,42 +621,36 @@
         .footer {
             background-color: var(--card-bg);
             border-top: 1px solid var(--border-color);
-            padding: 50px 30px 30px;
+            padding: 60px 30px 30px;
         }
 
         .footer-content {
             max-width: 1400px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
             gap: 60px;
-        }
-
-        .footer-brand {
-            padding-right: 20px;
         }
 
         .footer-brand h3 {
             font-family: var(--font-serif);
-            font-size: 1.3rem;
+            font-size: 1.8rem;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 16px;
             color: var(--text-color);
         }
 
         .footer-brand p {
             color: var(--secondary-text-color);
             line-height: 1.6;
-            font-size: 0.9rem;
+            margin-bottom: 20px;
         }
 
         .footer-section h4 {
-            font-size: 0.85rem;
+            font-size: 1rem;
             font-weight: 600;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
             color: var(--text-color);
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
         }
 
         .footer-section ul {
@@ -742,13 +658,12 @@
         }
 
         .footer-section ul li {
-            margin-bottom: 9px;
+            margin-bottom: 10px;
         }
 
         .footer-section ul li a {
             color: var(--secondary-text-color);
             text-decoration: none;
-            font-size: 0.9rem;
             transition: color var(--transition-speed) ease;
         }
 
@@ -758,12 +673,12 @@
 
         .footer-bottom {
             max-width: 1400px;
-            margin: 30px auto 0;
-            padding-top: 20px;
+            margin: 40px auto 0;
+            padding-top: 30px;
             border-top: 1px solid var(--border-color);
             text-align: center;
             color: var(--secondary-text-color);
-            font-size: 0.85rem;
+            font-size: 0.9rem;
         }
 
         @media (max-width: 992px) {
@@ -789,25 +704,28 @@
             .hero-animation {
                 width: 100%;
                 max-width: 100%;
-                min-height: 320px;
-            }
-
-            .terminal-body {
-                padding: 20px;
-                min-height: 320px;
-            }
-
-            .ascii-art {
-                font-size: 0.7rem;
+                min-height: 350px;
             }
 
             .section-title {
                 font-size: 2.2rem;
             }
 
-            .models-showcase {
-                grid-template-columns: 1fr;
-                gap: 25px;
+            .timeline-item {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .timeline-marker {
+                margin: 0 auto;
+            }
+
+            .model-card::before {
+                display: none;
+            }
+
+            .model-card:hover {
+                transform: translateY(-4px);
             }
 
             .model-features {
@@ -816,7 +734,7 @@
 
             .footer-content {
                 grid-template-columns: 1fr;
-                gap: 30px;
+                gap: 40px;
             }
 
             .about-container {
@@ -845,6 +763,7 @@
             <div class="logo">Protoetic</div>
             <div class="nav-links">
                 <a href="#technology">Technology</a>
+                <a href="#demo">Demo</a>
                 <a href="#research">Research</a>
                 <a href="#about">About Us</a>
             </div>
@@ -889,99 +808,74 @@
             </div>
 
             <div class="hero-animation">
-                <div class="terminal-window">
-                    <div class="terminal-header">
-                        <div class="terminal-button close" onclick="shakeTerminal()"></div>
-                        <div class="terminal-button minimize" onclick="minimizeTerminal()"></div>
-                        <div class="terminal-button maximize" onclick="maximizeTerminal()"></div>
-                        <div class="terminal-title">ode-7-code</div>
-                    </div>
-                    <div class="terminal-body" id="terminal-body">
-                        <div class="ascii-art" id="ascii-art">
- ███████╗  ███████╗  ███████╗
-██╔════██╗ ██    ██╗ ██╔═════
-██║    ██║ ██    █║  █████╗
-██║    ██║ ██   ██║  ██╔══
-╚██████║   █████║    ███████╗
- ╚════╝    ╚═══╝
-
- ██████  ███████  ██████   ███████ 
- ██     ██     ██ ██   ██  ██      
- ██     ██     ██ ██   ██  █████   
- ██     ██     ██ ██   ██  ██      
-  █████  ███████  ██████   ███████</div>
-                        <div class="terminal-line">
-                            <span class="terminal-prompt">$</span>
-                            <span class="terminal-command"> tylo --version</span>
-                        </div>
-                        <div class="terminal-line">
-                            <span class="terminal-output">ode-7-code v1.0.0 - Code Intelligence</span>
-                        </div>
-                        <div class="terminal-input-line">
-                            <span class="terminal-prompt">$</span>
-                            <input type="text" id="terminal-input" placeholder="Try: npm install, ode code, help" autocomplete="off">
-                        </div>
-                        <div id="terminal-output-container"></div>
-                    </div>
+                <div class="heroes_lottie_wrap">
+                    <video id="hero-video" autoplay loop muted playsinline>
+                        <source src="https://118.25.39.112/tyloai-overview.MP4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
             </div>
         </section>
 
         <section id="technology" class="section">
-            <h2 class="section-title">The ode-7 Model Family</h2>
+            <h2 class="section-title">The ode-6 Model Family</h2>
             <p class="section-subtitle">Developed by Protoetic's core research team, featuring groundbreaking post-thinking architecture and extended reasoning capabilities.</p>
             
-            <div class="models-showcase">
-                <div class="showcase-card">
-                    <div class="card-number">01</div>
-                    <span class="model-badge">FASTEST</span>
-                    <h3>ode-7-flash</h3>
-                    <p>Lightning-fast responses for comprehensive, all-around service. Perfect for everyday tasks that need quick, reliable answers.</p>
-                    <ul class="model-features">
-                        <li>Rapid response times</li>
-                        <li>Full-service capabilities</li>
-                        <li>Web search integrated</li>
-                        <li>Extended thinking support</li>
-                    </ul>
+            <div class="models-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker">01</div>
+                    <div class="model-card">
+                        <span class="model-badge">FASTEST</span>
+                        <h3>ode-6-flash</h3>
+                        <p>Lightning-fast responses for comprehensive, all-around service. Perfect for everyday tasks that need quick, reliable answers.</p>
+                        <ul class="model-features">
+                            <li>Rapid response times</li>
+                            <li>Full-service capabilities</li>
+                            <li>Web search integrated</li>
+                            <li>Extended thinking support</li>
+                        </ul>
+                    </div>
                 </div>
 
-                <div class="showcase-card">
-                    <div class="card-number">02</div>
-                    <span class="model-badge">SMARTEST</span>
-                    <h3>ode-7</h3>
-                    <p>Our most intelligent model, optimized for daily use. The perfect balance of power and practicality for complex tasks.</p>
-                    <ul class="model-features">
-                        <li>Advanced reasoning</li>
-                        <li>Ideal for everyday use</li>
-                        <li>Post-thinking enabled</li>
-                        <li>Context-aware responses</li>
-                    </ul>
+                <div class="timeline-item">
+                    <div class="timeline-marker">02</div>
+                    <div class="model-card">
+                        <span class="model-badge">SMARTEST</span>
+                        <h3>ode-6</h3>
+                        <p>Our most intelligent model, optimized for daily use. The perfect balance of power and practicality for complex tasks.</p>
+                        <ul class="model-features">
+                            <li>Advanced reasoning</li>
+                            <li>Ideal for everyday use</li>
+                            <li>Post-thinking enabled</li>
+                            <li>Context-aware responses</li>
+                        </ul>
+                    </div>
                 </div>
 
-                <div class="showcase-card">
-                    <div class="card-number">03</div>
-                    <span class="model-badge">CODE MASTER</span>
-                    <h3>ode-7-code</h3>
-                    <p>Revolutionary code intelligence model. From architectural design to implementation, ode-7-code transforms ideas into production-ready code with deep understanding.</p>
-                    <ul class="model-features">
-                        <li>Advanced code generation</li>
-                        <li>Architectural design</li>
-                        <li>Multi-language expertise</li>
-                        <li>Best practices built-in</li>
-                    </ul>
+                <div class="timeline-item">
+                    <div class="timeline-marker">03</div>
+                    <div class="model-card">
+                        <span class="model-badge">MOST POWERFUL</span>
+                        <h3>ode-6-reasoning</h3>
+                        <p>The ultimate model for intensive mathematics, advanced programming, and high-level cognitive chains. Built for the hardest challenges.</p>
+                        <ul class="model-features">
+                            <li>Deep mathematical reasoning</li>
+                            <li>Complex programming tasks</li>
+                            <li>Advanced cognitive chains</li>
+                            <li>Multi-step problem solving</li>
+                        </ul>
+                    </div>
                 </div>
+            </div>
+        </section>
 
-                <div class="showcase-card">
-                    <div class="card-number">04</div>
-                    <span class="model-badge">MOST POWERFUL</span>
-                    <h3>ode-7-reasoning</h3>
-                    <p>The ultimate model for intensive mathematics, advanced programming, and high-level cognitive chains. Built for the hardest challenges.</p>
-                    <ul class="model-features">
-                        <li>Deep mathematical reasoning</li>
-                        <li>Complex programming tasks</li>
-                        <li>Advanced cognitive chains</li>
-                        <li>Multi-step problem solving</li>
-                    </ul>
+        <section id="demo" class="section">
+            <h2 class="section-title">Our Core Technology: Post-Thinking</h2>
+            <p class="section-subtitle">Witness the cognitive architecture that sets Protoetic apart</p>
+            <div class="demo-section">
+                <div class="demo-intro">
+                    <h3>Technology Demonstration</h3>
+                    <p>Our post-thinking architecture doesn't just answer—it reasons, debates itself, and refines. Multiple cognitive processes collaborate, challenge each other, and synthesize optimal responses in real-time.</p>
                 </div>
             </div>
         </section>
@@ -1036,7 +930,7 @@
                         Founded in January 2025, Protoetic is on a mission to develop AI systems that think deeply, reason transparently, and genuinely understand the world. We believe AI should empower humanity, not replace human judgment.
                     </p>
                     <p style="font-size: 1.1rem; line-height: 1.8; color: var(--secondary-text-color); margin-bottom: 40px;">
-                        Our first product, TyloAI, demonstrates what's possible when cognitive architecture meets responsible development. With the ode-7 model family, we're not just building tools—we're crafting thinking partners that adapt to your needs and grow with you.
+                        Our first product, TyloAI, demonstrates what's possible when cognitive architecture meets responsible development. With the ode-6 model family, we're not just building tools—we're crafting thinking partners that adapt to your needs and grow with you.
                     </p>
                     <div>
                         <a href="app.html" class="cta-button" style="display: inline-block; padding: 14px 32px; font-size: 1.1rem; margin-right: 15px;">Launch TyloAI App</a>
@@ -1073,35 +967,16 @@
             <div class="footer-section">
                 <h4>Products</h4>
                 <ul>
-                    <li><a href="https://tyloai.com">TyloAI</a></li>
-                    <li><a href="ode.html">ode-7 Models</a></li>
-                    <li><a href="plan.html">Free Plan</a></li>
-                    <li><a href="plan.html">Pro Plan</a></li>
-                    <li><a href="plan.html">Max Plan</a></li>
-                    <li><a href="download-app.html">Download apps</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h4>Model</h4>
-                <ul>
-                    <li><a href="nano-model.html">Nano Models</a></li>
-                    <li><a href="ode.html">ode Models</a></li>
-                    <li><a href="prism-model.html">Prism Models</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h4>TyloAI Developer Platform</h4>
-                <ul>
-                    <li><a href="docs.tyloai.com">Overview</a></li>
+                    <li><a href="app.html">TyloAI Chat</a></li>
+                    <li><a href="#technology">ode-6 Models</a></li>
+                    <li><a href="#">API Access</a></li>
                 </ul>
             </div>
             
             <div class="footer-section">
                 <h4>Company</h4>
                 <ul>
-                    <li><a href="about.html">Protoetic</a></li>
+                    <li><a href="about.html">About Us</a></li>
                     <li><a href="research.html">Research</a></li>
                     <li><a href="careers.html">Careers</a></li>
                     <li><a href="news.html">News & Blog</a></li>
@@ -1109,8 +984,9 @@
             </div>
             
             <div class="footer-section">
-                <h4>Terms and policies</h4>
+                <h4>Resources</h4>
                 <ul>
+                    <li><a href="#">Documentation</a></li>
                     <li><a href="privacy.html">Privacy</a></li>
                     <li><a href="terms.html">Terms</a></li>
                     <li><a href="mailto:info@tyloai.com">Contact</a></li>
@@ -1130,6 +1006,7 @@
 
         const applyTheme = (theme) => {
             htmlEl.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
         };
 
         themeToggle.addEventListener('click', () => {
@@ -1138,7 +1015,8 @@
             applyTheme(newTheme);
         });
 
-        const initialTheme = 'dark';
+        const storedTheme = localStorage.getItem('theme');
+        const initialTheme = storedTheme ? storedTheme : 'dark';
         applyTheme(initialTheme);
 
         // Typing animation
@@ -1146,8 +1024,10 @@
         const phrases = [
             'Deep Reasoning',
             'Post-Thinking',
+            'Cognitive Architecture',
             'Beneficial AI',
-            'Extended Think',
+            'Extended Thinking',
+            'Transparent Intelligence'
         ];
         
         let phraseIndex = 0;
@@ -1197,205 +1077,6 @@
         document.getElementById('prompt-input').addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
                 submitPrompt();
-            }
-        });
-
-        // Terminal interactions
-        function shakeTerminal() {
-            const terminal = document.querySelector('.terminal-window');
-            terminal.style.animation = 'shake 0.5s';
-            setTimeout(() => {
-                terminal.style.animation = '';
-            }, 500);
-        }
-
-        function minimizeTerminal() {
-            const terminal = document.querySelector('.terminal-window');
-            terminal.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                terminal.style.transform = '';
-            }, 300);
-        }
-
-        function maximizeTerminal() {
-            const asciiArt = document.getElementById('ascii-art');
-            const lines = [
-                ' ███████╗  ███████╗  ███████╗',
-                '██╔════██╗ ██    ██╗ ██╔═════',
-                '██║    ██║ ██    █║  █████╗',
-                '██║    ██║ ██   ██║  ██╔══',
-                '╚██████║   █████║    ███████╗',
-                ' ╚════╝    ╚═══╝',
-
-                '██████  ███████  ██████   ███████', 
-                '██     ██     ██ ██   ██  ██',      
-                '██     ██     ██ ██   ██  █████',   
-                '██     ██     ██ ██   ██  ██',      
-                '█████  ███████   ██████   ███████',
-
-            ];
-            
-            let currentLine = 0;
-            asciiArt.textContent = '';
-            
-            const interval = setInterval(() => {
-                if (currentLine < lines.length) {
-                    asciiArt.textContent += lines[currentLine] + '\n';
-                    currentLine++;
-                } else {
-                    clearInterval(interval);
-                }
-            }, 50);
-        }
-
-        // Add shake animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes shake {
-                0%, 100% { transform: translateX(0); }
-                25% { transform: translateX(-10px); }
-                75% { transform: translateX(10px); }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Terminal command processor with fuzzy matching
-        const terminalInput = document.getElementById('terminal-input');
-        const terminalOutputContainer = document.getElementById('terminal-output-container');
-
-        const commands = {
-            'npm install -g @tyloai/ode-code': {
-                output: '✓ Installing @tyloai/ode-code...\n✓ Installation complete\n✓ Ready to use: ode code',
-                nextPrompt: true
-            },
-            'ode code': {
-                output: '> Launching ode code interface...\nPress Enter to continue or visit code.html',
-                nextPrompt: true,
-                redirect: 'code.html'
-            },
-            'help': {
-                output: 'Available commands:\n\n• npm install -g @tyloai/ode-code - Install ode code\n• ode code - Launch code interface\n• what is ode code? - Learn about ode code\n• help - Show this help\n• clear - Clear terminal'
-            },
-            'what is ode code?': {
-                output: 'ode code is an advanced AI-powered code generation tool.\n\nFeatures:\n• Intelligent code generation\n• Multi-language support\n• Architectural guidance\n• Best practices\n\nVisit code.html for more details.\nPress Enter to continue →',
-                nextPrompt: true,
-                redirect: 'code.html'
-            }
-        };
-
-        // Fuzzy matching function to handle typos
-        function findClosestCommand(input) {
-            const inputLower = input.toLowerCase();
-            let closestMatch = null;
-            let highestScore = 0;
-
-            for (const cmd in commands) {
-                const score = calculateSimilarity(inputLower, cmd.toLowerCase());
-                if (score > highestScore && score > 0.6) {
-                    highestScore = score;
-                    closestMatch = cmd;
-                }
-            }
-
-            return closestMatch;
-        }
-
-        // Levenshtein distance for fuzzy matching
-        function calculateSimilarity(str1, str2) {
-            const longer = str1.length > str2.length ? str1 : str2;
-            const shorter = str1.length > str2.length ? str2 : str1;
-            
-            if (longer.length === 0) return 1.0;
-            
-            const editDistance = getEditDistance(longer, shorter);
-            return (longer.length - editDistance) / longer.length;
-        }
-
-        function getEditDistance(s1, s2) {
-            const costs = [];
-            for (let i = 0; i <= s1.length; i++) {
-                let lastValue = i;
-                for (let j = 0; j <= s2.length; j++) {
-                    if (i === 0) {
-                        costs[j] = j;
-                    } else if (j > 0) {
-                        let newValue = costs[j - 1];
-                        if (s1.charAt(i - 1) !== s2.charAt(j - 1)) {
-                            newValue = Math.min(Math.min(newValue, lastValue), costs[j]) + 1;
-                        }
-                        costs[j - 1] = lastValue;
-                        lastValue = newValue;
-                    }
-                }
-                if (i > 0) costs[s2.length] = lastValue;
-            }
-            return costs[s2.length];
-        }
-
-        terminalInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                const userInput = terminalInput.value.trim();
-                terminalInput.value = '';
-
-                if (userInput.toLowerCase() === 'clear') {
-                    terminalOutputContainer.innerHTML = '';
-                    return;
-                }
-
-                if (!userInput) return;
-
-                // Display user command
-                const userCommandLine = document.createElement('div');
-                userCommandLine.className = 'terminal-output-item';
-                userCommandLine.innerHTML = `<span class="terminal-prompt">$</span> <span class="terminal-command">${userInput}</span>`;
-                terminalOutputContainer.appendChild(userCommandLine);
-
-                // Find exact match or closest match
-                let commandData = commands[userInput.toLowerCase()];
-                let suggestion = '';
-
-                if (!commandData) {
-                    const closest = findClosestCommand(userInput);
-                    if (closest) {
-                        suggestion = `Did you mean: <span class="terminal-link" onclick="document.getElementById('terminal-input').value='${closest}'; document.getElementById('terminal-input').focus()">${closest}</span>?`;
-                        commandData = commands[closest];
-                    }
-                }
-
-                // Display output
-                if (commandData) {
-                    const outputLine = document.createElement('div');
-                    outputLine.className = 'terminal-output-item';
-                    outputLine.innerHTML = `<span class="terminal-output">${commandData.output}</span>`;
-                    terminalOutputContainer.appendChild(outputLine);
-
-                    if (commandData.nextPrompt) {
-                        const promptLine = document.createElement('div');
-                        promptLine.className = 'terminal-output-item';
-                        promptLine.innerHTML = `<span class="terminal-suggestion">Press Enter to visit ${commandData.redirect || 'page'}...</span>`;
-                        terminalOutputContainer.appendChild(promptLine);
-
-                        terminalInput.addEventListener('keypress', function handleRedirect(evt) {
-                            if (evt.key === 'Enter') {
-                                window.location.href = commandData.redirect || 'code.html';
-                                terminalInput.removeEventListener('keypress', handleRedirect);
-                            }
-                        }, { once: true });
-                    }
-                } else if (suggestion) {
-                    const suggestionLine = document.createElement('div');
-                    suggestionLine.className = 'terminal-output-item';
-                    suggestionLine.innerHTML = `<span class="terminal-output">${suggestion}</span>`;
-                    terminalOutputContainer.appendChild(suggestionLine);
-                } else {
-                    const errorLine = document.createElement('div');
-                    errorLine.className = 'terminal-output-item';
-                    errorLine.innerHTML = `<span class="terminal-output">Command not found: ${userInput}. Type 'help' for available commands.</span>`;
-                    terminalOutputContainer.appendChild(errorLine);
-                }
-
-                // Auto-scroll to bottom
-                terminalOutputContainer.parentElement.scrollTop = terminalOutputContainer.parentElement.scrollHeight;
             }
         });
 
