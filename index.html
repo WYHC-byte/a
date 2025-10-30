@@ -1,14 +1,14 @@
-<!DOCTYPE html>
+<!DOCTYPE html><!-- Last Published: Thu Oct 23 2025 21:05:45 GMT+0000 (Coordinated Universal Time) -->
 <html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Protoetic | Building the Future of AI</title>
-    
+    <title>TyloAI | Building the Future of AI</title>
+    <link rel="icon" href="logo.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+    <meta name="msvalidate.01" content="700BEE949F9825BE95431FE3F9B8466B" />
     <style>
         :root {
             --font-serif: 'Playfair Display', serif;
@@ -766,6 +766,33 @@
             font-size: 0.85rem;
         }
 
+        .footer-social-icons {
+            display: flex;
+            gap: 16px; /* 图标间距 */
+            margin-top: 20px; /* 和上面的文字隔开 */
+        }
+        
+        .footer-social-icons a svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--secondary-text-color); /* 自动适配深色/浅色主题 */
+            transition: fill var(--transition-speed) ease;
+        }
+
+        .footer-social-icons a:hover svg {
+            fill: var(--text-color); /* 鼠标悬停时高亮 */
+        }
+
+        /* 适配移动端 */
+        @media (max-width: 992px) {
+            .footer-content {
+                text-align: center; /* 确保移动端所有内容居中 */
+            }
+            .footer-social-icons {
+                justify-content: center; /* 让图标在移动端居中显示 */
+            }
+        }
+
         @media (max-width: 992px) {
             .nav-links {
                 display: none;
@@ -842,11 +869,12 @@
 <body>
     <header class="main-header">
         <nav>
-            <div class="logo">Protoetic</div>
+            <div class="logo">TyloAI</div>
             <div class="nav-links">
                 <a href="#technology">Technology</a>
                 <a href="#research">Research</a>
                 <a href="#about">About Us</a>
+                <a href="https://github.com/TyloAI/TyloAI-System-Prompts">Open Source</a>
             </div>
             <div class="header-actions">
                 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
@@ -865,7 +893,7 @@
                     <span class="hero-title-line1">Intelligence meets</span>
                     <span class="hero-title-line2"><span id="typing-text" class="typing-text"></span></span>
                 </h1>
-                <p>Protoetic is building the next generation of AI systems that think deeply, reason transparently, and empower humanity. Our flagship product, TyloAI, represents the future of cognitive architecture.</p>
+                <p>TyloAI is building the next generation of AI systems that think deeply, reason transparently, and empower humanity. Our flagship product, TyloAI, represents the future of cognitive architecture.</p>
                 <div class="interactive-prompt">
                     <div class="prompt-input-area">
                         <input type="text" id="prompt-input" placeholder="How can I help you today?">
@@ -929,7 +957,7 @@
 
         <section id="technology" class="section">
             <h2 class="section-title">The ode-7 Model Family</h2>
-            <p class="section-subtitle">Developed by Protoetic's core research team, featuring groundbreaking post-thinking architecture and extended reasoning capabilities.</p>
+            <p class="section-subtitle">Developed by TyloAI's core research team, featuring groundbreaking post-thinking architecture and extended reasoning capabilities.</p>
             
             <div class="models-showcase">
                 <div class="showcase-card">
@@ -1011,7 +1039,7 @@
                     </div>
                     <h3>AI Safety & Ethics</h3>
                     <p>Committed to building AI systems that are safe, aligned with human values, and beneficial to society. Our research focuses on interpretability, robustness, and ethical decision-making.</p>
-                    <a href="#" class="read-more">Explore our approach →</a>
+                    <a href="https://github.com/TyloAI/TyloAI-System-Prompts" class="read-more">Explore our approach →</a>
                 </div>
 
                 <div class="research-card">
@@ -1033,7 +1061,7 @@
                 <div class="about-content">
                     <h2 class="section-title" style="text-align: left; margin-bottom: 30px;">Building the Future of AI</h2>
                     <p style="font-size: 1.1rem; line-height: 1.8; color: var(--secondary-text-color); margin-bottom: 30px;">
-                        Founded in January 2025, Protoetic is on a mission to develop AI systems that think deeply, reason transparently, and genuinely understand the world. We believe AI should empower humanity, not replace human judgment.
+                        Founded in January 2025, TyloAI is on a mission to develop AI systems that think deeply, reason transparently, and genuinely understand the world. We believe AI should empower humanity, not replace human judgment.
                     </p>
                     <p style="font-size: 1.1rem; line-height: 1.8; color: var(--secondary-text-color); margin-bottom: 40px;">
                         Our first product, TyloAI, demonstrates what's possible when cognitive architecture meets responsible development. With the ode-7 model family, we're not just building tools—we're crafting thinking partners that adapt to your needs and grow with you.
@@ -1066,7 +1094,7 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-brand">
-                <h3>Protoetic</h3>
+                <h3>TyloAI</h3>
                 <p>Building responsible AI systems that empower humanity through deep thinking and transparent reasoning. Founded January 2025.</p>
             </div>
             
@@ -1101,10 +1129,11 @@
             <div class="footer-section">
                 <h4>Company</h4>
                 <ul>
-                    <li><a href="about.html">Protoetic</a></li>
+                    <li><a href="about.html">TyloAI</a></li>
                     <li><a href="research.html">Research</a></li>
                     <li><a href="careers.html">Careers</a></li>
                     <li><a href="news.html">News & Blog</a></li>
+                    <li><a href="https://github.com/TyloAI/TyloAI-System-Prompts" target="_blank">Open Source</a></li>
                 </ul>
             </div>
             
@@ -1119,7 +1148,15 @@
         </div>
         
         <div class="footer-bottom">
-            <p>&copy; 2025 Protoetic. All rights reserved. | Building AI that thinks deeply and acts responsibly.</p>
+            <p>&copy; 2025 TyloAI. All rights reserved. | Building AI that thinks deeply and acts responsibly.</p>
+            <div class="footer-social-icons">
+                <a href="https://www.youtube.com/tyloai" target="_blank" aria-label="TyloAI on YouTube">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zM9.777 15.385V8.615l6.23 3.385-6.23 3.385z"/></svg>
+                </a>
+                <a href="https://github.com/TyloAI/TyloAI-System-Prompts" target="_blank" aria-label="TyloAI on GitHub">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.034c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+            </div>
         </div>
     </footer>
 
